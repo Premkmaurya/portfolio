@@ -1,4 +1,5 @@
 import "./rightsection.scss";
+import { LuExternalLink } from "react-icons/lu";
 
 const certificate = [
   {
@@ -41,18 +42,22 @@ const RightSection = () => {
               <div className="certificate">
                 {certificate.map((cer) => {
                   return (
-                    <>
+                    <div onClick={()=>{
+                      window.open(cer.url,"_blank")
+                    }}>
                       <img src={cer.url} />
+                      <LuExternalLink className="external-link" />
                       <div className="info">
                         <h3>{cer.title}</h3>
                         <p>{cer.org}</p>
                       </div>
-                    </>
+                    </div>
                   );
                 })}
               </div>
             </div>
           </div>
+          
         </div>
       </div>
     </div>
