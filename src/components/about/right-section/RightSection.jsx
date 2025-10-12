@@ -1,6 +1,7 @@
 import "./rightsection.scss";
 import { LuExternalLink } from "react-icons/lu";
 
+
 const certificate = [
   {
     url: "/img/certificate.png",
@@ -13,6 +14,7 @@ const certificate = [
     org: "Sheryians coding school",
   },
 ];
+
 
 const RightSection = () => {
   return (
@@ -42,9 +44,11 @@ const RightSection = () => {
               <div className="certificate">
                 {certificate.map((cer) => {
                   return (
-                    <div onClick={()=>{
-                      window.open(cer.url,"_blank")
-                    }}>
+                    <div
+                      onClick={() => {
+                        window.open(cer.url, "_blank");
+                      }}
+                    >
                       <img src={cer.url} />
                       <LuExternalLink className="external-link" />
                       <div className="info">
@@ -57,7 +61,6 @@ const RightSection = () => {
               </div>
             </div>
           </div>
-          
         </div>
       </div>
     </div>

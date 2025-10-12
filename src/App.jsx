@@ -11,6 +11,7 @@ const App = () => {
       </div>
       <div id="about">
         <About />
+        
       </div>
     </>
   );

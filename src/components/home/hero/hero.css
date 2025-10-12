@@ -29,7 +29,9 @@
 
 .paraDiv {
   width: 15rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  word-spacing: 0.1rem;
+  line-height: 1.2rem;
   position: absolute;
   bottom: 3%;
   left: 2%;
