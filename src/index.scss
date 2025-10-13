@@ -27,7 +27,8 @@ html,body{
     width: 100%;
     height: 100vh;
     scroll-behavior: smooth;
-    color: rgb(253, 237, 207);
+    background-color:white;
+    color: #ed9639;
     overflow-x:hidden;
 }
 .home{
@@ -44,4 +45,8 @@ html,body{
     span{
         display: flex;
     }
+}
+.project-container{
+    width: 100vw;
+    height: 100vh; 
 }
