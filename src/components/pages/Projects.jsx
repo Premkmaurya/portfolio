@@ -1,4 +1,4 @@
-import Content from "../projects/Content"
+import Content from "../projects/content/Content"
 
 const Projects = () => {
   return (
