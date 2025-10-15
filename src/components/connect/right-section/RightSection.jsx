@@ -20,6 +20,9 @@ const RightSection = () => {
             }}
             dragConstraints={socialRef}
           >
+            <div className="link-preview">
+              <img src="/img/eagle.jpg" alt="" />
+            </div>
             <FaInstagram size={29} />
           </motion.span>
           <motion.span
@@ -32,6 +35,9 @@ const RightSection = () => {
             }}
             dragConstraints={socialRef}
           >
+            <div className="link-preview">
+              <img src="/img/x.png" alt="" />
+            </div>
             <FaXTwitter size={29} />
           </motion.span>
           <motion.span
@@ -44,6 +50,9 @@ const RightSection = () => {
             }}
             dragConstraints={socialRef}
           >
+            <div className="link-preview">
+              <img src="/img/github.png" alt="" />
+            </div>
             <FaGithub size={29} />
           </motion.span>
           <motion.span
@@ -56,6 +65,9 @@ const RightSection = () => {
             }}
             dragConstraints={socialRef}
           >
+            <div className="link-preview">
+              <img src="/img/linkedin.png" alt="" />
+            </div>
             <FaLinkedin size={29} />
           </motion.span>
         </div>
