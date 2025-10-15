@@ -5,6 +5,12 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'AgileCursive';
+    src: url('/font/Agile-cursive.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 *{
     margin: 0;
@@ -46,7 +52,11 @@ html,body{
         display: flex;
     }
 }
-.project-container{
+.project-container,.connect{
     width: 100vw;
     height: 100vh; 
+}
+.connect{
+    background-color: #ed9639;
+    display: flex;
 }

@@ -1,0 +1,36 @@
+.main {
+  width: 40vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  .social {
+    width: 100%;
+    height: 90%;
+    color: #fcedcf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    .box {
+        width: 100%;
+        height: 7vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.6rem 0.6rem;
+        border-radius: 50%;
+        transition: all ease 0.5s;
+        cursor: grab;
+        &:hover {
+          background-color: #fcedcf80;
+        }
+      }
+    }
+  }
+}

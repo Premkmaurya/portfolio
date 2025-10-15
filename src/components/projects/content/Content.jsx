@@ -83,7 +83,6 @@ export default function Content() {
             <p className="project-desc">{projects[current].desc}</p>
             <div className="tech-container">
               {projects[current].tech.map((e) => {
-                console.log(e);
                 return (
                   <>
                     <div className="tech-stack">

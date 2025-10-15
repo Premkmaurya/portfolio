@@ -2,6 +2,7 @@ import Navbar from "./components/nav/Navbar";
 import About from "./components/pages/About";
 import Home from "./components/pages/Home";
 import Projects from "./components/pages/Projects";
+import Connect from "./components/pages/Connect";
 
 const App = () => {
   return (
@@ -15,6 +16,9 @@ const App = () => {
       </div>
       <div id="projects">
         <Projects />      
+      </div>
+      <div id="connect">
+        <Connect />      
       </div>
     </>
   );

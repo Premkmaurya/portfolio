@@ -1,9 +1,11 @@
-import React from 'react'
+import LeftSection from "../connect/left-section/LeftSection"
+import RightSection from "../connect/right-section/RightSection"
 
 const Connect = () => {
   return (
-    <div>
-      <h1>Connect With Me</h1>
+    <div className="connect">
+      <LeftSection />
+      <RightSection />
     </div>
   )
 }
