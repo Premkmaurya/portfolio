@@ -1,8 +1,19 @@
 import "./rightsection.scss";
+import { LuExternalLink } from "react-icons/lu";
 
 
-
-const languages = ["javascript","html5","css",]
+const certificate = [
+  {
+    url: "/img/certificate.png",
+    title: "JOB READY COHORT",
+    org: "Sheryians coding school",
+  },
+  {
+    url: "https://ik.imagekit.io/sk6swwncb/Prem%20Kumar%20Maury.png?updatedAt=1758564039170",
+    title: "JOB READY HACKATHON",
+    org: "Sheryians coding school",
+  },
+];
 
 
 const RightSection = () => {
@@ -22,22 +33,33 @@ const RightSection = () => {
                 and user-centric experiences. When I’m not coding, I’m usually
                 exploring new design trends, improving user interfaces, or
                 learning something new to stay ahead in this ever-evolving tech
-                world. My ultimate goal? To build impactful digital solutions
-                and grow into a developer who creates technology that inspires.
+                world.
               </p>
             </div>
           </div>
-
           <div className="second-section">
-                <h1>Skills</h1>
-                <div className="lang">
-                  <span><h2>Languages:-</h2>{languages.map(lang=>{
-                    return (
-                      <p>{lang},</p>
-                    )
-                  })}</span>
+          <h1>Certificates</h1>
+        <div className="certificates">
+          <div className="certificate">
+            {certificate.map((cer) => {
+              return (
+                <div
+                  onClick={() => {
+                    window.open(cer.url, "_blank");
+                  }}
+                >
+                  <img src={cer.url} />
+                  <LuExternalLink className="external-link" />
+                  <div className="info">
+                    <h3>{cer.title}</h3>
+                    <p>{cer.org}</p>
+                  </div>
                 </div>
+              );
+            })}
           </div>
+        </div>
+      </div>
         </div>
       </div>
     </div>

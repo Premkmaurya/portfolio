@@ -19,6 +19,9 @@ const RightSection = () => {
               damping: 10, // lower damping = more bounce
             }}
             dragConstraints={socialRef}
+            onClick={()=>{
+              window.open("https://www.instagram.com/premmaurya222/","_blank")
+            }}
           >
             <div className="link-preview">
               <img src="/img/eagle.jpg" alt="" />
@@ -34,6 +37,9 @@ const RightSection = () => {
               damping: 10, // lower damping = more bounce
             }}
             dragConstraints={socialRef}
+            onClick={()=>{
+              window.open("https://x.com/PremMaurya723","_blank")
+            }}
           >
             <div className="link-preview">
               <img src="/img/x.png" alt="" />
@@ -49,6 +55,9 @@ const RightSection = () => {
               damping: 10, // lower damping = more bounce
             }}
             dragConstraints={socialRef}
+            onClick={()=>{
+              window.open("https://github.com/Premkmaurya","_blank")
+            }}
           >
             <div className="link-preview">
               <img src="/img/github.png" alt="" />
@@ -64,6 +73,9 @@ const RightSection = () => {
               damping: 10, // lower damping = more bounce
             }}
             dragConstraints={socialRef}
+            onClick={()=>{
+              window.open("https://www.linkedin.com/in/prem-maurya-8640b5319/","_blank")
+            }}
           >
             <div className="link-preview">
               <img src="/img/linkedin.png" alt="" />

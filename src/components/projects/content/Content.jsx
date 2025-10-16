@@ -1,9 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import "./content.scss";
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 
 export default function Content() {
+  const descRef = useRef()
+  useEffect(() => {
+    if (!descRef.current) return;
+
+    const lenis = new Lenis({
+      wrapper: descRef.current,
+      smoothWheel: true,
+      lerp: 0.8,
+      duration: 1.3,
+    });
+
+    const raf = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+
+    requestAnimationFrame(raf);
+
+    return () => lenis.destroy();
+  }, []);
   const projects = [
     {
       id: 1,
@@ -80,7 +102,7 @@ export default function Content() {
             className="project-info"
           >
             <h3 className="project-title">{projects[current].title}</h3>
-            <p className="project-desc">{projects[current].desc}</p>
+            <p ref={descRef} className="project-desc">{projects[current].desc}</p>
             <div className="tech-container">
               {projects[current].tech.map((e) => {
                 return (
