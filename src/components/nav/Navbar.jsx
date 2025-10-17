@@ -1,4 +1,4 @@
-import "./navbar.css";
+import "./navbar.scss";
 import {useGSAP} from "@gsap/react";
 import gsap from "gsap";
 
