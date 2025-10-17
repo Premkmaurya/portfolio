@@ -8,14 +8,46 @@ const HeroSection = () => {
   useGSAP(() => {
     gsap.registerPlugin(SplitText);
     let split = SplitText.create(".heading", { type: "chars" });
+    let split_2 = SplitText.create(".para", { type: "lines" });
+    const tl = gsap.timeline()
 
     // now animate the characters in a staggered fashion
-    gsap.from(split.chars, {
+    tl.from(split.chars, {
       duration: 1,
       y: 100, // animate from 100px below
       autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
       stagger: 0.05, // 0.05 seconds between each
-    });
+    })
+    .from(".skill",{
+      opacity:0,
+      duration:2.1,
+      stagger:{
+        amount:0.02
+      }
+    })
+    .from(".image",{
+      opacity:0,
+      duration:0.4,
+    })
+    .from(split_2.lines,{
+      duration: 1,
+      y: 5, // animate from 100px below
+      autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
+      stagger: 0.05,
+      
+    })
+    .from(".connect-btn",{
+      opacity:0,
+      duration:0.2,
+    })
+    .from(".arrow",{
+      opacity:0,
+      duration:0.4,
+    })
+    .from(".resume-link",{
+      opacity:0,
+      duration:0.3,
+    })
   });
 
   return (
@@ -24,16 +56,16 @@ const HeroSection = () => {
         <h1 className="heading">Portfolio</h1>
         <div className="skillsDiv">
           <div className="skills">
-            <div>
+            <div className="skill">
               <h2>UI/UX designer</h2>
             </div>
-            <div>
+            <div className="skill">
               <h2>Full Stack Developer</h2>
             </div>
-            <div>
+            <div className="skill">
               <h2>MERN Stack Developer</h2>
             </div>
-            <div>
+            <div className="skill">
               <h2>Frontend Developer</h2>
             </div>
           </div>
@@ -54,7 +86,7 @@ const HeroSection = () => {
         <div className="resume-link-div">
           <div className="link-div">
             <div
-              className="link"
+              className="resume-link"
               onClick={() => {
                 window.open("https://www.google.com", "_blank");
               }}

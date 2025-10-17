@@ -37,6 +37,8 @@ export default function Content() {
       The project focuses on AI vision integration, responsive UI, and data efficiency, optimized to reduce API token usage by 28% through smart request throttling and local caching.`,
       tech: ["React", "Tailwind", "Node js", "Express", "GSAP"],
       image: "/img/caption-genration.png",
+      live_link:"https://backend-9yno.onrender.com/",
+      github_link:"https://github.com/Premkmaurya/AI-project/tree/main/caption-generator"
     },
     {
       id: 2,
@@ -48,6 +50,8 @@ export default function Content() {
       Implemented infinite scroll UI with React hooks and optimized state management, improving performance by 65% and boosting average session time by 2.3x.`,
       tech: ["React", "Tailwind", "Node js", "Express", "GSAP"],
       image: "/img/food-delivery.png",
+      live_link:"https://backend-9yno.onrender.com/",
+      github_link:"https://github.com/Premkmaurya/foodista"
     },
     {
       id: 3,
@@ -59,6 +63,8 @@ export default function Content() {
       The project focuses on real-time message streaming, smooth animations, and persistent chat history, enhancing user experience and engagement by over 70% during testing. Backend APIs were designed using Node.js and Express, ensuring 99.8% uptime with proper error handling and retry mechanisms.`,
       tech: ["React", "Tailwind", "Node js", "Express", "GSAP"],
       image: "/img/chatgpt.png",
+      live_link:"https://backend-9yno.onrender.com/",
+      github_link:"https://github.com/Premkmaurya/AI-project/tree/main/chat-gpt"
     },
     {
       id: 4,
@@ -67,7 +73,9 @@ export default function Content() {
       
       Implemented smooth scroll, parallax transitions, video hero animations, and mouse-follow effects, mimicking the cinematic storytelling experience of the real site.`,
       tech: ["React", "Tailwind","GSAP"],
-      image:"/img/k72.png"
+      image:"/img/k72.png",
+      live_link:"https://backend-9yno.onrender.com/",
+      github_link:"https://github.com/Premkmaurya/landing-page/tree/main/k72"
       
     },
   ];
@@ -114,8 +122,12 @@ export default function Content() {
                 );
               })}
             </div>
-            <button className="view-btn">View Project</button>
-            <button className="github-btn">Github Link</button>
+            <button onClick={()=>{
+              window.open(`${projects[current].live_link}`,"_blank")
+            }} className="view-btn">View Project</button>
+            <button onClick={()=>{
+              window.open(`${projects[current].github_link}`,"_blank")
+            }} className="github-btn">Github Link</button>
           </motion.div>
         </div>
 

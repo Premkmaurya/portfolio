@@ -64,7 +64,7 @@
     right: 4%;
     top: 37%;
     z-index: 5;
-    .link {
+    .resume-link {
       color: #fff;
       text-decoration: none;
       position: relative;
@@ -72,7 +72,7 @@
       cursor: pointer;
     }
 
-    .link::after {
+    .resume-link::after {
       content: "";
       position: absolute;
       bottom: 0;
@@ -83,7 +83,7 @@
       transition: width 0.3s ease-in-out;
     }
 
-    .link:hover::after {
+    .resume-link:hover::after {
       width: 100%;
     }
   }
