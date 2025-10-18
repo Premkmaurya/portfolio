@@ -22,7 +22,6 @@ const RightSection = () => {
       <div className="right-seciton">
         <div className="main">
           <div className="first-section">
-            <h1>About Me</h1>
             <div className="paragraph">
               <p>
                 Hi, I’m Prem Maurya, a passionate Full-Stack Web Developer and

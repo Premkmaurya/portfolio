@@ -4,6 +4,11 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  @media screen and (max-width: 480px) {
+    width: 100vw;
+    height: 90vh;
+    padding-left: 5%;
+  }
 
   .main {
     width: 90%;
@@ -16,11 +21,12 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      h1 {
-        text-decoration: underline;
+      @media screen and (max-width: 480px) {
+        gap: 0.7rem;
+        font-size: 0.9rem;
       }
       .paragraph {
-        padding-left: 3rem;
+        padding-left: 2rem;
         color: #a35127;
 
         p {
@@ -39,6 +45,9 @@
       .certificates {
         display: flex;
         padding-left: 3rem;
+        @media screen and (max-width: 480px) {
+          padding-left: 0;
+        }
         .certificate {
           display: flex;
           gap: 1rem;
@@ -51,18 +60,28 @@
               height: 3.5rem;
               border-radius: 13px;
               border: 2px solid #3d190683;
+              @media screen and (max-width: 480px) {
+                width: 4rem;
+                height: 3.5rem;
+              }
             }
             .external-link {
               position: absolute;
               top: 0.2rem;
               left: 3.6rem;
               color: rgba(0, 0, 0, 0.699);
+              @media screen and (max-width: 480px) {
+                left: 3rem;
+              }
             }
             .info {
               display: block;
               margin-left: 0.9rem;
               h3 {
                 font-size: 0.9rem;
+                @media screen and (max-width: 480px) {
+                  font-size: 0.8rem;
+                }
               }
               p {
                 font-size: 0.7rem;

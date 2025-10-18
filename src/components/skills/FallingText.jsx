@@ -178,7 +178,6 @@ const FallingText = ({
         ref={textRef}
         className="falling-text-target"
         style={{
-          fontSize: fontSize,
           lineHeight: 1.4
         }}
       />
