@@ -30,11 +30,7 @@ export default function Content() {
     {
       id: 1,
       title: "AI Image Caption Genreator",
-      desc: `Created an AI-powered image caption generator that analyzes uploaded images and automatically produces human-like descriptive captions with up to 92% accuracy, leveraging OpenAI’s vision and text generation models.
-
-      Users can upload or drag-and-drop any image, and the app instantly generates a contextually relevant caption in under 2 seconds, processing 1,500+ image requests per day with 99.7% uptime.
-
-      The project focuses on AI vision integration, responsive UI, and data efficiency, optimized to reduce API token usage by 28% through smart request throttling and local caching.`,
+      desc: `Created an AI-powered image caption generator that analyzes uploaded images and automatically produces human-like descriptive captions with up to 92% accuracy, leveraging Gemini's vision and text generation models.`,
       tech: ["React", "Tailwind", "Node js", "Express", "GSAP"],
       image: "/img/caption-genration.png",
       live_link:"https://backend-9yno.onrender.com/",
@@ -43,11 +39,7 @@ export default function Content() {
     {
       id: 2,
       title: "Food Delivery App",
-      desc: `Developed a modern food delivery platform where users can explore and order dishes in a Reels-style scrolling interface, designed to maximize engagement and reduce decision fatigue. Built using React.js, Node.js, and MongoDB, the app achieved 92% faster user engagement compared to traditional grid-based designs.
-
-      Integrated real-time API fetching to display food items dynamically, processing 500+ API requests daily with under 400ms latency. The platform supports user authentication, cart management, and secure order placement, ensuring a smooth, end-to-end delivery experience.
-
-      Implemented infinite scroll UI with React hooks and optimized state management, improving performance by 65% and boosting average session time by 2.3x.`,
+      desc: `Developed a modern food delivery platform where users can explore and order dishes in a Reels-style scrolling interface, designed to maximize engagement and reduce decision fatigue. Built using React.js, Node.js, and MongoDB.`,
       tech: ["React", "Tailwind", "Node js", "Express", "GSAP"],
       image: "/img/food-delivery.png",
       live_link:"https://backend-9yno.onrender.com/",
@@ -56,22 +48,16 @@ export default function Content() {
     {
       id: 3,
       title: "ChatGPT Clone",
-      desc: `Built a ChatGPT-inspired conversational AI web app that replicates 90% of the core functionality of OpenAI’s ChatGPT — enabling users to interact with an intelligent chatbot capable of generating context-aware responses within milliseconds.
-      
-      Developed a fully responsive frontend with React.js and SCSS, achieving 98% Lighthouse performance score and a 50% faster rendering time compared to standard UI frameworks. Integrated OpenAI GPT API to process over 1,000+ user queries per session with seamless API handling and optimized network calls.
-      
-      The project focuses on real-time message streaming, smooth animations, and persistent chat history, enhancing user experience and engagement by over 70% during testing. Backend APIs were designed using Node.js and Express, ensuring 99.8% uptime with proper error handling and retry mechanisms.`,
+      desc: `Built a ChatGPT-inspired conversational AI web app that replicates 90% of the core functionality of OpenAI’s ChatGPT — enabling users to interact with an intelligent chatbot capable of generating context-aware responses within milliseconds.`,
       tech: ["React", "Tailwind", "Node js", "Express", "GSAP"],
       image: "/img/chatgpt.png",
-      live_link:"https://backend-9yno.onrender.com/",
+      live_link:"https://chatgpt-pd3e.onrender.com/",
       github_link:"https://github.com/Premkmaurya/AI-project/tree/main/chat-gpt"
     },
     {
       id: 4,
       title: "Rejouice Clone",
-      desc: `Built a pixel-perfect frontend clone of the award-winning Rejouice Agency website, focusing on fluid animations, modern motion design, and seamless user interactions. The project was crafted entirely from scratch using React.js, GSAP, and SCSS, achieving a 97% visual match to the original site and 90+ Lighthouse performance score across all devices.
-      
-      Implemented smooth scroll, parallax transitions, video hero animations, and mouse-follow effects, mimicking the cinematic storytelling experience of the real site.`,
+      desc: `Built a pixel-perfect frontend clone of the K72 website, focusing on fluid animations, modern motion design, and seamless user interactions. The project was crafted entirely from scratch using React.js, GSAP, and Tailwind CSS.`,
       tech: ["React", "Tailwind","GSAP"],
       image:"/img/k72.png",
       live_link:"https://backend-9yno.onrender.com/",

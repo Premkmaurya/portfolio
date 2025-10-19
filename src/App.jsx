@@ -39,24 +39,24 @@ const App = () => {
   }, []);
 
   return (
-    <div className="app">
-      <Navbar />
-      <div id="home">
-        <Home />
+      <div className="app">
+        <Navbar />
+        <div id="home">
+          <Home />
+        </div>
+        <div id="about">
+          <About />
+        </div>
+        <div id="skills">
+          <Skills />
+        </div>
+        <div id="projects">
+          <Projects />
+        </div>
+        <div id="connect">
+          <Connect />
+        </div>
       </div>
-      <div id="about">
-        <About />
-      </div>
-      <div id="skills">
-        <Skills />
-      </div>
-      <div id="projects">
-        <Projects />
-      </div>
-      <div id="connect">
-        <Connect />
-      </div>
-    </div>
   );
 };
 

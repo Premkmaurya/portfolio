@@ -164,6 +164,8 @@ const FallingText = ({
   };
 
   return (
+    <>
+    <h1 className='skills-heading'>Skills</h1>
     <div
       ref={containerRef}
       className={`falling-text-container ${className}`}
@@ -183,6 +185,7 @@ const FallingText = ({
       />
       <div ref={canvasContainerRef} className="falling-text-canvas" />
     </div>
+    </>
   );
 };
 
