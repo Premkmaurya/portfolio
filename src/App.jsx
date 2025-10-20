@@ -9,8 +9,13 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
+import { useRef,useEffect } from "react";
+import { useNavbar } from "./context/NavContext";
 
 const App = () => {
+  const mainRef= useRef();
+
+  const {isSidebarOpen} = useNavbar()
   const lenis = new Lenis({
     wrapper:window,
     smoothWheel:true,
@@ -37,11 +42,19 @@ const App = () => {
       ease: "power2.out",
     });
   }, []);
+  useEffect(()=>{
+    if(isSidebarOpen){
+      mainRef.current.classList.add("blur")
+    }else{
+      mainRef.current.classList.remove("blur")
+    }
+  },[isSidebarOpen])
 
   return (
-      <div className="app">
+      <div>
         <Navbar />
-        <div id="home">
+        <div ref={mainRef} className="app">
+          <div id="home">
           <Home />
         </div>
         <div id="about">
@@ -55,6 +68,7 @@ const App = () => {
         </div>
         <div id="connect">
           <Connect />
+        </div>
         </div>
       </div>
   );

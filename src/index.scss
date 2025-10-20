@@ -48,6 +48,10 @@ body {
   color: #ed9639;
   overflow-x: hidden;
 }
+
+.blur{
+  filter: blur(2px);
+}
 .home {
   width: 102vw;
   margin-top: 4.2rem;
