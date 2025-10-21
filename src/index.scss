@@ -49,7 +49,7 @@ body {
   overflow-x: hidden;
 }
 
-.blur{
+.blur {
   filter: blur(2px);
 }
 .home {
@@ -63,13 +63,13 @@ body {
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
-  @media screen and (max-width: 375px) {
-    height: 130vh;
-  }
   @media screen and (max-width: 480px) {
     height: 105vh;
   }
-  h1{
+  @media screen and (max-width: 375px) {
+    height: 130vh;
+  }
+  h1 {
     text-decoration: underline;
     text-align: center;
     margin-bottom: 1rem;
@@ -86,20 +86,23 @@ body {
 #skills {
   width: 100%;
   height: 50vh;
+  @media screen and (max-width: 480px) {
+    height: 60vh;
+  }
   @media screen and (max-width: 375px) {
-    height: 70vh;
+    height: 80vh;
   }
 }
 .project-container {
   width: 100vw;
   height: 100vh;
-  padding-top:1.4rem;
-  @media screen and (max-width:375px) {
-    height: 130vh;
+  padding-top: 1.4rem;
+  @media screen and (max-width: 480px) {
+    padding-top: 0.2rem;
+    height: 95vh;
   }
-  @media screen and (max-width:480px) {
-    padding-top:0.2rem;
-    height:95vh;
+  @media screen and (max-width: 375px) {
+    height: 130vh;
   }
 }
 .connect {
@@ -107,7 +110,7 @@ body {
   height: 100vh;
   background-color: #ed9639;
   display: flex;
-  @media screen and (max-width:480px){
-    flex-direction:column;
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
   }
 }

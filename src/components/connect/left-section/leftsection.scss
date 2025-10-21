@@ -26,21 +26,21 @@
     h1 {
       font-size: 6rem;
       text-transform: uppercase;
-      @media screen and (max-width: 375px) {
-        font-size: 4rem;
-      }
       @media screen and (max-width: 480px) {
         font-size: 4.5rem;
+      }
+      @media screen and (max-width: 375px) {
+        font-size: 4rem;
       }
       span {
         color: #a35127;
         font-size: 4rem;
         font-family: AgileCursive;
-        @media screen and (max-width: 375px) {
-          font-size: 2.5rem;
-        }
         @media screen and (max-width: 480px) {
           font-size: 3rem;
+        }
+        @media screen and (max-width: 375px) {
+          font-size: 2.5rem;
         }
       }
     }

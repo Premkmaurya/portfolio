@@ -64,16 +64,16 @@ const Navbar = () => {
           </div>
         </div>
         <div className="links">
-          <a onClick={()=>closeSidebar()} className="link" href="#home">
+          <a className="link" href="#home">
             Home
           </a>
-          <a onClick={()=>closeSidebar()} className="link" href="#about">
+          <a className="link" href="#about">
             About
           </a>
-          <a onClick={()=>closeSidebar()} className="link" href="#projects">
+          <a className="link" href="#projects">
             Projects
           </a>
-          <a onClick={()=>closeSidebar()} className="link" href="#connect">
+          <a className="link" href="#connect">
             Connect
           </a>
         </div>
@@ -81,16 +81,16 @@ const Navbar = () => {
       <div className="sidebar">
         <img src="/img/sidebar.png" alt="sidebar" />
         <div className="sidebar-navigate-links">
-          <a className="sidebar-link" href="#home">
+          <a onClick={()=>closeSidebar()} className="sidebar-link" href="#home">
             Home
           </a>
-          <a className="sidebar-link" href="#about">
+          <a onClick={()=>closeSidebar()} className="sidebar-link" href="#about">
             About
           </a>
-          <a className="sidebar-link" href="#projects">
+          <a onClick={()=>closeSidebar()} className="sidebar-link" href="#projects">
             Projects
           </a>
-          <a className="sidebar-link" href="#connect">
+          <a onClick={()=>closeSidebar()} className="sidebar-link" href="#connect">
             Connect
           </a>
         </div>

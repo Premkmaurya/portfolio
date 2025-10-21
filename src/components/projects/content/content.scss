@@ -55,18 +55,17 @@
     }
 
     .project-info {
-      max-width: 400px;
+      max-width: 375px;
       text-align: center;
 
       @media (min-width: 768px) {
         text-align: left;
       }
+      @media screen and (max-width:480px) {
+        max-width: 370px;  
+      }
       @media screen and (max-width:375px) {
         max-width: 300px;
-      }
-      @media screen and (max-width:480px) {
-        max-width: 370px;
-        
       }
 
       .project-title {
@@ -148,12 +147,12 @@
       width: 300px;
       height: 80px;
       position: relative;
-      @media screen and (max-width:375px) {
-        width: 230px;
-      }
       @media screen and (max-width:480px) {
         width: 270px;
       }
+        @media screen and (max-width:375px) {
+          width: 230px;
+        }
 
       .carousel-track {
         display: flex;

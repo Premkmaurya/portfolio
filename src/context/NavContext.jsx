@@ -16,9 +16,6 @@ const NavbarProvider = ({ children }) => {
   const toggleSidebar = () => {
     setIsSidebarOpen(prev => !prev);
   };
-  useEffect(() => {
-    console.log(isSidebarOpen)
-  },[isSidebarOpen])
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
