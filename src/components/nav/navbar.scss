@@ -19,6 +19,12 @@
       @media screen and (max-width: 576px) {
         font-size: 1.5rem;
       }
+      @media screen and (max-width: 480px) {
+        font-size: 1.8rem;
+      }
+      @media screen and (max-width: 375px) {
+        font-size: 1.5rem;
+      }
     }
     .ham-icons {
       display: none;
@@ -29,6 +35,10 @@
 
       @media screen and (max-width: 768px) {
         display: block;
+      }
+      @media screen and (max-width: 480px) {
+        display: block;
+        font-size:1.6rem;
       }
       .wrapper {
         position: relative;
@@ -85,7 +95,7 @@
     position: fixed;
     top: -100%;
     right: 0;
-    width: 55%;
+    width: 65%;
     height: 100vh;
     display: none;
     z-index: 200;
@@ -112,7 +122,7 @@
       width: 100%;
       color: black;
       z-index: 207;
-      bottom: 2vw;
+      bottom: 8vw;
       height: 7vw;
       position: absolute;
       .box {

@@ -108,7 +108,7 @@ const Navbar = () => {
               <div className="link-preview">
                 <img src="/img/eagle.jpg" alt="" />
               </div>
-              <FaInstagram size={25} />
+              <FaInstagram size={29} />
             </span>
             <span
               onClick={() => {
@@ -118,7 +118,7 @@ const Navbar = () => {
               <div className="link-preview">
                 <img src="/img/x.png" alt="" />
               </div>
-              <FaXTwitter size={25} />
+              <FaXTwitter size={29} />
             </span>
             <span
               onClick={() => {
@@ -128,7 +128,7 @@ const Navbar = () => {
               <div className="link-preview">
                 <img src="/img/github.png" alt="" />
               </div>
-              <FaGithub size={25} />
+              <FaGithub size={29} />
             </span>
             <span
               onClick={() => {
@@ -141,7 +141,7 @@ const Navbar = () => {
               <div className="link-preview">
                 <img src="/img/linkedin.png" alt="" />
               </div>
-              <FaLinkedin size={25} />
+              <FaLinkedin size={29} />
             </span>
           </div>
         </div>

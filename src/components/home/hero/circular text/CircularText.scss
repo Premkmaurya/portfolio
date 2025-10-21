@@ -13,9 +13,13 @@
   -webkit-transform-origin: 50% 50%;
   bottom: 3%;
   right: 4%;
-  @media screen and (max-width:480px) {
+  @media screen and (max-width:375px) {
     width:60px;
     height:60px;
+  }
+  @media screen and (max-width:375px) {
+    width:69px;
+    height:69px;
   }
   span {
     position: absolute;
@@ -27,8 +31,11 @@
     bottom: 0;
     font-size: 15px;
     transition: all 0.5s cubic-bezier(0, 0, 0, 1);
-    @media screen and (max-width:480px) {
+    @media screen and (max-width:375px) {
       font-size: 10px;
+    }
+    @media screen and (max-width:480px) {
+      font-size: 14px;
     }
   }
 }
