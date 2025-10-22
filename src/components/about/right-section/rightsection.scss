@@ -1,4 +1,4 @@
-.right-seciton {
+.right-section {
   width: 50vw;
   height: 80vh;
   display: flex;
@@ -9,8 +9,10 @@
     height: 55vh;
     padding-left: 5%;
   }
+  @media screen and (max-width: 400px) {
+    height: 65vh;
+  }
   @media screen and (max-width: 375px) {
-    width: 100vw;
     height: 70vh;
   }
 
@@ -67,6 +69,10 @@
               height: 3.5rem;
               border-radius: 13px;
               border: 2px solid #3d190683;
+              @media screen and (max-width: 400px) {
+                width: 4rem;
+                height: 3.5rem;
+              }
               @media screen and (max-width: 375px) {
                 width: 4rem;
                 height: 3.5rem;

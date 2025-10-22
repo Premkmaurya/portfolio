@@ -66,6 +66,9 @@ body {
   @media screen and (max-width: 480px) {
     height: 105vh;
   }
+  @media screen and (max-width: 480px) {
+    height: 115vh;
+  }
   @media screen and (max-width: 375px) {
     height: 130vh;
   }
@@ -88,6 +91,9 @@ body {
   height: 50vh;
   @media screen and (max-width: 480px) {
     height: 60vh;
+  }
+  @media screen and (max-width: 400px) {
+    height: 70vh;
   }
   @media screen and (max-width: 375px) {
     height: 80vh;

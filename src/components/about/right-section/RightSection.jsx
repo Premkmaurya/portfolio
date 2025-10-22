@@ -1,6 +1,9 @@
 import "./rightsection.scss";
 import { LuExternalLink } from "react-icons/lu";
-
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 const certificate = [
   {
@@ -15,15 +18,45 @@ const certificate = [
   },
 ];
 
-
 const RightSection = () => {
+  useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(SplitText);
+
+    let split = SplitText.create(".para", { type: "lines" });
+    const tl = gsap.timeline();
+    // now animate the characters in a staggered fashion
+    tl.from(split.lines, {
+      duration: 1,
+      y: 50, // animate from 100px below
+      autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
+      stagger: 0.05, // 0.05 seconds between each
+      scrollTrigger: {
+        trigger: ".para",
+        start: "bottom 80%",
+        toggleActions: "play none none none",
+      },
+    }).from(".certificate div", {
+      duration: 1,
+      y: 50,
+      autoAlpha: 0,
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: ".certificates",
+        start: "top 80%",
+        markers: true,
+        toggleActions: "play none none none",
+      },
+    });
+  }, []);
+
   return (
     <div>
-      <div className="right-seciton">
+      <div className="right-section">
         <div className="main">
           <div className="first-section">
             <div className="paragraph">
-              <p>
+              <p className="para">
                 Hi, I’m Prem Maurya, a passionate Full-Stack Web Developer and
                 UI/UX Designer who loves turning ideas into interactive,
                 visually stunning web experiences. I work with technologies like{" "}
@@ -37,28 +70,28 @@ const RightSection = () => {
             </div>
           </div>
           <div className="second-section">
-          <h1>Certificates</h1>
-        <div className="certificates">
-          <div className="certificate">
-            {certificate.map((cer) => {
-              return (
-                <div
-                  onClick={() => {
-                    window.open(cer.url, "_blank");
-                  }}
-                >
-                  <img src={cer.url} />
-                  <LuExternalLink className="external-link" />
-                  <div className="info">
-                    <h3>{cer.title}</h3>
-                    <p>{cer.org}</p>
-                  </div>
-                </div>
-              );
-            })}
+            <h1>Certificates</h1>
+            <div className="certificates">
+              <div className="certificate">
+                {certificate.map((cer) => {
+                  return (
+                    <div
+                      onClick={() => {
+                        window.open(cer.url, "_blank");
+                      }}
+                    >
+                      <img src={cer.url} />
+                      <LuExternalLink className="external-link" />
+                      <div className="info">
+                        <h3>{cer.title}</h3>
+                        <p>{cer.org}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
         </div>
       </div>
     </div>
