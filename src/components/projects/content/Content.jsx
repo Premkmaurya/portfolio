@@ -46,15 +46,6 @@ export default function Content() {
       github_link:"https://github.com/Premkmaurya/foodista"
     },
     {
-      id: 3,
-      title: "ChatGPT Clone",
-      desc: `Built a ChatGPT-inspired conversational AI web app that replicates 90% of the core functionality of OpenAI’s ChatGPT — enabling users to interact with an intelligent chatbot capable of generating context-aware responses within milliseconds.`,
-      tech: ["React", "Tailwind", "Node js", "Express", "GSAP"],
-      image: "/img/chatgpt.png",
-      live_link:"https://chatgpt-pd3e.onrender.com/",
-      github_link:"https://github.com/Premkmaurya/AI-project/tree/main/chat-gpt"
-    },
-    {
       id: 4,
       title: "Rejouice Clone",
       desc: `Built a pixel-perfect frontend clone of the K72 website, focusing on fluid animations, modern motion design, and seamless user interactions. The project was crafted entirely from scratch using React.js, GSAP, and Tailwind CSS.`,

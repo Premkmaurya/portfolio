@@ -23,7 +23,7 @@ const RightSection = () => {
     gsap.registerPlugin(ScrollTrigger);
     gsap.registerPlugin(SplitText);
 
-    let split = SplitText.create(".para", { type: "lines" });
+    let split = SplitText.create(".about-para", { type: "lines" });
     const tl = gsap.timeline();
     // now animate the characters in a staggered fashion
     tl.from(split.lines, {
@@ -32,7 +32,7 @@ const RightSection = () => {
       autoAlpha: 0, // fade in from opacity: 0 and visibility: hidden
       stagger: 0.05, // 0.05 seconds between each
       scrollTrigger: {
-        trigger: ".para",
+        trigger: ".about-para",
         start: "bottom 80%",
         toggleActions: "play none none none",
       },
@@ -44,7 +44,6 @@ const RightSection = () => {
       scrollTrigger: {
         trigger: ".certificates",
         start: "top 80%",
-        markers: true,
         toggleActions: "play none none none",
       },
     });
@@ -56,7 +55,7 @@ const RightSection = () => {
         <div className="main">
           <div className="first-section">
             <div className="paragraph">
-              <p className="para">
+              <p className="about-para">
                 Hi, I’m Prem Maurya, a passionate Full-Stack Web Developer and
                 UI/UX Designer who loves turning ideas into interactive,
                 visually stunning web experiences. I work with technologies like{" "}
