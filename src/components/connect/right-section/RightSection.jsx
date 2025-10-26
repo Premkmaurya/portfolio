@@ -24,7 +24,7 @@ const RightSection = () => {
             }}
           >
             <div className="link-preview">
-              <img src="/img/eagle.jpg" alt="" />
+              <img src="/img/insta.png" alt="" />
             </div>
             <FaInstagram size={29} />
           </motion.span>
