@@ -33,7 +33,7 @@ export default function Content() {
       desc: `Created an AI-powered image caption generator that analyzes uploaded images and automatically produces human-like descriptive captions with up to 92% accuracy, leveraging Gemini's vision and text generation models.`,
       tech: ["React", "Tailwind", "Node js", "Express", "GSAP"],
       image: "/img/caption-genration.png",
-      live_link:"https://backend-9yno.onrender.com/",
+      live_link:"https://ai-project-uho4.onrender.com",
       github_link:"https://github.com/Premkmaurya/AI-project/tree/main/caption-generator"
     },
     {
