@@ -51,8 +51,8 @@ export default function Content() {
       desc: `Built a pixel-perfect frontend clone of the K72 website, focusing on fluid animations, modern motion design, and seamless user interactions. The project was crafted entirely from scratch using React.js, GSAP, and Tailwind CSS.`,
       tech: ["React", "Tailwind","GSAP"],
       image:"/img/k72.png",
-      live_link:"https://backend-9yno.onrender.com/",
-      github_link:"https://landing-page-six-lyart-59.vercel.app/"
+      live_link:"https://landing-page-six-lyart-59.vercel.app/",
+      github_link:"https://github.com/Premkmaurya/landing-page/k72"
       
     },
   ];
