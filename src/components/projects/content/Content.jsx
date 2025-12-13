@@ -52,7 +52,7 @@ export default function Content() {
       tech: ["React", "Tailwind","GSAP"],
       image:"/img/k72.png",
       live_link:"https://landing-page-six-lyart-59.vercel.app/",
-      github_link:"https://github.com/Premkmaurya/landing-page/k72"
+      github_link:"https://github.com/Premkmaurya/landing-page/tree/main/k72"
       
     },
   ];
