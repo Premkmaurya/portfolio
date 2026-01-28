@@ -88,7 +88,7 @@ const HeroSection = () => {
             <div
               className="resume-link"
               onClick={() => {
-                window.open("https://www.google.com", "_blank");
+                window.open("https://drive.google.com/file/d/1GCKqG2GIycDri5JMMCFGpE9GkbyWll2s/view?usp=sharing", "_blank");
               }}
             >
               Resume
