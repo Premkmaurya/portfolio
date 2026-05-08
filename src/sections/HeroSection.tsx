@@ -1,10 +1,14 @@
 import React from "react";
-import { motion } from "framer-motion";
 import Magnet from "../components/Magnet";
 import ContactButton from "../components/ContactButton";
 import FadeIn from "../components/FadeIn";
 
-const navLinks = ["About", "Price", "Projects", "Contact"];
+const navLinks = [
+  { name: "About", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "Projects", href: "#projects" },
+  { name: "Contact", href: "#contact" },
+];
 
 const HeroSection: React.FC = () => {
   return (
@@ -17,11 +21,11 @@ const HeroSection: React.FC = () => {
         <nav className="flex justify-between px-6 md:px-10 pt-6 md:pt-8">
           {navLinks.map((link) => (
             <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
+              key={link.name}
+              href={link.href}
               className="text-[#D7E2EA] font-medium uppercase tracking-wider text-sm md:text-lg lg:text-[1.4rem] transition-opacity duration-200 hover:opacity-70"
             >
-              {link}
+              {link.name}
             </a>
           ))}
         </nav>

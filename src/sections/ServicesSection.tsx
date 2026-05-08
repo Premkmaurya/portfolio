@@ -43,7 +43,7 @@ const services: Service[] = [
 const ServicesSection: React.FC = () => {
   return (
     <section
-      id="price"
+      id="services"
       className="bg-white rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32"
     >
       {/* Heading */}

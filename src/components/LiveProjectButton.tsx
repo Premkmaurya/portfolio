@@ -1,12 +1,14 @@
 import React from 'react';
 
 interface LiveProjectButtonProps {
-  className?: string;
+  className?: string; 
+  url: string;
 }
 
-const LiveProjectButton: React.FC<LiveProjectButtonProps> = ({ className = '' }) => {
+const LiveProjectButton: React.FC<LiveProjectButtonProps> = ({ className = '', url }) => {
   return (
     <button
+    onClick={() => window.open(url, '_blank')}
       id="live-project-button"
       className={`rounded-full font-medium uppercase tracking-widest cursor-pointer
         border-2 border-[#D7E2EA] text-[#D7E2EA]
