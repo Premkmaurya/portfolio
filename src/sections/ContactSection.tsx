@@ -124,7 +124,7 @@ const ContactSection: React.FC = () => {
         <FadeIn delay={0.2} y={20}>
           <div className="flex justify-center mb-20 sm:mb-28">
             <a
-              href="mailto:Prem@example.com"
+              href="mailto:premmaurya537@gmail.com"
               className="group flex items-center gap-3 rounded-full border border-[#D7E2EA]/20 bg-white/5 backdrop-blur-sm px-6 py-4 sm:px-8 sm:py-5 transition-all duration-300 hover:border-[#D7E2EA]/60 hover:bg-white/10"
             >
               <Mail className="text-[#D7E2EA] w-5 h-5 flex-shrink-0" />
@@ -132,7 +132,7 @@ const ContactSection: React.FC = () => {
                 className="text-[#D7E2EA] font-medium tracking-wide"
                 style={{ fontSize: "clamp(0.9rem, 1.6vw, 1.2rem)" }}
               >
-                Prem@example.com
+                premmaurya537@gmail.com
               </span>
               <ArrowUpRight className="text-[#D7E2EA] w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
             </a>
