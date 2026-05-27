@@ -10,33 +10,33 @@ interface Service {
 const services: Service[] = [
   {
     number: '01',
-    name: '3D Modeling',
+    name: 'Frontend Development',
     description:
-      'Creation of detailed objects, characters, or environments tailored to specific client needs, ideal for games, products, and visualizations.',
+      'Building responsive, modern, and interactive user interfaces using HTML, CSS, JavaScript, React, Next.js, and Tailwind CSS.',
   },
   {
     number: '02',
-    name: 'Rendering',
+    name: 'Full Stack Web Apps',
     description:
-      'High-quality, photorealistic renders that showcase designs with custom lighting, textures, and materials to bring concepts to life.',
+      'Developing scalable web applications with frontend and backend integration, authentication, APIs, and database connectivity.',
   },
   {
     number: '03',
-    name: 'Motion Design',
+    name: 'API Integration',
     description:
-      'Dynamic animations and motion graphics that add energy and storytelling to brands, products, and digital experiences.',
+      'Integrating REST APIs and dynamic data fetching to create fast, real-time, and interactive web experiences.',
   },
   {
     number: '04',
-    name: 'Branding',
+    name: 'Responsive Web Design',
     description:
-      'Crafting cohesive visual identities — from logos to full brand systems — that communicate a clear and memorable presence.',
+      'Designing clean, mobile-friendly, and conversion-focused websites with modern layouts and smooth user experience.',
   },
   {
     number: '05',
-    name: 'Web Design',
+    name: 'Custom Website Development',
     description:
-      'Designing clean, modern, and conversion-focused websites with attention to layout, typography, and user experience.',
+      'Creating custom business websites, portfolio websites, and startup-ready web solutions tailored to client needs.',
   },
 ];
 

@@ -40,14 +40,14 @@ const projects: Project[] = [
   {
     number: "03",
     category: "Client",
-    name: "Solaris Digital",
-    url: "https://timeflow.design",
+    name: "Dental Clinic",
+    url: "https://dental-clinic-lovat-alpha.vercel.app/",
     col1Images: [
-      "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85",
-      "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b.png&w=1280&q=85",
+      "https://ik.imagekit.io/sk6swwncb/Screenshot%20(3).png",
+      "https://ik.imagekit.io/sk6swwncb/Screenshot%20(4).png",
     ],
     col2Image:
-      "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055818_9d062121-ad7e-46b9-999a-1a6a692ef1ee.png&w=1280&q=85",
+      "https://ik.imagekit.io/sk6swwncb/Screenshot%20(2).png",
   },
 ];
 

@@ -252,10 +252,10 @@ const ContactSection: React.FC = () => {
                   What I can help with
                 </p>
                 {[
-                  "3D Modeling & Rendering",
-                  "Motion Design",
-                  "Branding & Identity",
-                  "Web Design",
+                  "Frontend Development",
+                  "Full Stack Web Apps",
+                  "API Integration",
+                  "Responsive Web Design",
                 ].map((item) => (
                   <div
                     key={item}
