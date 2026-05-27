@@ -10,7 +10,7 @@ import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 
 function App() {
-  const lenis = new Lenis({
+  new Lenis({
     autoRaf: true,
     allowNestedScroll: true,
     autoToggle: true,
