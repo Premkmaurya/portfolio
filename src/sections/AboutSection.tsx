@@ -1,17 +1,18 @@
-import React from 'react';
-import FadeIn from '../components/FadeIn';
-import AnimatedText from '../components/AnimatedText';
-import ContactButton from '../components/ContactButton';
-
+import React from "react";
+import FadeIn from "../components/FadeIn";
+import AnimatedText from "../components/AnimatedText";
+import ContactButton from "../components/ContactButton";
 const aboutText =
-  "With more than five years of experience in design, i focus on branding, web design, and user experience, i truly enjoy working with businesses that aim to stand out and present their best image. Let's build something incredible together!";
+  "I’m a passionate web developer focused on building modern, responsive, and user-friendly web applications. I work with JavaScript, React, Next.js, Tailwind CSS, APIs, and full-stack technologies to create clean, fast, and scalable digital experiences. From business websites to dynamic web apps, I enjoy turning ideas into real products that solve problems and deliver great user experiences. Let’s build something amazing together!";
 
+
+  
 const AboutSection: React.FC = () => {
   return (
     <section
       id="about"
       className="relative min-h-screen flex items-center justify-center px-5 sm:px-8 md:px-10 py-20"
-      style={{ background: '#0C0C0C' }}
+      style={{ background: "#0C0C0C" }}
     >
       {/* Decorative corner images */}
 
@@ -85,7 +86,7 @@ const AboutSection: React.FC = () => {
         <FadeIn delay={0} y={40}>
           <h2
             className="hero-heading font-black uppercase leading-none tracking-tight"
-            style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+            style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
           >
             About me
           </h2>
@@ -96,7 +97,7 @@ const AboutSection: React.FC = () => {
           <AnimatedText
             text={aboutText}
             className="text-[#D7E2EA] font-medium leading-relaxed max-w-[560px]"
-            style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}
+            style={{ fontSize: "clamp(1rem, 2vw, 1.35rem)" }}
           />
 
           <FadeIn delay={0.2} y={20}>

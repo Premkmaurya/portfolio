@@ -3,6 +3,8 @@ import Magnet from "../components/Magnet";
 import ContactButton from "../components/ContactButton";
 import FadeIn from "../components/FadeIn";
 
+import charImage from "../assets/character.png"
+
 const navLinks = [
   { name: "About", href: "#about" },
   { name: "Services", href: "#services" },
@@ -56,7 +58,7 @@ const HeroSection: React.FC = () => {
           inactiveTransition="transform 0.6s ease-in-out"
         >
           <img
-            src="https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png"
+            src={charImage}
             alt="Prem — 3D Creator portrait"
             className="w-full h-auto object-contain select-none"
             draggable={false}

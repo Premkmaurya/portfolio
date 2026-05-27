@@ -6,15 +6,12 @@ interface ContactButtonProps {
 
 const ContactButton: React.FC<ContactButtonProps> = ({ className = "" }) => {
   const handleClick = () => {
-    const contactSection = document.getElementById("contact");
-    console.log(contactSection);
-    if (contactSection) {
-      contactSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start", // or 'center' for better focus
-        inline: "nearest",
-      });
-    }
+    const subject = encodeURIComponent("Let's work together!");
+    const body = encodeURIComponent(
+      "Hi Prem,\n\nI'm interested in discussing a project with you.\n\nBest regards"
+    );
+    const mailtoLink = `mailto:Prem@example.com?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
   };
 
   return (
