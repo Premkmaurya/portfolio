@@ -2,6 +2,7 @@ import React from "react";
 import Magnet from "../components/Magnet";
 import ContactButton from "../components/ContactButton";
 import FadeIn from "../components/FadeIn";
+import SideRays from "../components/SideRays";
 
 import charImage from "../assets/character.png"
 
@@ -18,6 +19,23 @@ const HeroSection: React.FC = () => {
       className="h-screen flex flex-col relative"
       style={{ overflowX: "clip", background: "#0C0C0C" }}
     >
+      {/* Background SideRays */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <SideRays
+          speed={1.5}
+          rayColor1="#B600A8"
+          rayColor2="#7621B0"
+          intensity={2.0}
+          spread={1.8}
+          origin="top-right"
+          tilt={0}
+          saturation={1.2}
+          blend={0.5}
+          falloff={0.8}
+          opacity={0.4}
+        />
+      </div>
+
       {/* Navbar */}
       <FadeIn delay={0} y={-20} as="nav" className="relative z-30">
         <nav className="flex justify-between px-4 sm:px-10 pt-5 sm:pt-8">
