@@ -1,4 +1,5 @@
 import "./index.css";
+import { Helmet } from "react-helmet-async";
 import HeroSection from "./sections/HeroSection";
 import MarqueeSection from "./sections/MarqueeSection";
 import AboutSection from "./sections/AboutSection";
@@ -25,6 +26,23 @@ function App() {
         overflowX: "clip",
       }}
     >
+      <Helmet>
+        <title>Prem Maurya | Full Stack Developer</title>
+        <meta
+          name="description"
+          content="Full Stack Developer specializing in React, Node.js, JavaScript, and modern web applications."
+        />
+        <meta property="og:title" content="Prem Maurya | Full Stack Developer" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://portfolio-lovat-eight-72.vercel.app"
+        />
+        <meta
+          property="og:description"
+          content="Portfolio of a Full Stack Developer."
+        />
+      </Helmet>
       <HeroSection />
       <MarqueeSection />
       <AboutSection />

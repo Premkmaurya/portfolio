@@ -186,7 +186,7 @@ const ContactSection: React.FC = () => {
                     required
                     value={formState.name}
                     onChange={handleChange}
-                    placeholder="Your name"
+                    placeholder="Prem Maurya"
                     className="bg-white/5 border border-[#D7E2EA]/15 rounded-2xl px-5 py-4 text-[#D7E2EA] font-light placeholder:text-[#D7E2EA]/25 outline-none focus:border-[#D7E2EA]/50 transition-colors duration-200"
                     style={{ fontSize: "clamp(0.9rem, 1.4vw, 1rem)" }}
                   />
