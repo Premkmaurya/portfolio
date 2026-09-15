@@ -1,54 +1,16 @@
-# Portfolio Website
+# React + Vite
 
-This repository contains a personal portfolio website built with React, TypeScript, Vite, and Tailwind CSS. It showcases a modern landing page with animated sections, project highlights, and a contact form.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Key Features
+Currently, two official plugins are available:
 
-- Hero section with animated introduction
-- About section describing skills and background
-- Services and projects showcase
-- Contact section for invitations and collaboration
-- Smooth scrolling and responsive layout
-- Custom components for animated text, marquees, buttons, and visual effects
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Technology Stack
+## React Compiler
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- ESLint
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Project Structure
+## Expanding the ESLint configuration
 
-- `src/App.tsx` — main application layout
-- `src/main.tsx` — app entry point
-- `src/components/` — reusable UI components
-- `src/sections/` — portfolio page sections
-- `src/index.css` / `src/App.css` — styles and theme utilities
-
-## Run Locally
-
-1. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-2. Start the development server:
-
-   ```bash
-   npm run dev
-   ```
-
-3. Open the app in your browser at the URL shown in the terminal.
-
-## Build for Production
-
-```bash
-npm run build
-```
-
-## Notes
-
-This portfolio is designed to present work clearly and professionally, while using modern front-end tooling for fast development and responsive design.
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.

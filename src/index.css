@@ -1,40 +1,36 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+@font-face {
+  font-family: "PP Editorial Old Ultrabold";
+  src: url("/fonts/PP Editorial Old Ultrabold.ttf") format("truetype");
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  font-family: "PP Editorial Old Ultrabold", "Segoe UI", sans-serif;
+  line-height: 1.5;
+  color: #141518;
+  background: #ffffff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
   margin: 0;
-  padding: 0;
+  box-sizing: border-box;
 }
 
 html,
 body,
 #root {
-  background: #0C0C0C;
-  font-family: 'Kanit', sans-serif;
+  min-height: 100%;
+  width: 100%;
+  font-family: "Segoe UI", sans-serif;
 }
 
-.hero-heading {
-  background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #0C0C0C;
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+body {
+  min-height: 100vh;
 }
