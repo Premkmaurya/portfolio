@@ -7,6 +7,10 @@
   font-display: swap;
 }
 
+@theme {
+  --pp-editorial-old-ultrabold: "PP Editorial Old Ultrabold", "Segoe UI", sans-serif;
+}
+
 :root {
   font-family: "PP Editorial Old Ultrabold", "Segoe UI", sans-serif;
   line-height: 1.5;
@@ -19,7 +23,6 @@
 }
 
 * {
-  margin: 0;
   box-sizing: border-box;
 }
 
