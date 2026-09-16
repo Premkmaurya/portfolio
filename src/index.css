@@ -7,12 +7,9 @@
   font-display: swap;
 }
 
-@theme {
-  --pp-editorial-old-ultrabold: "PP Editorial Old Ultrabold", "Segoe UI", sans-serif;
-}
-
 :root {
-  font-family: "PP Editorial Old Ultrabold", "Segoe UI", sans-serif;
+  --pp-editorial-old-ultrabold: "PP Editorial Old Ultrabold", "Segoe UI", sans-serif;
+  font-family: var(--pp-editorial-old-ultrabold);
   line-height: 1.5;
   color: #141518;
   background: #ffffff;
@@ -32,8 +29,10 @@ body,
   min-height: 100%;
   width: 100%;
   font-family: "Segoe UI", sans-serif;
+  background: #262220;
 }
 
 body {
   min-height: 100vh;
+  margin: 0;
 }
