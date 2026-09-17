@@ -78,7 +78,7 @@ const Hero = ({ loading }) => {
                 duration: 0.9,
                 stagger: 0.1,
             },
-            '-=0.55'
+            '<'
         )
         .to(
             revealMeta.lines,
@@ -88,7 +88,7 @@ const Hero = ({ loading }) => {
                 duration: 0.8,
                 stagger: 0.08,
             },
-            '-=0.75'
+            '<'
         )
 
         return () => {
@@ -105,7 +105,7 @@ const Hero = ({ loading }) => {
             ref={revealRef}
             className="pointer-events-none absolute inset-0 z-30 bg-[#3A3632] text-[#F3EEE8]"
         >
-            <div className="mx-auto flex h-full max-w-[1600px] flex-col px-8 pb-5 pt-8 md:px-10 xl:px-20">
+            <div className="mx-auto flex h-full max-w-[1700px] flex-col pl-20 sm:pl-24 md:pl-28 pr-6 sm:pr-10 md:pr-16 pb-5 pt-8">
                 <div className="flex flex-1 items-start justify-between gap-8 pt-2 md:pt-4">
                     <div className="flex-1 overflow-hidden">
                         <h1 className="font-[--pp-editorial-old-ultrabold] leading-[0.72] tracking-[-0.08em] text-[clamp(6rem,13vw,20rem)]">
