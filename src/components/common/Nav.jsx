@@ -18,7 +18,6 @@ export const Nav = () => {
     { name: 'Behance', href: 'https://behance.net' },
     { name: 'Linkedin', href: 'https://linkedin.com' },
   ]
-
   // Close on Escape key press
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -34,7 +33,7 @@ export const Nav = () => {
     <>
       {/* Left Persistent Sidebar */}
       <nav aria-label="Main Sidebar" className="h-screen w-16 sm:w-18 shrink-0 fixed top-0 left-0 z-[100] pointer-events-auto">
-        <div className="flex h-full w-full flex-col border-r border-[#58534f]/50 bg-[#262220]/40 backdrop-blur-[2px]">
+        <div className="flex h-full w-full flex-col border-r border-[#58534f]/50 backdrop-blur-[2px]">
           {/* Three horizontal lines button div */}
           <button
             type="button"
@@ -94,7 +93,7 @@ export const Nav = () => {
             exit={{
               transform: 'translateX(-100%)'
             }}
-            transition={{ duration: 0.8, ease: "easeIn" }}
+            transition={{ duration: 0.4, ease: "easeIn" }}
             className="fixed inset-0 z-[90] bg-[#262220] text-[#F3EEE8] flex flex-col justify-between pl-16 sm:pl-18 pr-6 sm:pr-12 md:pr-16 py-8 md:py-12 overflow-hidden selection:bg-[#F3EEE8] selection:text-[#262220]"
           >
             {/* Top Bar inside Overlay */}
@@ -105,9 +104,9 @@ export const Nav = () => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.35, delay: 0.1 }}
                 onClick={() => setIsOpen(false)}
-                className="group relative cursor-pointer py-1 px-2 font-editorial text-lg sm:text-xl md:text-2xl uppercase tracking-[0.15em] text-[#F3EEE8] hover:text-white transition-colors duration-200"
+                className="group relative cursor-pointer px-2 font-editorial text-lg sm:text-xl md:text-2xl whitespace-nowrap leading-none uppercase tracking-[0.15em] text-[#F3EEE8] hover:text-white transition-colors duration-200"
               >
-                <span>CLOSE</span>
+                <span className="text-target">CLOSE</span>
                 <span className="absolute bottom-0 left-2 right-2 h-[1px] bg-[#F3EEE8] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </motion.button>
             </div>
@@ -117,7 +116,7 @@ export const Nav = () => {
               <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 lg:gap-6">
                 {navItems.map((item, index) => {
                   const isHovered = hoveredIndex === index
-                  const isCurrentActive = activeIndex === index && hoveredIndex === null
+                  const isCurrentActive = activeIndex === index
                   const isHighlighted = isHovered || isCurrentActive
 
                   return (
@@ -184,7 +183,7 @@ export const Nav = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative pb-1 font-normal text-[#A8A199] hover:text-[#F3EEE8] transition-colors duration-300 inline-block"
+                  className="group relative tracking-tighter font-normal text-[#A8A199] hover:text-[#F3EEE8] transition-colors duration-300 inline-block"
                 >
                   <span>{social.name}</span>
                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#F3EEE8] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left pointer-events-none" />
