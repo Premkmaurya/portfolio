@@ -26,14 +26,12 @@ function App() {
   }, [])
 
   return (
-    <div className="h-screen overflow-hidden bg-[#262220]">
+    <div className="h-full flex bg-[#262220]">
       <Loader loading={loading} setLoading={setLoading} />
       {!loading && (
-        <div ref={scrollRef} className="horizontal-scroll h-screen overflow-x-auto overflow-y-hidden">
-          <div className="flex h-full min-w-screen">
-            <Hero loading={loading} />
-            <About />
-          </div>
+        <div ref={scrollRef} className="horizontal-scroll min-h-screen">
+          <Hero loading={loading} />
+          <About />
         </div>
       )}
     </div>
