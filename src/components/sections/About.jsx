@@ -24,12 +24,12 @@ const About = () => {
         </div>
         <div className='w-full h-1/2 flex'>
           <div className='w-1/2 h-full py-8 flex items-end justify-start gap-4'>
-            <span className='inline-flex items-center gap-2 text-[0.85vw] font-medium uppercase tracking-[0.15em]'>
+            <span className='about-link inline-flex items-center gap-2 text-[0.85vw] font-medium uppercase tracking-[0.15em]'>
               More About Me
               <FontAwesomeIcon icon={faArrowRight} className='text-[0.8vw]' />
             </span>
           </div>
-          <div className='w-1/2 h-full relative bg-red-400'>
+          <div className='w-1/2 h-full relative '>
             <img src={portraitUrl} alt="Portrait" className='w-full h-full object-cover' />
           </div>
         </div>

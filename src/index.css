@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 @font-face {
   font-family: "PP Editorial Old Ultrabold";
@@ -7,7 +8,6 @@
   font-display: swap;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
   --pp-editorial-old-ultrabold:
     "PP Editorial Old Ultrabold", "Segoe UI", sans-serif;
@@ -29,6 +29,31 @@
 
 .font-editorial {
   font-family: "PP Editorial Old Ultrabold", serif;
+}
+
+.about-link {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.about-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.2rem;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s ease;
+}
+
+.about-link:hover::after,
+.about-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 * {
