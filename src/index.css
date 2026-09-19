@@ -7,8 +7,10 @@
   font-display: swap;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
-  --pp-editorial-old-ultrabold: "PP Editorial Old Ultrabold", "Segoe UI", sans-serif;
+  --pp-editorial-old-ultrabold:
+    "PP Editorial Old Ultrabold", "Segoe UI", sans-serif;
   font-family: var(--pp-editorial-old-ultrabold);
   line-height: 1.5;
   color: #141518;
@@ -19,14 +21,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 .font-editorial {
   font-family: "PP Editorial Old Ultrabold", serif;
 }
 
 * {
   box-sizing: border-box;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
