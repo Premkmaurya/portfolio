@@ -7,7 +7,7 @@ const About = () => {
     'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80'
 
   return (
-    <section className="absolute top-0 left-0 z-35 min-h-screen h-full flex w-full bg-[#FAF9F6] px-6 py-6 text-[#2E2B28] sm:px-22">
+    <section className="flex h-screen w-screen flex-shrink-0 bg-[#FAF9F6] px-6 py-6 text-[#2E2B28] sm:px-22">
       <div className='w-1/2 h-full'>
         <div className='w-full h-1/2'>
           <span className='text-[2.3vw] font-[--pp-editorial-old-ultrabold] tracking-tighter'>CHAPTER 1</span>

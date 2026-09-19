@@ -6,100 +6,100 @@ const Hero = ({ loading }) => {
     const revealRef = useRef(null)
 
     useEffect(() => {
-    if (loading) return
+        if (loading) return
 
-    const ctx = gsap.context(() => {
-        const revealTitle = new SplitText('.reveal-title', {
-            type: 'lines',
-            linesClass: 'line',
-            mask: 'lines',
-            autoSplit: true,
-        })
+        const ctx = gsap.context(() => {
+            const revealTitle = new SplitText('.reveal-title', {
+                type: 'lines',
+                linesClass: 'line',
+                mask: 'lines',
+                autoSplit: true,
+            })
 
-        const revealCopy = new SplitText('.reveal-copy', {
-            type: 'lines',
-            linesClass: 'line',
-            mask: 'lines',
-            autoSplit: true,
-        })
+            const revealCopy = new SplitText('.reveal-copy', {
+                type: 'lines',
+                linesClass: 'line',
+                mask: 'lines',
+                autoSplit: true,
+            })
 
-        const revealMeta = new SplitText('.reveal-meta', {
-            type: 'lines',
-            linesClass: 'line',
-            mask: 'lines',
-            autoSplit: true,
-        })
+            const revealMeta = new SplitText('.reveal-meta', {
+                type: 'lines',
+                linesClass: 'line',
+                mask: 'lines',
+                autoSplit: true,
+            })
 
-        // Hide everything BEFORE browser can visibly paint it
-        gsap.set(
-            [
-                revealTitle.lines,
-                revealCopy.lines,
-                revealMeta.lines,
-            ],
-            {
-                yPercent: 100,
-                opacity: 0,
+            // Hide everything BEFORE browser can visibly paint it
+            gsap.set(
+                [
+                    revealTitle.lines,
+                    revealCopy.lines,
+                    revealMeta.lines,
+                ],
+                {
+                    yPercent: 100,
+                    opacity: 0,
+                }
+            )
+
+            const tl = gsap.timeline({
+                defaults: {
+                    ease: 'power3.out',
+                },
+            })
+
+            tl.fromTo(
+                revealRef.current,
+                {
+                    yPercent: 100,
+                },
+                {
+                    yPercent: 0,
+                    duration: 1.1,
+                    ease: 'power3.inOut',
+                }
+            )
+                .to(
+                    revealTitle.lines,
+                    {
+                        yPercent: 0,
+                        opacity: 1,
+                        duration: 1,
+                        stagger: 0.12,
+                    },
+                    '-=0.3'
+                )
+                .to(
+                    revealCopy.lines,
+                    {
+                        yPercent: 0,
+                        opacity: 1,
+                        duration: 0.9,
+                        stagger: 0.1,
+                    },
+                    '<'
+                )
+                .to(
+                    revealMeta.lines,
+                    {
+                        yPercent: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        stagger: 0.08,
+                    },
+                    '<'
+                )
+
+            return () => {
+                revealTitle.revert()
+                revealCopy.revert()
+                revealMeta.revert()
             }
-        )
+        }, revealRef)
 
-        const tl = gsap.timeline({
-            defaults: {
-                ease: 'power3.out',
-            },
-        })
-
-        tl.fromTo(
-            revealRef.current,
-            {
-                yPercent: 100,
-            },
-            {
-                yPercent: 0,
-                duration: 1.1,
-                ease: 'power3.inOut',
-            }
-        )
-        .to(
-            revealTitle.lines,
-            {
-                yPercent: 0,
-                opacity: 1,
-                duration: 1,
-                stagger: 0.12,
-            },
-            '-=0.3'
-        )
-        .to(
-            revealCopy.lines,
-            {
-                yPercent: 0,
-                opacity: 1,
-                duration: 0.9,
-                stagger: 0.1,
-            },
-            '<'
-        )
-        .to(
-            revealMeta.lines,
-            {
-                yPercent: 0,
-                opacity: 1,
-                duration: 0.8,
-                stagger: 0.08,
-            },
-            '<'
-        )
-
-        return () => {
-            revealTitle.revert()
-            revealCopy.revert()
-            revealMeta.revert()
-        }
-    }, revealRef)
-
-    return () => ctx.revert()
-}, [loading])
+        return () => ctx.revert()
+    }, [loading])
     return (
         <div
             ref={revealRef}
