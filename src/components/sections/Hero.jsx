@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import SplitText from 'gsap/SplitText'
 
-const Hero = ({ loading }) => {
-    const revealRef = useRef(null)
+const Hero = ({ reveal, loading }) => {
 
     useEffect(() => {
         if (loading) return
@@ -30,7 +29,6 @@ const Hero = ({ loading }) => {
                 autoSplit: true,
             })
 
-            // Hide everything BEFORE browser can visibly paint it
             gsap.set(
                 [
                     revealTitle.lines,
@@ -49,27 +47,15 @@ const Hero = ({ loading }) => {
                 },
             })
 
-            tl.fromTo(
-                revealRef.current,
-                {
-                    yPercent: 100,
-                },
+            tl.to(
+                revealTitle.lines,
                 {
                     yPercent: 0,
-                    duration: 1.1,
-                    ease: 'power3.inOut',
+                    opacity: 1,
+                    duration: 1,
+                    stagger: 0.12,
                 }
             )
-                .to(
-                    revealTitle.lines,
-                    {
-                        yPercent: 0,
-                        opacity: 1,
-                        duration: 1,
-                        stagger: 0.12,
-                    },
-                    '-=0.3'
-                )
                 .to(
                     revealCopy.lines,
                     {
@@ -96,16 +82,15 @@ const Hero = ({ loading }) => {
                 revealCopy.revert()
                 revealMeta.revert()
             }
-        }, revealRef)
+        })
 
         return () => ctx.revert()
     }, [loading])
     return (
         <div
-            ref={revealRef}
-            className="pointer-events-none absolute inset-0 z-30 bg-[#3A3632] text-[#F3EEE8]"
+            className="pointer-events-none h-screen w-[100vw] min-w-[100vw] flex-shrink-0 overflow-hidden bg-[#3A3632] text-[#F3EEE8]"
         >
-            <div className="mx-auto flex h-full max-w-[1700px] flex-col pl-20 sm:pl-24 md:pl-28 pr-6 sm:pr-10 md:pr-16 pb-5 pt-8">
+            <div className="mx-auto flex h-full w-full max-w-screen flex-col pl-20 pr-6 pb-5 pt-8 sm:pl-24 sm:pr-10 md:pl-28 md:pr-16">
                 <div className="flex flex-1 items-start justify-between gap-8 pt-2 md:pt-4">
                     <div className="flex-1 overflow-hidden">
                         <h1 className="font-[--pp-editorial-old-ultrabold] leading-[0.72] tracking-[-0.08em] text-[clamp(6rem,13vw,20rem)]">
