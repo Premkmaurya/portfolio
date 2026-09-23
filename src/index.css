@@ -68,7 +68,6 @@ body,
   width: 100%;
   font-family: "Segoe UI", sans-serif;
   background: #262220;
-  overflow-y: hidden;
 }
 
 body {
@@ -77,6 +76,9 @@ body {
 }
 
 .horizontal-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow-x: auto;
   scroll-behavior: smooth;
 }
 
