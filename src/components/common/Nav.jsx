@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export const Nav = () => {
+export const Nav = ({ reveal = false, progress = 0 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [hoveredIndex, setHoveredIndex] = useState(null)
   const [activeIndex, setActiveIndex] = useState(0)
+
+  const isLightNav = progress >= 0.53
+  const navBackground = isLightNav ? 'bg-[#FAF9F6]' : reveal ? 'bg-[#3A3632]' : ''
+  const navTextColor = isLightNav ? 'text-[#3A3632]' : 'text-[#F3EEE8]'
+  const navLineColor = isLightNav ? 'bg-[#3A3632]' : 'bg-[#F3EEE8]'
 
   const navItems = [
     { number: '01.', title: 'HOME', href: '#home' },
@@ -33,7 +38,7 @@ export const Nav = () => {
     <>
       {/* Left Persistent Sidebar */}
       <nav aria-label="Main Sidebar" className="h-screen w-16 sm:w-18 shrink-0 fixed top-0 left-0 z-[100] pointer-events-auto">
-        <div className="flex h-full w-full flex-col border-r border-[#58534f]/50 backdrop-blur-[2px]">
+        <div className={`flex h-full w-full flex-col border-r border-[#58534f]/50 ${navBackground} ${navTextColor} transition-colors duration-500`}>
           {/* Three horizontal lines button div */}
           <button
             type="button"
@@ -45,29 +50,29 @@ export const Nav = () => {
             <motion.div
               animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
-              className="w-7 h-[1.8px] rounded-full bg-[#F3EEE8] transition-all group-hover:bg-white"
+              className={`w-7 h-[1.8px] rounded-full ${navLineColor} transition-all group-hover:opacity-80`}
             />
             <motion.div
               animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
               transition={{ duration: 0.2 }}
-              className="w-7 h-[1.8px] rounded-full bg-[#F3EEE8] transition-all group-hover:bg-white"
+              className={`w-7 h-[1.8px] rounded-full ${navLineColor} transition-all group-hover:opacity-80`}
             />
             <motion.div
               animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
-              className="w-7 h-[1.8px] rounded-full bg-[#F3EEE8] transition-all group-hover:bg-white"
+              className={`w-7 h-[1.8px] rounded-full ${navLineColor} transition-all group-hover:opacity-80`}
             />
           </button>
 
           {/* Vertical Text Elements */}
-          <div className="flex min-h-0 flex-1 flex-col text-[11px] sm:text-xs tracking-[0.18em] text-[#F3EEE8]/80 select-none">
+          <div className={`flex min-h-0 flex-1 flex-col text-[11px] sm:text-xs tracking-[0.18em] select-none ${navTextColor}/80`}>
             <div className="flex min-h-0 flex-1 items-center justify-center">
               <span className="-rotate-90 whitespace-nowrap uppercase">
                 Folio — Edition
               </span>
             </div>
             <div className="flex min-h-0 flex-1 items-center justify-center">
-              <span className="-rotate-90 whitespace-nowrap uppercase font-medium">
+              <span className="-rotate-90 whitespace-nowrap uppercase text-[0.8rem] font-normal tracking-normal">
                 PREM MAURYA™
               </span>
             </div>
