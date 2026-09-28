@@ -4,7 +4,7 @@ import SplitText from 'gsap/SplitText'
 
 gsap.registerPlugin(SplitText)
 
-export const Loader = ({ loading, setLoading }) => {
+export const Loader = ({ reveal, setLoading }) => {
   const loaderRef = useRef(null)
   const barRef = useRef(null)
 
@@ -69,7 +69,7 @@ export const Loader = ({ loading, setLoading }) => {
   }, [])
 
   return (
-    <div ref={loaderRef} className="relative h-screen w-screen bg-[#262220] text-[#F3EEE8] font-[--pp-editorial-old-ultrabold]">
+    <div ref={loaderRef} className={`relative h-screen w-screen bg-[#262220] text-[#F3EEE8] font-[--pp-editorial-old-ultrabold] ${reveal && "hidden"}`}>
       <div className="relative z-10 h-full w-full">
         <div className="relative h-1/2 w-full">
           <div className="flex h-full items-center justify-start px-20">

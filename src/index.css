@@ -71,14 +71,20 @@ body,
 }
 
 body {
-  min-height: 100vh;
   margin: 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge legacy */
 }
 
-.horizontal-scroll {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  overflow-x: auto;
-  scroll-behavior: smooth;
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge legacy */
 }
+
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
 

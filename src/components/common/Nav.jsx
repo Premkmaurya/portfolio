@@ -7,9 +7,9 @@ export const Nav = ({ reveal = false, progress = 0 }) => {
   const [activeIndex, setActiveIndex] = useState(0)
 
   const isLightNav = progress >= 0.53
-  const navBackground = isLightNav ? 'bg-[#FAF9F6]' : reveal ? 'bg-[#3A3632]' : ''
-  const navTextColor = isLightNav ? 'text-[#3A3632]' : 'text-[#F3EEE8]'
-  const navLineColor = isLightNav ? 'bg-[#3A3632]' : 'bg-[#F3EEE8]'
+  const navBackground = isOpen ? 'bg-[#262220]' : isLightNav ? 'bg-[#FAF9F6]' : reveal ? 'bg-[#3A3632]' : ''
+  const navTextColor = isOpen ? 'text-[#F3EEE8]' : isLightNav ? 'text-[#3A3632]' : 'text-[#F3EEE8]'
+  const navLineColor = isOpen ? 'bg-[#F3EEE8]' : isLightNav ? 'bg-[#3A3632]' : 'bg-[#F3EEE8]'
 
   const navItems = [
     { number: '01.', title: 'HOME', href: '#home' },

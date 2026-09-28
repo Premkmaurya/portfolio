@@ -1,27 +1,31 @@
 import { useEffect, useRef, useState } from 'react'
 import { Loader } from './components/common/Loader'
 import { Nav } from './components/common/Nav'
-import About from './components/sections/About'
 
 import gsap from 'gsap'
 import SplitText from 'gsap/SplitText'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger'
+import About from './components/sections/About'
 
 gsap.registerPlugin(SplitText)
 gsap.registerPlugin(ScrollTrigger)
 
+
+
 function App() {
   const [loading, setLoading] = useState(true)
   const [reveal, setReveal] = useState(false)
-  const [progress, setProgress] = useState(0)
 
   const revealRef = useRef(null)
   const containerRef = useRef(null)
+  const aboutRef = useRef(null)
 
   useEffect(() => {
     if (loading) return
 
     const ctx = gsap.context(() => {
+
+
       const tl = gsap.timeline({
         defaults: {
           ease: 'power3.out',
@@ -72,25 +76,6 @@ function App() {
 
       tl.call(() => setReveal(true))
 
-      tl.add(() => {
-        gsap.to(containerRef.current, {
-          x: "-100%",
-          ease: 'none',
-          scrollTrigger: {
-            trigger: revealRef.current,
-            start: 'top top',
-            end: () => `+=${containerRef.current.scrollWidth}`,
-            scrub: 1,
-            pin: true,
-            anticipatePin: 1,
-            markers: false,
-            invalidateOnRefresh: true,
-            onUpdate: (self) => {
-              setProgress(self.progress)
-            }
-          },
-        })
-      })
     }, revealRef)
 
     return () => ctx.revert()
@@ -98,21 +83,21 @@ function App() {
 
   return (
     <>
-      <Nav reveal={reveal} progress={progress} />
+      <Nav reveal={reveal} />
       <div className="h-screen bg-[#262220]">
-        <Loader loading={loading} setLoading={setLoading} />
+        <Loader setLoading={setLoading} reveal={reveal} />
         {!loading && (
           <div
             ref={revealRef}
-            className="absolute inset-0 z-30 min-h-screen min-w-screen translate-y-full"
+            className="absolute inset-0 z-30 min-h-screen min-w-screen overflow-x-hidden translate-y-full"
           >
             <div
               ref={containerRef}
-              className="flex h-full min-h-screen"
+              className="h-full min-h-screen"
               style={{ width: 'fit-content' }}
             >
               {/* Hero Section */}
-              <div className="hero-section bg-[#3A3632] text-[#F3EEE8] w-screen flex-shrink-0 min-h-screen h-full flex flex-col justify-between">
+              <div className="hero-section bg-[#3A3632] text-[#F3EEE8] w-screen shrink-0 min-h-screen h-full flex flex-col justify-between">
                 <div className="mx-auto flex h-full max-w-[1700px] flex-col pl-20 sm:pl-24 md:pl-28 pr-6 sm:pr-10 md:pr-16 pb-5 pt-8">
                   <div className="flex flex-1 items-start justify-between gap-8 pt-2 md:pt-4">
                     <div className="flex-1">
@@ -172,9 +157,7 @@ function App() {
               </div>
 
               {/* About Section */}
-              <div className="about-section w-screen flex-shrink-0 min-h-screen h-full">
-                <About progress={progress} />
-              </div>
+              <About />
             </div>
           </div>
         )}
