@@ -81,7 +81,8 @@ export const ScrollVelocity = ({
     scrollerStyle,
     renderClone,
     overlayRoot,
-    overlayClassName
+    overlayClassName,
+    overlayActive
   }) {
     const baseX = useMotionValue(0);
     const scrollOptions = scrollContainerRef ? { container: scrollContainerRef } : {};
@@ -134,7 +135,11 @@ export const ScrollVelocity = ({
       const spans = [];
       for (let i = 0; i < numCopies; i++) {
         spans.push(
-          <span className={isClone ? `${className} ${overlayClassName}` : className} key={i} ref={!isClone && i === 0 ? copyRef : null}>
+          <span
+            className={isClone ? `${className} ${overlayClassName}${overlayActive ? '' : ' scroll-velocity-overlay-text--hidden'}` : className}
+            key={i}
+            ref={!isClone && i === 0 ? copyRef : null}
+          >
             {children}&nbsp;
           </span>
         );
@@ -178,9 +183,10 @@ export const ScrollVelocity = ({
           scrollerClassName={scrollerClassName}
           parallaxStyle={parallaxStyle}
           scrollerStyle={scrollerStyle}
-          renderClone={overlayRows.includes(index)}
+          renderClone={overlayRows.length > 0}
           overlayRoot={overlayRoot}
           overlayClassName={overlayClassName}
+          overlayActive={overlayRows.includes(index)}
         >
           {text}
         </VelocityText>
