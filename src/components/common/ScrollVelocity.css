@@ -27,9 +27,14 @@
 }
 
 .scroll-velocity-text {
-  color: rgba(243, 238, 232, 0.82);
+  color: #262220;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+}
+
+.scroll-velocity-parallax:nth-child(2) .scroll-velocity-text {
+  color: transparent;
+  -webkit-text-stroke: 1px #262220;
 }
 
 .scroll-velocity-parallax {

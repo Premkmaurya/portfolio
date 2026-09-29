@@ -84,7 +84,7 @@ function App() {
   return (
     <>
       <Nav reveal={reveal} />
-      <div className="h-screen bg-[#262220]">
+      <div className="h-screen">
         <Loader setLoading={setLoading} reveal={reveal} />
         {!loading && (
           <div
