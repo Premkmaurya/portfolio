@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useLayoutEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
   motion,
   useScroll,
@@ -8,7 +9,8 @@ import {
   useTransform,
   useMotionValue,
   useVelocity,
-  useAnimationFrame
+  useAnimationFrame,
+  useReducedMotion
 } from 'motion/react';
 import './ScrollVelocity.css';
 
@@ -18,18 +20,29 @@ function useElementWidth(ref) {
   useLayoutEffect(() => {
     function updateWidth() {
       if (ref.current) {
-        setWidth(ref.current.offsetWidth);
+        const nextWidth = ref.current.offsetWidth;
+        setWidth(currentWidth => currentWidth === nextWidth ? currentWidth : nextWidth);
       }
     }
 
     updateWidth();
 
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', updateWidth);
-      return () => window.removeEventListener('resize', updateWidth);
+    let active = true;
+    if (typeof document !== 'undefined' && document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        if (active) updateWidth();
+      });
     }
 
-    return undefined;
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', updateWidth);
+      return () => {
+        active = false;
+        window.removeEventListener('resize', updateWidth);
+      };
+    }
+
+    return () => { active = false; };
   }, [ref]);
 
   return width;
@@ -47,8 +60,12 @@ export const ScrollVelocity = ({
   parallaxClassName = 'parallax',
   scrollerClassName = 'scroller',
   parallaxStyle,
-  scrollerStyle
+  scrollerStyle,
+  overlayRows = [],
+  overlayClassName = 'scroll-velocity-overlay-text'
 }) => {
+  const [overlayRoot, setOverlayRoot] = useState(null);
+
   function VelocityText({
     children,
     baseVelocity = velocity,
@@ -61,7 +78,10 @@ export const ScrollVelocity = ({
     parallaxClassName,
     scrollerClassName,
     parallaxStyle,
-    scrollerStyle
+    scrollerStyle,
+    renderClone,
+    overlayRoot,
+    overlayClassName
   }) {
     const baseX = useMotionValue(0);
     const scrollOptions = scrollContainerRef ? { container: scrollContainerRef } : {};
@@ -77,6 +97,7 @@ export const ScrollVelocity = ({
       velocityMapping?.output || [0, 5],
       { clamp: false }
     );
+    const shouldReduceMotion = useReducedMotion();
 
     const copyRef = useRef(null);
     const copyWidth = useElementWidth(copyRef);
@@ -95,6 +116,8 @@ export const ScrollVelocity = ({
     const directionFactor = useRef(1);
 
     useAnimationFrame((t, delta) => {
+      if (shouldReduceMotion) return;
+
       let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
       if (velocityFactor.get() < 0) {
@@ -107,26 +130,40 @@ export const ScrollVelocity = ({
       baseX.set(baseX.get() + moveBy);
     });
 
-    const spans = [];
-    for (let i = 0; i < numCopies; i++) {
-      spans.push(
-        <span className={className} key={i} ref={i === 0 ? copyRef : null}>
-          {children}&nbsp;
-        </span>
+    function renderTrack(isClone = false) {
+      const spans = [];
+      for (let i = 0; i < numCopies; i++) {
+        spans.push(
+          <span className={isClone ? `${className} ${overlayClassName}` : className} key={i} ref={!isClone && i === 0 ? copyRef : null}>
+            {children}&nbsp;
+          </span>
+        );
+      }
+
+      return (
+        <motion.div className={scrollerClassName} style={{ x, ...scrollerStyle }}>
+          {spans}
+        </motion.div>
       );
     }
 
     return (
-      <div className={parallaxClassName} style={parallaxStyle}>
-        <motion.div className={scrollerClassName} style={{ x, ...scrollerStyle }}>
-          {spans}
-        </motion.div>
-      </div>
+      <>
+        <div className={parallaxClassName} style={parallaxStyle}>
+          {renderTrack()}
+        </div>
+        {renderClone && overlayRoot && createPortal(
+          <div className={`${parallaxClassName} scroll-velocity-clone-row`} style={parallaxStyle}>
+            {renderTrack(true)}
+          </div>,
+          overlayRoot
+        )}
+      </>
     );
   }
 
   return (
-    <section>
+    <section className={overlayRows.length ? 'scroll-velocity-root scroll-velocity-root--layered' : undefined}>
       {texts.map((text, index) => (
         <VelocityText
           key={index}
@@ -141,10 +178,14 @@ export const ScrollVelocity = ({
           scrollerClassName={scrollerClassName}
           parallaxStyle={parallaxStyle}
           scrollerStyle={scrollerStyle}
+          renderClone={overlayRows.includes(index)}
+          overlayRoot={overlayRoot}
+          overlayClassName={overlayClassName}
         >
           {text}
         </VelocityText>
       ))}
+      {overlayRows.length > 0 && <div ref={setOverlayRoot} className="scroll-velocity-overlay" aria-hidden="true" />}
     </section>
   );
 };
