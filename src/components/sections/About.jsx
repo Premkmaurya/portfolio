@@ -4,6 +4,7 @@ import SplitText from "gsap/SplitText"
 import ScrollTrigger from "gsap/dist/ScrollTrigger"
 import ScrollVelocity from "../common/ScrollVelocity"
 import TechText from "../common/TechText"
+import WarpText from "../common/WarpText"
 
 gsap.registerPlugin(SplitText, ScrollTrigger)
 
@@ -46,7 +47,7 @@ const About = () => {
     <>
       <section className="about-marquee relative h-screen w-screen mt-10 overflow-hidden">
         <ScrollVelocity
-          texts={['BUILDING THE WEB', 'IDEAS INTO PRODUCTS', 'PREM MAURYA']}
+          texts={['FULL STACK DEVELOPER', 'UI/UX DEVELOPER', 'MERN STACK DEVELOPER']}
           velocity={136}
           numCopies={10}
           className="scroll-velocity-text font-[--pp-editorial-old-ultrabold]"
@@ -76,12 +77,11 @@ const About = () => {
           reveal="letter"
           dashLength={4}
           dashGap={2}
-          specks={15}
-          fontFamily=""
+          specks={0}
           color="#141518"
           accentColor="#141518"
           letterSpacing={-0.05}
-          reach={200}
+          reach={60}
           softness={0.7}
           strokeWidth={1.5}
           speed={1}
@@ -94,14 +94,10 @@ const About = () => {
 
         <div className="about-intro-copy">
           <p>
-            I design and develop digital experiences with a focus on craft,
-            motion, and interaction — creating interfaces where every detail is
-            intentional.
+            I design and build modern digital experiences where clean interfaces, thoughtful interactions, and solid engineering come together.
           </p>
           <p>
-            Based in Amsterdam, I work at the intersection of creativity and
-            technology. From concept to code, I bring ideas to life with
-            meticulous attention to detail.
+            With React, Next.js, TypeScript, GSAP, and Node.js, I turn ideas into interactive interfaces, full-stack applications, and AI-powered products. I care about the details — from smooth motion and responsive UI to clean, maintainable code.
           </p>
         </div>
       </section>

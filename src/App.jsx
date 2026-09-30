@@ -6,6 +6,7 @@ import gsap from 'gsap'
 import SplitText from 'gsap/SplitText'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import About from './components/sections/About'
+import WarpText from './components/common/WarpText'
 
 gsap.registerPlugin(SplitText)
 gsap.registerPlugin(ScrollTrigger)
@@ -158,6 +159,8 @@ function App() {
 
               {/* About Section */}
               <About />
+
+
             </div>
           </div>
         )}
