@@ -1,47 +1,14 @@
-import { useLayoutEffect, useRef } from "react"
+import { useRef } from "react"
 import gsap from "gsap"
 import SplitText from "gsap/SplitText"
 import ScrollTrigger from "gsap/dist/ScrollTrigger"
 import ScrollVelocity from "../common/ScrollVelocity"
 import TechText from "../common/TechText"
-import WarpText from "../common/WarpText"
 
 gsap.registerPlugin(SplitText, ScrollTrigger)
 
 const About = () => {
   const aboutIntroRef = useRef(null)
-
-  // useLayoutEffect(() => {
-  //   const ctx = gsap.context(() => {
-  //     const split = new SplitText(
-  //       [".about-intro-title", ".about-intro-copy p"],
-  //       {
-  //         type: "lines",
-  //         linesClass: "about-reveal-line",
-  //         autoSplit: true,
-  //         mask: "lines",
-  //       }
-  //     )
-
-  //     gsap.from(split.lines, {
-  //       yPercent: 100,
-  //       opacity: 0,
-  //       duration: 1.1,
-  //       ease: "power3.out",
-  //       stagger: 0.08,
-  //       scrollTrigger: {
-  //         trigger: aboutIntroRef.current,
-  //         start: "top 75%",
-  //         once: true,
-  //         markers:true
-  //       },
-  //     })
-
-  //     return () => split.revert()
-  //   }, aboutIntroRef)
-
-  //   return () => ctx.revert()
-  // }, [])
 
   return (
     <>
