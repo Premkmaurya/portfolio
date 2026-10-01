@@ -8,9 +8,9 @@ import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import About from './components/sections/About'
 import WarpText from './components/common/WarpText'
 import Work from './components/sections/Work'
+import ScrollExpand from './components/common/ScrollExpand'
 
 gsap.registerPlugin(SplitText)
-gsap.registerPlugin(ScrollTrigger)
 
 
 
@@ -162,6 +162,9 @@ function App() {
               <About />
 
               <Work />
+
+            
+              
 
             </div>
           </div>

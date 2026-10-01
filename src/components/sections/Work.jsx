@@ -1,58 +1,27 @@
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useLayoutEffect, useRef } from 'react'
-
-gsap.registerPlugin(ScrollTrigger)
+import React from 'react'
 
 const Work = () => {
-  const sectionRef = useRef(null)
-  const imageRef = useRef(null)
 
-  useLayoutEffect(() => {
-    const media = gsap.matchMedia()
-
-    media.add(
-      {
-        isMobile: '(max-width: 767px)',
-        isDesktop: '(min-width: 768px)',
-      },
-      ({ conditions }) => {
-        const { isMobile } = conditions
-
-        gsap.set(imageRef.current, { width: 0, height: 0, autoAlpha: 0 })
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top top',
-            end: '+=120%',
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-            markers:true
-          },
-        }).to(imageRef.current, {
-          width: isMobile ? '55vw' : '42vw',
-          height: isMobile ? '45vh' : '58vh',
-          autoAlpha: 1,
-          ease: 'none',
-        })
-      }
-    )
-
-    return () => media.revert()
-  }, [])
 
   return (
-  <div ref={sectionRef} className='relative w-screen h-screen bg-[#faf9f6] text-[#141518]'>
-        <div className='flex w-full h-full items-center justify-center overflow-hidden gap-6'>
-            <div className='text-[7vw] font-bold [word-spacing:4px]'>THE</div>
-      <div ref={imageRef} className='w-0 h-0 shrink-0 overflow-hidden'>
-        <img src="/mine.png" className='w-full h-full object-cover' alt="" />
-      </div>
-            <div className='text-[7vw] font-bold [word-spacing:4px]'>WORK</div>
+    <section className="w-screen h-screen ml-6 flex flex-row">
+      <div className="h-full w-[55%] flex py-10 items-end justify-center">
+        <div className="relative w-[65%] h-[50%] border border-[#272323]">
         </div>
-        <div></div>
-    </div>
+      </div>
+      <div className="h-full w-[45%] px-5 py-14">
+        <p className="font-['Segoe UI'] font-normal text-[0.775rem] ">FEATURED WORK</p>
+        <div className="h-[90%] mt-4 w-full font-[--pp-editorial-old-ultrabold]">
+          <div className='h-1/4 w-full border-b border-[#1111114b] text-[4rem]'>VEGE MONEY</div>
+          <div className='h-1/4 w-full border-b border-[#1111114b] text-[4rem]'>VEGE MONEY</div>
+          <div className='h-1/4 w-full border-b border-[#1111114b] text-[4rem]'>VEGE MONEY</div>
+          <div className='h-1/4 w-full text-[4rem]'>VEGE MONEY</div>
+        </div>
+        <div className="h-[10%] w-full flex items-center justify-end"> 
+          <button className="text-[#111111] py-2 px-4 hover:bg-[#333333]">View Project</button>
+        </div>
+      </div>
+    </section>
   )
 }
 
