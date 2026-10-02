@@ -160,12 +160,8 @@ function App() {
 
               {/* About Section */}
               <About />
-
+              {/* Work Section */}
               <Work />
-
-            
-              
-
             </div>
           </div>
         )}
