@@ -173,3 +173,34 @@ html {
 }
 
 
+.project-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 8px 16px;
+  color: #111;
+}
+
+.project-btn-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #111;
+
+  transform: scaleX(0);
+  transform-origin: left;
+
+  transition: transform 500ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.project-btn:hover .project-btn-line {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* When hover ends, animate from RIGHT → LEFT */
+.project-btn:not(:hover) .project-btn-line {
+  transform-origin: right;
+}
+

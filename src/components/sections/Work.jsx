@@ -1,7 +1,8 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FiExternalLink } from "react-icons/fi";
+import { FaArrowRightLong } from "react-icons/fa6";
 
-const headings = ['VEGE MONEY', 'VEGE MONEY', 'VEGE MONEY']
+const headings = ['VEGE MONEY', 'VEGE MONEY', 'VEGE MONEY', 'VEGE MONEY']
 
 const Work = () => {
 
@@ -9,7 +10,7 @@ const Work = () => {
   return (
     <section className="w-screen h-screen ml-6 flex flex-row">
       <div className="h-full w-[55%] flex py-10 items-end justify-center">
-        <div className="relative w-[65%] h-[50%] border border-[#272323]">
+        <div className="relative w-[65%] h-[50%] border border-[#27232370]">
         </div>
       </div>
       <div className="h-full w-[45%] px-5 py-14">
@@ -19,7 +20,7 @@ const Work = () => {
           {headings.map((heading, index) => (
             <div
               key={index}
-              className="group relative h-1/4 w-full overflow-hidden border-b border-[#1111114b] text-[4rem]"
+              className={`group relative h-1/4 w-full overflow-hidden cursor-pointer ${index != headings.length - 1 ? 'border-b border-[#1111114b]' : ''} text-[4rem]`}
             >
               {/* Original text */}
               <div>
@@ -46,12 +47,19 @@ const Work = () => {
                   {heading}
                 </span>
               </div>
-
-              <FontAwesomeIcon icon={byPrefixAndName.fas['arrow-up-right-from-square']} />
-
-              {/* Animated underline */}
-              <span
+              <FiExternalLink
                 className="
+                  opacity-0 absolute right-10 top-[30%]
+                  translate-x-1/2
+                  h-10 w-10
+                  transition-all duration-500
+                  ease-[cubic-bezier(.22,1,.36,1)]
+                  group-hover:opacity-100 group-hover:translate-x-0"
+              />
+              {/* Animated underline */}
+              {index === headings.length - 1 ? null : (
+                <span
+                  className="
                     absolute bottom-0 left-0 z-10
                     h-[1px] w-full
                     origin-left scale-x-0
@@ -60,36 +68,19 @@ const Work = () => {
                     ease-[cubic-bezier(.22,1,.36,1)]
                     group-hover:scale-x-100
                   "
-              />
+                />)}
             </div>
           ))}
-
-          <div className="group relative h-1/4 w-full overflow-hidden  text-[4rem]">
-            {/* Original text */}
-            <span
-              className="
-                    block transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)]
-                    group-hover:-translate-y-full
-                  "
-            >
-              {headings[headings.length - 1]}
-            </span>
-
-            {/* Hover text */}
-            <span
-              className="
-                    absolute left-0 top-full block
-                    transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)]
-                    group-hover:-translate-y-full
-                  "
-            >
-              {headings[headings.length - 1]}
-            </span>
-
-          </div>
         </div>
-        <div className="h-[20%] w-full flex items-center justify-end">
-          <button className="text-[#111111] py-2 px-4 hover:bg-[#333333]">View Project</button>
+        <div className="h-[20%] w-full flex items-center justify-end gap-4 px-10">
+          <button className="project-btn">
+            {/* Button text */}
+            <span className="relative z-10 text-[1.3rem] flex items-center gap-4 font-['Segoe UI']">
+              View Project
+              <FaArrowRightLong className="w-5 h-5" />
+              <span className="project-btn-line" />
+            </span>
+          </button>
         </div>
       </div>
     </section>
