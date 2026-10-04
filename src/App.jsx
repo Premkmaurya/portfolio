@@ -4,11 +4,8 @@ import { Nav } from './components/common/Nav'
 
 import gsap from 'gsap'
 import SplitText from 'gsap/SplitText'
-import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import About from './components/sections/About'
-import WarpText from './components/common/WarpText'
 import Work from './components/sections/Work'
-import ScrollExpand from './components/common/ScrollExpand'
 
 gsap.registerPlugin(SplitText)
 
@@ -20,7 +17,6 @@ function App() {
 
   const revealRef = useRef(null)
   const containerRef = useRef(null)
-  const aboutRef = useRef(null)
 
   useEffect(() => {
     if (loading) return
@@ -163,6 +159,8 @@ function App() {
               <About />
               {/* Work Section */}
               <Work />
+              {/* ScrollExpand Section */}
+
             </div>
           </div>
         )}

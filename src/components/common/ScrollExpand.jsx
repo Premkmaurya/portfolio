@@ -11,6 +11,20 @@ const smoothstep = (edge0, edge1, x) => {
   return t * t * (3 - 2 * t);
 };
 
+const getScrollParent = (node) => {
+  let p = node?.parentNode;
+  while (p && p !== document.body && p !== document.documentElement) {
+    if (p instanceof HTMLElement) {
+      const style = window.getComputedStyle(p);
+      if (/(auto|scroll|hidden)/.test(style.overflow + style.overflowY + style.overflowX)) {
+        return p;
+      }
+    }
+    p = p.parentNode;
+  }
+  return window;
+};
+
 const ScrollExpand = ({
   src = '',
   mediaType = 'image',
@@ -173,15 +187,24 @@ const ScrollExpand = ({
     current = target;
     applyProgress(current);
 
-    const scroller = useWindowScroll ? window : root;
-    scroller.addEventListener('scroll', onScroll, { passive: true });
+    const scrollParent = useWindowScroll ? getScrollParent(root) : root;
+    const scrollers = [scrollParent];
+    if (useWindowScroll && scrollParent !== window) {
+      scrollers.push(window);
+    }
+
+    scrollers.forEach(s => {
+      s.addEventListener('scroll', onScroll, { passive: true, capture: true });
+    });
     window.addEventListener('resize', onResize);
     const ro = new ResizeObserver(onResize);
     ro.observe(root);
 
     return () => {
       if (raf) cancelAnimationFrame(raf);
-      scroller.removeEventListener('scroll', onScroll);
+      scrollers.forEach(s => {
+        s.removeEventListener('scroll', onScroll, { capture: true });
+      });
       window.removeEventListener('resize', onResize);
       ro.disconnect();
     };
