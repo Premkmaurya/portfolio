@@ -3,8 +3,21 @@ import { FiExternalLink } from "react-icons/fi";
 import { FaArrowRightLong } from "react-icons/fa6";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitText from "gsap/SplitText";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
+// App.jsx wraps every section in a div with `overflow-x-hidden`, which makes it
+// the real scroll container (window never scrolls). ScrollTrigger must watch it.
+const getScrollParent = (el) => {
+  let node = el?.parentElement;
+  while (node && node !== document.body) {
+    const { overflowY } = getComputedStyle(node);
+    if (overflowY === "auto" || overflowY === "scroll") return node;
+    node = node.parentElement;
+  }
+  return window;
+};
 
 const headings = ["VEGE MONEY", "VEGE MONEY", "VEGE MONEY", "VEGE MONEY"];
 
@@ -12,62 +25,63 @@ const Work = () => {
   const sectionRef = useRef(null);
   const featuredRef = useRef(null);
   const projectsRef = useRef(null);
-  const buttonRef = useRef(null);
 
   useLayoutEffect(() => {
+    const scroller = getScrollParent(sectionRef.current);
+
     const ctx = gsap.context(() => {
-      const projects = projectsRef.current.children;
+      const q = gsap.utils.selector(sectionRef);
 
-      // Initial hidden state
-      gsap.set(featuredRef.current, {
-        opacity: 0,
-        y: 30,
-      });
+      // Same split as Loader.jsx: lines, each one masked so text rises out of a clip
+      const splitOpts = { type: "words,lines", linesClass: "line", mask: "lines" };
+      const splitFeatured = new SplitText(featuredRef.current, splitOpts);
+      const splitProjects = new SplitText(q(".work-project-text"), splitOpts);
+      const splitButton = new SplitText(q(".work-btn-text"), splitOpts);
 
-      gsap.set(projects, {
-        opacity: 0,
-        y: 80,
-      });
-
-      gsap.set(buttonRef.current, {
-        opacity: 0,
-        y: 30,
-      });
-
-      // Reveal animation when Work section enters viewport
       const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: sectionRef.current,
+          scroller,
           start: "top 70%",
           toggleActions: "play none none reverse",
-          markers: true,
+          invalidateOnRefresh: true,
+          markers: true, // remove once the start marker sits on the section's top edge
         },
       });
 
-      tl.to(featuredRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: "power3.out",
-      });
+      tl.from(splitFeatured.lines, { yPercent: 100, opacity: 0, duration: 1, stagger: 0.08 })
+        .from(
+          splitProjects.lines,
+          { yPercent: 100, opacity: 0, duration: 1.2, stagger: 0.1 },
+          "-=0.6"
+        )
+        .from(splitButton.lines, { yPercent: 100, opacity: 0, duration: 1, stagger: 0.08 }, "-=0.6")
+        .from(q(".work-btn-arrow"), { opacity: 0, x: -12, duration: 0.8 }, "<0.2");
 
-      tl.to(projects, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out",
-      }, "-=0.2");
-
-      tl.to(buttonRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power3.out",
-      }, "-=0.3");
+      return () => {
+        splitFeatured.revert();
+        splitProjects.revert();
+        splitButton.revert();
+      };
     }, sectionRef);
 
-    return () => ctx.revert();
+    // Re-measure when layout above Work changes (portrait image, fonts loading)
+    let raf;
+    const refresh = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => ScrollTrigger.refresh());
+    };
+    const content = scroller === window ? document.body : scroller.firstElementChild;
+    const ro = new ResizeObserver(refresh);
+    if (content) ro.observe(content);
+    document.fonts?.ready.then(refresh);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -100,9 +114,10 @@ const Work = () => {
                 } text-[4rem]`}
             >
               {/* Original text */}
-              <div>
+              <div className="relative">
                 <span
                   className="
+                    work-project-text
                     relative z-0 block
                     transition-transform duration-500
                     ease-[cubic-bezier(.22,1,.36,1)]
@@ -156,10 +171,10 @@ const Work = () => {
         </div>
 
         <div className="h-[20%] w-full flex items-center justify-end gap-4 px-10">
-          <button ref={buttonRef} className="project-btn">
+          <button className="project-btn">
             <span className="relative z-10 text-[1.3rem] flex items-center gap-4 font-['Segoe UI']">
-              View Project
-              <FaArrowRightLong className="w-5 h-5" />
+              <span className="work-btn-text">View Project</span>
+              <FaArrowRightLong className="work-btn-arrow w-5 h-5" />
               <span className="project-btn-line" />
             </span>
           </button>

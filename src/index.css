@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
 @font-face {
@@ -145,7 +145,6 @@
   box-sizing: border-box;
 }
 
-
 html,
 body,
 #root {
@@ -172,7 +171,6 @@ html {
   display: none;
 }
 
-
 .project-btn {
   position: relative;
   overflow: hidden;
@@ -191,7 +189,7 @@ html {
   transform: scaleX(0);
   transform-origin: left;
 
-  transition: transform 500ms cubic-bezier(.22, 1, .36, 1);
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .project-btn:hover .project-btn-line {
@@ -203,4 +201,3 @@ html {
 .project-btn:not(:hover) .project-btn-line {
   transform-origin: right;
 }
-
