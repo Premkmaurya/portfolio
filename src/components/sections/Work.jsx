@@ -54,8 +54,7 @@ const Work = () => {
           start: () => `top+=${scrollerH() * SCROLL_DISTANCE} top`,
           end: "max",
           toggleActions: "play none none reverse",
-          invalidateOnRefresh: true,
-          markers: true, // remove once the start marker lines up with the end of the expand
+          invalidateOnRefresh: true
         },
       });
 
@@ -123,7 +122,7 @@ const Work = () => {
   return (
     <div ref={wrapRef} className="relative w-screen">
       <ScrollExpand
-        src="/mine.png"
+        src="/images.jfif"
         alt="Prem Maurya"
         title="Crafting Digital Experiences"
         scrollHint="Scroll to reveal"

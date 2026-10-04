@@ -132,10 +132,10 @@ function App() {
                   <div className="flex items-end justify-between gap-4 pb-3 pt-5 text-[#F3EEE8]">
                     <div className="text-[1.05rem] leading-tight tracking-[-0.03em] text-[#F3EEE8]/90">
                       <div className="mb-1 overflow-hidden">
-                        <span className='reveal-meta block'>HCMC, Vietnam</span>
+                        <span className='reveal-meta block'>Lucknow, India</span>
                       </div>
                       <div className="mb-1 overflow-hidden">
-                        <span className='reveal-meta block'>(GMT+7) 02:13</span>
+                        <span className='reveal-meta block'>(GMT+5:30) 02:13</span>
                       </div>
                     </div>
 
