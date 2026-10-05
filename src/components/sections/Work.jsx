@@ -62,6 +62,12 @@ const Work = () => {
       const reveal = gsap.timeline({ paused: true });
 
       reveal
+        .from(".preview-box", {
+          opacity: 0,
+          yPercent: 100,
+          duration: 1.2,
+          ease: "power3.out"
+        })
         .from(splitFeatured.lines, {
           duration: 1.2,
           yPercent: 100,
@@ -210,7 +216,7 @@ const Work = () => {
           ref={sectionRef}
           className="absolute inset-0 z-10 flex flex-row bg-[#faf9f6] pl-6"
         >
-          <div className="h-full w-[55%] flex py-10 items-end justify-center">
+          <div className="preview-box h-full w-[55%] flex py-10 items-end justify-center">
             <div className="relative w-[65%] h-[50%] border border-[#27232370]"></div>
           </div>
 
