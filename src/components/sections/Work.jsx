@@ -4,7 +4,6 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/SplitText";
-import ScrollExpand from "../common/ScrollExpand"
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -22,19 +21,33 @@ const getScrollParent = (el) => {
 
 const headings = ["VEGE MONEY", "VEGE MONEY", "VEGE MONEY", "VEGE MONEY"];
 
-const SCROLL_DISTANCE = 1.2; // must match <ScrollExpand scrollDistance>; the section enters when it reaches 1
-const ENTER_FROM = "right"; // "left" | "right"
+// --- image reveal tuning --------------------------------------------------
+const ENTER_FROM = "right"; // which side the Work section slides in from: "left" | "right"
+const SCROLL_VH = 400; // scroll length of the whole sequence, in viewport heights
+const HOLD = 0.3; // pause after the image is full-screen, before the section starts entering (timeline units)
+const SLIDE = 0.8; // how much scroll the section needs to slide fully in (timeline units; image expand = 1)
+const START = { w: 0, h: 0, r: 24 }; // image starts as nothing (w/h = 0) and grows from the center; r = corner radius px
+const WORD_GAP = 1; // vw on each side of the center, so THE and WORK start close together
+const ZOOM = 1.35; // image starts zoomed in, settles to 1
+
+const insetFrom = `inset(${(100 - START.h) / 2}% ${(100 - START.w) / 2}% ${(100 - START.h) / 2}% ${(100 - START.w) / 2}% round ${START.r}px)`;
+const insetTo = "inset(0% 0% 0% 0% round 0px)";
+// the image box shrinks toward 0 edge distance; THE / WORK ride that edge outward
+const EDGE_VW = (100 - START.w) / 2;
+const TOTAL = 1 + HOLD + SLIDE;
+const REVEAL_AT = (1 + HOLD + SLIDE * 0.7) / TOTAL; // text lines start once the section is ~70% in
 
 const Work = () => {
   const wrapRef = useRef(null);
+  const frameRef = useRef(null);
+  const imgRef = useRef(null);
+  const theRef = useRef(null);
+  const wordRef = useRef(null);
   const sectionRef = useRef(null);
   const featuredRef = useRef(null);
-  const projectsRef = useRef(null);
 
   useLayoutEffect(() => {
     const scroller = getScrollParent(wrapRef.current);
-    const track = wrapRef.current.querySelector(".scroll-expand__track");
-    const scrollerH = () => (scroller === window ? window.innerHeight : scroller.clientHeight);
 
     const ctx = gsap.context(() => {
       const q = gsap.utils.selector(sectionRef);
@@ -45,54 +58,87 @@ const Work = () => {
       const splitProjects = new SplitText(q(".work-project-text"), splitOpts);
       const splitButton = new SplitText(q(".work-btn-text"), splitOpts);
 
-      const tl = gsap.timeline({
-        defaults: { ease: "power3.out" },
-        scrollTrigger: {
-          trigger: track, // ScrollExpand's scroll track
-          scroller,
-          // fires the moment ScrollExpand's progress reaches 1
-          start: () => `top+=${scrollerH() * SCROLL_DISTANCE} top`,
-          end: "max",
-          toggleActions: "play none none reverse",
-          invalidateOnRefresh: true
-        },
-      });
+      // ---- B) Work section text reveal (time-based, plays once the section is mostly in) ----
+      const reveal = gsap.timeline({ paused: true });
 
-      // 1) the section slides in over the expanded image
-      tl.fromTo(
-        sectionRef.current,
-        {
-          xPercent: ENTER_FROM === "left" ? -100 : 100
-        },
-        {
-          xPercent: 0, duration: 1.1, ease: "power3.inOut"
-        }
-      )
-        // 2) then the text reveals, same technique as the Loader
+      reveal
         .from(splitFeatured.lines, {
           duration: 1.2,
           yPercent: 100,
           opacity: 0,
           stagger: 0.08,
-          delay:-1.4
+          ease: "power3.out",
         })
         .from(splitProjects.lines, {
           duration: 1.2,
           yPercent: 100,
           opacity: 0,
           stagger: 0.1,
+          ease: "power3.out",
         }, "-=0.6")
         .from(splitButton.lines, {
           duration: 1.2,
           yPercent: 100,
           opacity: 0,
           stagger: 0.08,
+          ease: "power3.out",
         }, "-=0.6")
         .from(q(".work-btn-arrow"), {
           opacity: 1,
           x: -12,
-          duration: 0.8
+          duration: 0.8,
+          ease: "power3.out",
         }, "<0.2");
+
+      let shown = false;
+      const setShown = (on) => {
+        if (on === shown) return;
+        shown = on;
+        on ? reveal.play() : reveal.reverse();
+      };
+
+      // ---- A) image reveal + section slide-in, both driven by scroll (scrubbed) ----
+      const ease = "power2.inOut"; // shared, so the words stay locked to the image edge
+      const tl = gsap.timeline({
+        defaults: { ease },
+        scrollTrigger: {
+          trigger: wrapRef.current,
+          scroller,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => setShown(self.progress >= REVEAL_AT),
+        },
+      });
+
+      tl.fromTo(frameRef.current, { clipPath: insetFrom }, { clipPath: insetTo, duration: 1 }, 0)
+        .fromTo(imgRef.current, { scale: ZOOM }, { scale: 1, duration: 1 }, 0)
+        // THE leaves to the left, WORK to the right, starting flush against the image box
+        .to(
+          theRef.current,
+          {
+            x: () => -((EDGE_VW / 100) * window.innerWidth + theRef.current.offsetWidth + 40),
+            duration: 1,
+          },
+          0
+        )
+        .to(
+          wordRef.current,
+          {
+            x: () => (EDGE_VW / 100) * window.innerWidth + wordRef.current.offsetWidth + 40,
+            duration: 1,
+          },
+          0
+        )
+        // hold on the full-screen image before the section enters
+        .to({}, { duration: HOLD })
+        // the Work section slides in from the side, tied 1:1 to your scroll
+        .fromTo(
+          sectionRef.current,
+          { xPercent: ENTER_FROM === "left" ? -100 : 100 },
+          { xPercent: 0, duration: SLIDE, ease: "none" }
+        );
 
       return () => {
         splitFeatured.revert();
@@ -120,33 +166,49 @@ const Work = () => {
   }, []);
 
   return (
-    <div ref={wrapRef} className="relative w-screen">
-      <ScrollExpand
-        src="/images.jfif"
-        alt="Prem Maurya"
-        title="Crafting Digital Experiences"
-        scrollHint="Scroll to reveal"
-        useWindowScroll
-        scrollDistance={SCROLL_DISTANCE}
-        startWidth={42}
-        startHeight={58}
-        startRadius={24}
-        mediaZoom={1.35}
-        className="w-screen text-[#F3EEE8]"
-      >
-        <h2 className="font-[--pp-editorial-old-ultrabold] text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] tracking-[-0.04em] text-[#F3EEE8]">
-          Let's build<br />something great
-        </h2>
-        <p className="mt-4 text-[clamp(1rem,1.5vw,1.4rem)] leading-[1.3] text-[#F3EEE8]/80 max-w-[32rem]">
-          Open for collaborations and new opportunities.
-        </p>
-      </ScrollExpand>
+    // Tall wrapper = scroll length. The stage inside sticks to the top while you scroll through it.
+    <div ref={wrapRef} className="relative w-screen" style={{ height: `${100 + SCROLL_VH}vh` }}>
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#faf9f6]">
+        {/* IMAGE: full-screen, shown through a clip-path that grows to the whole screen */}
+        <div ref={frameRef} className="absolute inset-0" style={{ clipPath: insetFrom }}>
+          <img
+            ref={imgRef}
+            src="/mine.png"
+            alt="Prem Maurya"
+            draggable={false}
+            className="h-full w-full object-cover will-change-transform"
+            style={{ transform: `scale(${ZOOM})` }}
+          />
+        </div>
 
-      {/* Overlay layer as tall as ScrollExpand's track; the section sticks inside it */}
-      <div className="pointer-events-none absolute inset-0">
+        {/* THE (left of the image) and WORK (right of the image) */}
+        <div
+          className="pointer-events-none absolute inset-y-0 flex items-center"
+          style={{ right: `${50 + START.w / 2 + WORD_GAP}vw` }}
+        >
+          <span
+            ref={theRef}
+            className="block select-none whitespace-nowrap font-[--pp-editorial-old-ultrabold] text-[5.5vw] font-bold leading-none text-[#111]"
+          >
+            THE
+          </span>
+        </div>
+        <div
+          className="pointer-events-none absolute inset-y-0 flex items-center"
+          style={{ left: `${50 + START.w / 2 + WORD_GAP}vw` }}
+        >
+          <span
+            ref={wordRef}
+            className="block select-none whitespace-nowrap font-[--pp-editorial-old-ultrabold] text-[5.5vw] font-bold leading-none text-[#111]"
+          >
+            WORK
+          </span>
+        </div>
+
+        {/* WORK SECTION: starts off-screen, slides in with the scroll once the image is full-screen */}
         <section
           ref={sectionRef}
-          className="pointer-events-auto sticky top-0 flex h-screen w-full flex-row bg-[#faf9f6] pl-6"
+          className="absolute inset-0 z-10 flex flex-row bg-[#faf9f6] pl-6"
         >
           <div className="h-full w-[55%] flex py-10 items-end justify-center">
             <div className="relative w-[65%] h-[50%] border border-[#27232370]"></div>
@@ -174,7 +236,6 @@ const Work = () => {
                   {/* Original text */}
                   <div className="relative">
                     <span
-                      ref={projectsRef}
                       className="
                     work-project-text
                     relative z-0 block
