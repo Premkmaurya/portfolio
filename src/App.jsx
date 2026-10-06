@@ -14,9 +14,26 @@ gsap.registerPlugin(SplitText)
 function App() {
   const [loading, setLoading] = useState(true)
   const [reveal, setReveal] = useState(false)
+  const [navLight, setNavLight] = useState(false)
+
 
   const revealRef = useRef(null)
   const containerRef = useRef(null)
+
+  useEffect(() => {
+  if (loading) return
+  const scroller = revealRef.current
+  const hero = scroller.querySelector('.hero-section')
+
+  const onScroll = () => {
+    // light nav once the Hero's bottom edge passes the middle of the screen
+    setNavLight(scroller.scrollTop >= hero.offsetHeight - scroller.clientHeight * 0.5)
+  }
+
+  scroller.addEventListener('scroll', onScroll, { passive: true })
+  onScroll() // set the correct color on load
+  return () => scroller.removeEventListener('scroll', onScroll)
+}, [loading])
 
   useEffect(() => {
     if (loading) return
@@ -82,7 +99,7 @@ function App() {
 
   return (
     <>
-      <Nav reveal={reveal} />
+      <Nav reveal={reveal} isLight={navLight} />
       <div className="h-screen">
         <Loader setLoading={setLoading} reveal={reveal} />
         {!loading && (

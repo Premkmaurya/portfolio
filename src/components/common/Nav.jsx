@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export const Nav = ({ reveal = false, progress = 0 }) => {
+export const Nav = ({ reveal = false, isLight }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [hoveredIndex, setHoveredIndex] = useState(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
-  const isLightNav = progress >= 0.53
+  const isLightNav = isLight
   const navBackground = isOpen ? 'bg-[#262220]' : isLightNav ? 'bg-[#FAF9F6]' : reveal ? 'bg-[#3A3632]' : ''
   const navTextColor = isOpen ? 'text-[#F3EEE8]' : isLightNav ? 'text-[#3A3632]' : 'text-[#F3EEE8]'
   const navLineColor = isOpen ? 'bg-[#F3EEE8]' : isLightNav ? 'bg-[#3A3632]' : 'bg-[#F3EEE8]'

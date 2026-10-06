@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useRef } from "react";
-import { FiExternalLink } from "react-icons/fi";
+import React, { useLayoutEffect, useRef, useState } from "react";
+import { FiExternalLink, FiArrowUpRight } from "react-icons/fi";
 import { FaArrowRightLong } from "react-icons/fa6";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -19,7 +19,48 @@ const getScrollParent = (el) => {
   return window;
 };
 
-const headings = ["VEGE MONEY", "VEGE MONEY", "VEGE MONEY", "VEGE MONEY"];
+const headings = [
+  {
+    title: "StudySync",
+    previewImage: "/image.jfif",
+    description: "A comprehensive platform for collaborative learning and educational resources.",
+    additionalInfo:{
+      technologies: "React, Node.js, Express, MongoDB",
+      duration: "6 months",
+      link: "https://study-sync-ten-lake.vercel.app/"
+    },
+  },
+  {
+    title: "Spotify",
+    previewImage: "/image.jfif",
+    description: "A music streaming platform for discovering and listening to songs.",
+    additionalInfo:{
+      technologies: "React, Node.js, Express, MongoDB",
+      duration: "6 months",
+      link: "https://spotify-ebon-one.vercel.app/"
+    },
+  },
+  {
+    title: "UltraPath",
+    previewImage: "/image.jfif",
+    description: "A navigation app for finding the best routes and getting real-time traffic updates.",
+    additionalInfo:{
+      technologies: "React, Node.js, Express, MongoDB",
+      duration: "6 months",
+      link: "https://lab-report-theta.vercel.app/"
+    },
+  },
+  {
+    title: "Timeflow",
+    previewImage: "/image.jfif",
+    description: "A time management tool for tracking overtime and improving productivity.",
+    additionalInfo:{
+      technologies: "React, Node.js, Express, MongoDB",
+      duration: "6 months",
+      link: "https://timeflow-frontend-rsb5.onrender.com/"
+    },
+  },
+];
 
 // --- image reveal tuning --------------------------------------------------
 const ENTER_FROM = "right"; // which side the Work section slides in from: "left" | "right"
@@ -45,6 +86,7 @@ const Work = () => {
   const wordRef = useRef(null);
   const sectionRef = useRef(null);
   const featuredRef = useRef(null);
+  const [active, setActive] = useState(0); // project shown in the preview box (last hovered)
 
   useLayoutEffect(() => {
     const scroller = getScrollParent(wrapRef.current);
@@ -74,14 +116,14 @@ const Work = () => {
           opacity: 0,
           stagger: 0.08,
           ease: "power3.out",
-        })
+        }, "<")
         .from(splitProjects.lines, {
           duration: 1.2,
           yPercent: 100,
           opacity: 0,
           stagger: 0.1,
           ease: "power3.out",
-        }, "-=0.6")
+        }, "<")
         .from(splitButton.lines, {
           duration: 1.2,
           yPercent: 100,
@@ -217,7 +259,62 @@ const Work = () => {
           className="absolute inset-0 z-10 flex flex-row bg-[#faf9f6] pl-6"
         >
           <div className="preview-box h-full w-[55%] flex py-10 items-end justify-center">
-            <div className="relative w-[65%] h-[50%] border border-[#27232370]"></div>
+            <div className="flex h-full w-[65%] flex-col justify-end gap-6">
+              {/* Details of the active project (all stacked, the active one fades in) */}
+              <div className="grid font-['Segoe UI'] text-[#111]">
+                {headings.map((project, i) => (
+                  <div
+                    key={project.title}
+                    aria-hidden={i !== active}
+                    className={`col-start-1 row-start-1 flex flex-col gap-3 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${i === active
+                      ? "translate-y-0 opacity-100"
+                      : "pointer-events-none translate-y-3 opacity-0"
+                      }`}
+                  >
+                    <span className="text-[0.775rem] tracking-[0.18em] opacity-60">
+                      {String(i + 1).padStart(2, "0")} / {String(headings.length).padStart(2, "0")}
+                    </span>
+                    <p className="max-w-[28rem] text-[1rem] leading-[1.45]">
+                      {project.description}
+                    </p>
+                    <dl className="flex gap-10 text-[0.8rem]">
+                      <div>
+                        <dt className="opacity-50">Technologies</dt>
+                        <dd>{project.additionalInfo.technologies}</dd>
+                      </div>
+                      <div>
+                        <dt className="opacity-50">Duration</dt>
+                        <dd>{project.additionalInfo.duration}</dd>
+                      </div>
+                    </dl>
+                    <a
+                      href={project.additionalInfo.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      tabIndex={i === active ? 0 : -1}
+                      className="about-link w-fit items-center gap-2 text-[0.85rem]"
+                    >
+                      Visit project
+                      <FiArrowUpRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                ))}
+              </div>
+
+              {/* Preview image: every project's image is stacked, the active one shows */}
+              <div className="relative h-[50%] w-full overflow-hidden border border-[#27232370]">
+                {headings.map((project, i) => (
+                  <img
+                    key={project.title}
+                    src={project.previewImage}
+                    alt={project.title}
+                    draggable={false}
+                    className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${i === active ? "scale-100 opacity-100" : "scale-110 opacity-0"
+                      }`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="h-full w-[45%] px-5 py-14">
@@ -231,10 +328,15 @@ const Work = () => {
             <div
               className="h-[80%] mt-4 w-full font-[--pp-editorial-old-ultrabold]"
             >
-              {headings.map((heading, index) => (
-                <div
-                  key={index}
-                  className={`group relative h-1/4 w-full overflow-hidden cursor-pointer ${index !== headings.length - 1
+              {headings.map((project, index) => (
+                <a
+                  key={project.title}
+                  href={project.additionalInfo.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={() => setActive(index)}
+                  onFocus={() => setActive(index)}
+                  className={`group relative block h-1/4 w-full overflow-hidden cursor-pointer ${index !== headings.length - 1
                     ? "border-b border-[#1111114b]"
                     : ""
                     } text-[4rem]`}
@@ -245,24 +347,24 @@ const Work = () => {
                       className="
                     work-project-text
                     relative z-0 block
-                    transition-transform duration-500
+                    font-semibold transition-transform duration-500
                     ease-[cubic-bezier(.22,1,.36,1)]
                     group-hover:-translate-y-full
                   "
                     >
-                      {heading}
+                      {project.title}
                     </span>
 
                     {/* Hover text */}
                     <span
                       className="
                     absolute left-0 top-full z-0 block
-                    transition-transform duration-500
+                    font-semibold transition-transform duration-500
                     ease-[cubic-bezier(.22,1,.36,1)]
                     group-hover:-translate-y-full
                   "
                     >
-                      {heading}
+                      {project.title}
                     </span>
                   </div>
 
@@ -292,12 +394,17 @@ const Work = () => {
                   "
                     />
                   )}
-                </div>
+                </a>
               ))}
             </div>
 
             <div className="h-[20%] w-full flex items-center justify-end gap-4 px-10">
-              <button className="project-btn">
+              <button
+                className="project-btn cursor-pointer"
+                onClick={() =>
+                  window.open(headings[active].additionalInfo.link, "_blank", "noopener,noreferrer")
+                }
+              >
                 <span className="relative z-10 text-[1.3rem] flex items-center gap-4 font-['Segoe UI']">
                   <span className="work-btn-text">View Project</span>
                   <FaArrowRightLong className="work-btn-arrow w-5 h-5" />
