@@ -4,6 +4,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/SplitText";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -22,9 +23,9 @@ const getScrollParent = (el) => {
 const headings = [
   {
     title: "StudySync",
-    previewImage: "/image.jfif",
+    previewImage: "/images.jfif",
     description: "A comprehensive platform for collaborative learning and educational resources.",
-    additionalInfo:{
+    additionalInfo: {
       technologies: "React, Node.js, Express, MongoDB",
       duration: "6 months",
       link: "https://study-sync-ten-lake.vercel.app/"
@@ -32,9 +33,9 @@ const headings = [
   },
   {
     title: "Spotify",
-    previewImage: "/image.jfif",
+    previewImage: "/images.jfif",
     description: "A music streaming platform for discovering and listening to songs.",
-    additionalInfo:{
+    additionalInfo: {
       technologies: "React, Node.js, Express, MongoDB",
       duration: "6 months",
       link: "https://spotify-ebon-one.vercel.app/"
@@ -42,9 +43,9 @@ const headings = [
   },
   {
     title: "UltraPath",
-    previewImage: "/image.jfif",
+    previewImage: "/mine.png",
     description: "A navigation app for finding the best routes and getting real-time traffic updates.",
-    additionalInfo:{
+    additionalInfo: {
       technologies: "React, Node.js, Express, MongoDB",
       duration: "6 months",
       link: "https://lab-report-theta.vercel.app/"
@@ -52,9 +53,9 @@ const headings = [
   },
   {
     title: "Timeflow",
-    previewImage: "/image.jfif",
+    previewImage: "/images.jfif",
     description: "A time management tool for tracking overtime and improving productivity.",
-    additionalInfo:{
+    additionalInfo: {
       technologies: "React, Node.js, Express, MongoDB",
       duration: "6 months",
       link: "https://timeflow-frontend-rsb5.onrender.com/"
@@ -87,6 +88,8 @@ const Work = () => {
   const sectionRef = useRef(null);
   const featuredRef = useRef(null);
   const [active, setActive] = useState(0); // project shown in the preview box (last hovered)
+
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     const scroller = getScrollParent(wrapRef.current);
@@ -402,7 +405,7 @@ const Work = () => {
               <button
                 className="project-btn cursor-pointer"
                 onClick={() =>
-                  window.open(headings[active].additionalInfo.link, "_blank", "noopener,noreferrer")
+                  navigate('/works')
                 }
               >
                 <span className="relative z-10 text-[1.3rem] flex items-center gap-4 font-['Segoe UI']">

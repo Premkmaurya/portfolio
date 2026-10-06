@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 export const Nav = ({ reveal = false, isLight }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [hoveredIndex, setHoveredIndex] = useState(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const navigate = useNavigate();
 
   const isLightNav = isLight
   const navBackground = isOpen ? 'bg-[#262220]' : isLightNav ? 'bg-[#FAF9F6]' : reveal ? 'bg-[#3A3632]' : ''
@@ -12,10 +14,10 @@ export const Nav = ({ reveal = false, isLight }) => {
   const navLineColor = isOpen ? 'bg-[#F3EEE8]' : isLightNav ? 'bg-[#3A3632]' : 'bg-[#F3EEE8]'
 
   const navItems = [
-    { number: '01.', title: 'HOME', href: '#home' },
-    { number: '02.', title: 'ABOUT', href: '#about' },
-    { number: '03.', title: 'WORKS', href: '#works' },
-    { number: '04.', title: 'CONTACT', href: '#contact' },
+    { number: '01.', title: 'HOME', href: '/' },
+    { number: '02.', title: 'ABOUT', href: '/about' },
+    { number: '03.', title: 'WORKS', href: '/works' },
+    { number: '04.', title: 'CONTACT', href: '/contact' },
   ]
 
   const socialLinks = [
