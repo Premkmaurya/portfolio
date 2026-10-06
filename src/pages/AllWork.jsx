@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const EASE = "ease-[cubic-bezier(.22,1,.36,1)]";
 const TITLE_CLASS =
-    "font-editorial leading-[1.1] tracking-[-0.03em] text-[clamp(2.4rem,6vw,5rem)]";
+    "font-editorial leading-[1.1] tracking-[-0.03em] text-[4rem]";
 
 
 // All projects shown on /works. Edit this file to add, remove or reorder work.
@@ -33,11 +33,15 @@ const Works = () => {
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".work-container",
-                    start: "25% 20%",
+                    start: "22% 20%",
                     pin: true,
                     markers: true,
                     scrub: 0.5,
                 }
+            })
+            tl.to(".work-container", {
+                xPercent: -40,
+                ease: "none",
             })
         }, pageRef);
 
@@ -54,7 +58,7 @@ const Works = () => {
             <Nav reveal isLight progress={1} />
 
             <div ref={pageRef} className="min-h-screen bg-[#faf9f6] pl-16 text-[#111] sm:pl-18">
-                <div className="mx-auto max-w-[1500px] px-6 pb-24 pt-8 sm:px-10 md:px-16">
+                <div className="mx-auto max-w-[1500px] pt-8">
 
                     {/* Heading */}
                     <div className="flex items-start gap-4">
@@ -76,7 +80,7 @@ const Works = () => {
                                 : {};
 
                             return (
-                                <article 
+                                <article
                                     key={work.id}
                                     className="works-row group w-[60vw] relative flex flex-col gap-8 py-4 md:py-8"
                                 >
@@ -93,13 +97,13 @@ const Works = () => {
                                     <div className="relative md:col-span-6">
                                         <TitleWrap {...wrapProps} className="relative block overflow-hidden">
                                             <h2
-                                                className={`works-title-text relative z-0 block transition-transform duration-500 ${EASE} group-hover:-translate-y-full ${TITLE_CLASS}`}
+                                                className={`works-title-text relative z-0 block uppercase transition-transform duration-500 ${EASE} group-hover:-translate-y-full ${TITLE_CLASS}`}
                                             >
                                                 {work.title}
                                             </h2>
                                             <span
                                                 aria-hidden="true"
-                                                className={`absolute left-0 top-full z-0 block w-full transition-transform duration-500 ${EASE} group-hover:-translate-y-full ${TITLE_CLASS}`}
+                                                className={`absolute left-0 top-full z-0 block w-full uppercase transition-transform duration-500 ${EASE} group-hover:-translate-y-full ${TITLE_CLASS}`}
                                             >
                                                 {work.title}
                                             </span>

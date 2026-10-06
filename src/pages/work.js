@@ -18,8 +18,8 @@ export const works = [
     github: "",
   },
   {
-    id: "lesson-planner",
-    title: "LESSON PLANNER",
+    id: "Timeflow",
+    title: "Timeflow",
     year: "2026",
     preview: "/mine.png",
     summary:
@@ -29,8 +29,8 @@ export const works = [
     github: "",
   },
   {
-    id: "lesson-planner",
-    title: "LESSON PLANNER",
+    id: "UltraPath",
+    title: "UltraPath",
     year: "2026",
     preview: "/mine.png",
     summary:
@@ -40,8 +40,8 @@ export const works = [
     github: "",
   },
   {
-    id: "vege-money",
-    title: "VEGE MONEY",
+    id: "Spotify",
+    title: "Spotify",
     year: "",
     preview: "/mine.png",
     summary: "",
