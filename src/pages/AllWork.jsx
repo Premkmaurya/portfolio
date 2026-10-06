@@ -30,47 +30,15 @@ const Works = () => {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            const q = gsap.utils.selector(pageRef);
-
-            // Same split as Loader.jsx: lines, each one masked so text rises out of a clip
-            const splitOpts = { type: "words,lines", linesClass: "line", mask: "lines" };
-            const splitHeading = new SplitText(q(".works-heading"), splitOpts);
-            const splitTitles = new SplitText(q(".works-title-text"), splitOpts);
-
-            // Page header
-            gsap
-                .timeline({ defaults: { ease: "power3.out" } })
-                .from(splitHeading.lines, { yPercent: 100, opacity: 0, duration: 1.2, stagger: 0.08 })
-                .from(q(".works-head-fade"), { y: 20, opacity: 0, duration: 0.9, stagger: 0.08 }, "-=0.8");
-
-            // Each row reveals as it scrolls into view (window scrolls on this page)
-            q(".works-row").forEach((row) => {
-                gsap
-                    .timeline({
-                        defaults: { ease: "power3.out" },
-                        scrollTrigger: { trigger: row, start: "top 88%", once: true },
-                    })
-                    .from(
-                        row.querySelector(".works-rule"),
-                        { scaleX: 0, duration: 1.1, ease: "power3.inOut" },
-                        0
-                    )
-                    .from(row.querySelectorAll(".works-title-text .line"), {
-                        yPercent: 100,
-                        opacity: 0,
-                        duration: 1.1,
-                    }, 0.1)
-                    .from(
-                        row.querySelectorAll(".works-fade"),
-                        { y: 24, opacity: 0, duration: 0.9, stagger: 0.08 },
-                        0.3
-                    );
-            });
-
-            return () => {
-                splitHeading.revert();
-                splitTitles.revert();
-            };
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".work-container",
+                    start: "25% 20%",
+                    pin: true,
+                    markers: true,
+                    scrub: 0.5,
+                }
+            })
         }, pageRef);
 
         // Fonts load after first paint; re-measure trigger positions when they do
@@ -87,19 +55,9 @@ const Works = () => {
 
             <div ref={pageRef} className="min-h-screen bg-[#faf9f6] pl-16 text-[#111] sm:pl-18">
                 <div className="mx-auto max-w-[1500px] px-6 pb-24 pt-8 sm:px-10 md:px-16">
-                    {/* Top bar */}
-                    <div className="works-head-fade flex items-center justify-between text-[0.8rem] uppercase tracking-[0.18em]">
-                        <Link to="/" className="about-link items-center gap-2">
-                            <FiArrowLeft className="h-4 w-4" />
-                            Home
-                        </Link>
-                        <span className="opacity-60">
-                            {String(works.length).padStart(2, "0")} projects
-                        </span>
-                    </div>
 
                     {/* Heading */}
-                    <div className="mb-14 mt-12 flex items-start gap-4 md:mb-20 md:mt-16">
+                    <div className="flex items-start gap-4">
                         <h1 className="works-heading pb-2 font-editorial text-[clamp(4rem,13vw,14rem)] leading-none tracking-[-0.06em]">
                             ALL WORKS
                         </h1>
@@ -109,7 +67,7 @@ const Works = () => {
                     </div>
 
                     {/* List */}
-                    <div>
+                    <div className="work-container min-w-screen w-screen flex flex-row gap-16">
                         {works.map((work, index) => {
                             const href = work.live || work.github;
                             const TitleWrap = href ? "a" : "div";
@@ -118,20 +76,17 @@ const Works = () => {
                                 : {};
 
                             return (
-                                <article
+                                <article 
                                     key={work.id}
-                                    className="works-row group relative grid grid-cols-1 gap-y-6 py-8 md:grid-cols-12 md:gap-x-8 md:py-10"
+                                    className="works-row group w-[60vw] relative flex flex-col gap-8 py-4 md:py-8"
                                 >
-                                    {/* faint rule + dark rule that draws in on hover (same as the Work section) */}
-                                    <span className="works-rule pointer-events-none absolute left-0 top-0 h-px w-full origin-left bg-[#1111114b]" />
-                                    <span
-                                        className={`pointer-events-none absolute left-0 top-0 z-10 h-px w-full origin-left scale-x-0 bg-[#111] transition-transform duration-500 ${EASE} group-hover:scale-x-100`}
-                                    />
-
                                     {/* Index + year */}
                                     <div className="works-fade text-sm tracking-widest md:col-span-1 md:pt-5">
                                         <div>{String(index + 1).padStart(2, "0")}</div>
                                         {work.year && <div className="mt-1 opacity-50">{work.year}</div>}
+                                    </div>
+                                    <div className="relative w-full h-[30vh] overflow-hidden rounded-[0.4rem] md:col-span-5 md:h-[40vh]">
+                                        <img className="w-full h-full object-cover" src={work.preview} alt={work.title} />
                                     </div>
 
                                     {/* Title with the same text-swap hover as the Work section */}
@@ -208,24 +163,6 @@ const Works = () => {
                                 </article>
                             );
                         })}
-                        <div className="h-px w-full bg-[#1111114b]" />
-                    </div>
-
-                    {/* Footer */}
-                    <div className="mt-10 flex items-center justify-between text-[0.85rem]">
-                        <Link to="/" className="about-link items-center gap-2">
-                            <FiArrowLeft className="h-4 w-4" />
-                            Back home
-                        </Link>
-                        <a
-                            href="https://github.com/Premkmaurya"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="about-link items-center gap-2"
-                        >
-                            More on GitHub
-                            <FiArrowUpRight className="h-4 w-4" />
-                        </a>
                     </div>
                 </div>
             </div>
