@@ -1,177 +1,218 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { FiArrowLeft, FiArrowUpRight, FiExternalLink, FiGithub } from "react-icons/fi";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/SplitText";
 import { Nav } from "../components/common/Nav";
 import { works } from "./work";
+import { slugify } from "../utils/slug";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(SplitText);
 
-const EASE = "ease-[cubic-bezier(.22,1,.36,1)]";
-const TITLE_CLASS =
-    "font-editorial leading-[1.1] tracking-[-0.03em] text-[4rem]";
+// --- motion tuning -------------------------------------------------------
+const SMOOTH = 0.085; // 0-1, lower = floatier gallery
+const WHEEL = 1.2; // wheel / trackpad speed multiplier
+const DRAG = 1.4; // drag speed multiplier
+const MAX_TILT = 9; // deg of 3D tilt at full speed
+const PERSPECTIVE = 900; // px, per-card perspective
+const INTRO = 0.55; // gallery sweeps in from this fraction of the screen width
 
-
-// All projects shown on /works. Edit this file to add, remove or reorder work.
-// Empty `live` / `github` / `summary` / `tags` are simply not rendered.
+const clamp = gsap.utils.clamp;
 
 const Works = () => {
-    const pageRef = useRef(null);
+  const pageRef = useRef(null);
+  const viewportRef = useRef(null);
+  const trackRef = useRef(null);
 
-    useEffect(() => {
-        document.title = "Works — Prem Maurya";
-        window.scrollTo(0, 0);
-        return () => {
-            document.title = "portfolio";
-        };
-    }, []);
+  useEffect(() => {
+    document.title = "Works — Prem Maurya";
+    return () => {
+      document.title = "portfolio";
+    };
+  }, []);
 
-    useLayoutEffect(() => {
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: ".work-container",
-                    start: "22% 20%",
-                    pin: true,
-                    markers: true,
-                    scrub: 0.5,
-                }
-            })
-            tl.to(".work-container", {
-                xPercent: -40,
-                ease: "none",
-            })
-        }, pageRef);
+  useLayoutEffect(() => {
+    const page = pageRef.current;
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        // Fonts load after first paint; re-measure trigger positions when they do
-        const refresh = () => ScrollTrigger.refresh();
-        document.fonts?.ready.then(refresh);
+    const s = { target: 0, current: 0, max: 0, dragging: false, lastX: 0, moved: 0 };
+    let lastTilt = 0;
 
-        return () => ctx.revert();
-    }, []);
+    const ctx = gsap.context(() => {
+      const q = gsap.utils.selector(page);
+      const cards = q(".works-card");
 
-    return (
-        <>
-            {/* light rail on this page */}
-            <Nav reveal isLight progress={1} />
+      // ---- intro: same masked-line reveal as the Loader, then the cards fade in ----
+      const splitHeading = new SplitText(q(".works-heading"), {
+        type: "words,lines",
+        linesClass: "line",
+        mask: "lines",
+      });
+      gsap
+        .timeline({ defaults: { ease: "power3.out" } })
+        .from(splitHeading.lines, { yPercent: 100, opacity: 0, duration: 1.2, stagger: 0.08 })
+        .from(q(".works-count"), { y: 30, opacity: 0, duration: 1 }, "-=0.9")
+        .from(cards, { opacity: 0, duration: 1, stagger: 0.08 }, "-=1");
 
-            <div ref={pageRef} className="min-h-screen bg-[#faf9f6] pl-16 text-[#111] sm:pl-18">
-                <div className="mx-auto max-w-[1500px] pt-8">
+      // ---- gallery: wheel / drag drives `target`, the ticker eases `current` toward it ----
+      gsap.set(cards, { transformPerspective: PERSPECTIVE });
+      const setX = gsap.quickSetter(track, "x", "px");
 
-                    {/* Heading */}
-                    <div className="flex items-start gap-4">
-                        <h1 className="works-heading pb-2 font-editorial text-[clamp(4rem,13vw,14rem)] leading-none tracking-[-0.06em]">
-                            ALL WORKS
-                        </h1>
-                        <span className="works-head-fade mt-3 text-sm tracking-widest opacity-60 md:mt-6">
-                            ({String(works.length).padStart(2, "0")})
-                        </span>
-                    </div>
+      const measure = () => {
+        s.max = Math.max(0, track.offsetWidth - viewport.clientWidth);
+        s.target = clamp(0, s.max, s.target);
+      };
+      measure();
 
-                    {/* List */}
-                    <div className="work-container min-w-screen w-screen flex flex-row gap-16">
-                        {works.map((work, index) => {
-                            const href = work.live || work.github;
-                            const TitleWrap = href ? "a" : "div";
-                            const wrapProps = href
-                                ? { href, target: "_blank", rel: "noopener noreferrer" }
-                                : {};
+      // start pushed to the right so the cards sweep in (the tilt below comes for free)
+      s.current = reduce ? 0 : -viewport.clientWidth * INTRO;
+      setX(-s.current);
 
-                            return (
-                                <article
-                                    key={work.id}
-                                    className="works-row group w-[60vw] relative flex flex-col gap-8 py-4 md:py-8"
-                                >
-                                    {/* Index + year */}
-                                    <div className="works-fade text-sm tracking-widest md:col-span-1 md:pt-5">
-                                        <div>{String(index + 1).padStart(2, "0")}</div>
-                                        {work.year && <div className="mt-1 opacity-50">{work.year}</div>}
-                                    </div>
-                                    <div className="relative w-full h-[30vh] overflow-hidden rounded-[0.4rem] md:col-span-5 md:h-[40vh]">
-                                        <img className="w-full h-full object-cover" src={work.preview} alt={work.title} />
-                                    </div>
+      const tick = () => {
+        const diff = s.target - s.current;
+        s.current += Math.abs(diff) < 0.05 ? diff : diff * SMOOTH;
+        setX(-s.current);
 
-                                    {/* Title with the same text-swap hover as the Work section */}
-                                    <div className="relative md:col-span-6">
-                                        <TitleWrap {...wrapProps} className="relative block overflow-hidden">
-                                            <h2
-                                                className={`works-title-text relative z-0 block uppercase transition-transform duration-500 ${EASE} group-hover:-translate-y-full ${TITLE_CLASS}`}
-                                            >
-                                                {work.title}
-                                            </h2>
-                                            <span
-                                                aria-hidden="true"
-                                                className={`absolute left-0 top-full z-0 block w-full uppercase transition-transform duration-500 ${EASE} group-hover:-translate-y-full ${TITLE_CLASS}`}
-                                            >
-                                                {work.title}
-                                            </span>
-                                        </TitleWrap>
+        // lag behind the target = speed. Tilt the cards in the direction of travel.
+        const tilt = reduce ? 0 : clamp(-MAX_TILT, MAX_TILT, diff * 0.03);
+        if (tilt !== lastTilt) {
+          gsap.set(cards, { rotateY: tilt, scale: 1 + Math.abs(tilt) / 180 });
+          lastTilt = tilt;
+        }
+      };
+      gsap.ticker.add(tick);
 
-                                        {href && (
-                                            <FiArrowUpRight
-                                                className={`pointer-events-none absolute right-2 top-[30%] h-9 w-9 translate-x-1/2 opacity-0 transition-all duration-500 ${EASE} group-hover:translate-x-0 group-hover:opacity-100`}
-                                            />
-                                        )}
-                                    </div>
+      const onWheel = (e) => {
+        e.preventDefault();
+        const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        s.target = clamp(0, s.max, s.target + d * (e.deltaMode === 1 ? 32 : 1) * WHEEL);
+      };
+      const onDown = (e) => {
+        if (e.pointerType === "mouse" && e.button !== 0) return;
+        s.dragging = true;
+        s.lastX = e.clientX;
+        s.moved = 0;
+      };
+      const onMove = (e) => {
+        if (!s.dragging) return;
+        const dx = e.clientX - s.lastX;
+        s.lastX = e.clientX;
+        s.moved += Math.abs(dx);
+        s.target = clamp(0, s.max, s.target - dx * DRAG);
+      };
+      const onUp = () => {
+        s.dragging = false;
+      };
+      // a drag must not count as a click on a card
+      const onClickCapture = (e) => {
+        if (s.moved > 6) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        s.moved = 0;
+      };
+      const onKey = (e) => {
+        if (e.key === "ArrowRight") s.target = clamp(0, s.max, s.target + viewport.clientWidth * 0.3);
+        if (e.key === "ArrowLeft") s.target = clamp(0, s.max, s.target - viewport.clientWidth * 0.3);
+      };
 
-                                    {/* Details */}
-                                    <div className="flex flex-col gap-5 md:col-span-5 md:pt-3">
-                                        {work.summary && (
-                                            <p className="works-fade max-w-[34rem] text-[0.95rem] leading-[1.55] opacity-75">
-                                                {work.summary}
-                                            </p>
-                                        )}
+      page.addEventListener("wheel", onWheel, { passive: false });
+      viewport.addEventListener("pointerdown", onDown);
+      viewport.addEventListener("click", onClickCapture, true);
+      window.addEventListener("pointermove", onMove);
+      window.addEventListener("pointerup", onUp);
+      window.addEventListener("pointercancel", onUp);
+      window.addEventListener("keydown", onKey);
 
-                                        {work.tags.length > 0 && (
-                                            <ul className="works-fade flex flex-wrap gap-2">
-                                                {work.tags.map((tag) => (
-                                                    <li
-                                                        key={tag}
-                                                        className="rounded-full border border-[#1111114b] px-3 py-1 text-[0.72rem] tracking-wide"
-                                                    >
-                                                        {tag}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        )}
+      const ro = new ResizeObserver(measure);
+      ro.observe(track);
+      ro.observe(viewport);
 
-                                        {(work.live || work.github) && (
-                                            <div className="works-fade flex items-center gap-6 text-[0.85rem]">
-                                                {work.live && (
-                                                    <a
-                                                        href={work.live}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="about-link items-center gap-2"
-                                                    >
-                                                        <FiExternalLink className="h-4 w-4" />
-                                                        Live
-                                                    </a>
-                                                )}
-                                                {work.github && (
-                                                    <a
-                                                        href={work.github}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="about-link items-center gap-2"
-                                                    >
-                                                        <FiGithub className="h-4 w-4" />
-                                                        Code
-                                                    </a>
-                                                )}
-                                            </div>
-                                        )}
-                                    </div>
-                                </article>
-                            );
-                        })}
-                    </div>
+      return () => {
+        gsap.ticker.remove(tick);
+        page.removeEventListener("wheel", onWheel);
+        viewport.removeEventListener("pointerdown", onDown);
+        viewport.removeEventListener("click", onClickCapture, true);
+        window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("pointerup", onUp);
+        window.removeEventListener("pointercancel", onUp);
+        window.removeEventListener("keydown", onKey);
+        ro.disconnect();
+        splitHeading.revert();
+      };
+    }, pageRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <>
+      {/* light rail on this page */}
+      <Nav reveal isLight progress={1} />
+
+      <div
+        ref={pageRef}
+        className="flex h-screen select-none flex-col overflow-hidden bg-[#ece8e1] pl-16 text-[#2a2622] sm:pl-18"
+      >
+        {/* Heading + count */}
+        <header className="flex items-start justify-between px-[4.5vw] pt-[3vh]">
+          <h1 className="works-heading pb-2 font-editorial text-[clamp(3.5rem,9vw,9rem)] uppercase leading-none tracking-[-0.03em]">
+            All Work
+          </h1>
+          <span className="works-count font-editorial text-[clamp(3.5rem,9vw,9rem)] leading-none tracking-[-0.03em]">
+            ({works.length})
+          </span>
+        </header>
+
+        {/* Gallery: moves with wheel / trackpad / drag / arrow keys */}
+        <div
+          ref={viewportRef}
+          className="relative mt-[3vh] min-h-0 flex-1 cursor-grab touch-none overflow-hidden active:cursor-grabbing"
+        >
+          <div
+            ref={trackRef}
+            className="flex w-max items-start gap-[2.2vw] px-[4.5vw] will-change-transform"
+          >
+            {works.map((work, index) => (
+              <Link
+                key={work.title}
+                to={`/works/${slugify(work.title)}`}
+                draggable={false}
+                className="works-card group block w-[20.3vw] min-w-[170px] max-w-[380px] shrink-0"
+              >
+                {/* alternating short / tall images, tops aligned like the reference */}
+                <div
+                  className={`overflow-hidden ${index % 2 === 0 ? "aspect-[278/220]" : "aspect-[278/320]"
+                    }`}
+                >
+                  <img
+                    src={work.previewImage}
+                    alt={work.title}
+                    draggable={false}
+                    className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-105"
+                  />
                 </div>
-            </div>
-        </>
-    );
+
+                {/* caption: big numeral, small category — year, project name */}
+                <div className="mt-[1.2vh] flex items-start gap-3">
+                  <span className="font-editorial text-[clamp(1.8rem,3.4vw,3.4rem)] leading-none">
+                    {String(index + 1).padStart(2, "0")}.
+                  </span>
+                  <div className="pt-[0.35em]">
+                    <div className="text-[0.68rem] uppercase tracking-[0.04em] opacity-70">
+                      {work.category} — {work.year}
+                    </div>
+                    <div className="mt-1 text-[0.95rem] font-medium">{work.title}</div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Works;
