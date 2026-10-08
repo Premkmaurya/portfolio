@@ -1,5 +1,20 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+// App.jsx wraps every section in a div with `overflow-x-hidden`, which makes it
+// the real scroll container (window never scrolls). ScrollTrigger must watch it.
+const getScrollParent = (el) => {
+    let node = el?.parentElement;
+    while (node && node !== document.body) {
+        const { overflowY } = getComputedStyle(node);
+        if (overflowY === "auto" || overflowY === "scroll") return node;
+        node = node.parentElement;
+    }
+    return window;
+};
 
 const services = [
     {
@@ -7,140 +22,138 @@ const services = [
         title: "WEB DEVELOPMENT",
         description:
             "Fast, responsive websites and web applications built with clean code, strong UX, and modern technologies.",
-        image: "/images/what-i-do/web-development.jpg",
+        image: "/images.jfif",
     },
     {
         number: "02",
         title: "UI/UX DESIGN",
         description:
             "Interfaces designed around clarity, usability, visual hierarchy, and a smooth interaction experience.",
-        image: "/images/what-i-do/ui-ux.jpg",
+        image: "/images.jfif",
     },
     {
         number: "03",
         title: "CREATIVE DEVELOPMENT",
         description:
             "Interactive digital experiences combining animation, motion, WebGL, and thoughtful frontend engineering.",
-        image: "/images/what-i-do/creative-development.jpg",
+        image: "/images.jfif",
     },
     {
         number: "04",
         title: "FULL-STACK DEVELOPMENT",
         description:
             "Complete products built from frontend to backend, APIs, databases, authentication, and deployment.",
-        image: "/images/what-i-do/full-stack.jpg",
+        image: "/images.jfif",
     },
 ];
 
 const WhatIDo = () => {
+    const wrapRef = useRef(null);
     const sectionRef = useRef(null);
     const trackRef = useRef(null);
-    const cardsRef = useRef([]);
-
-    const [active, setActive] = useState(0);
 
     useLayoutEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.from(".what-intro", {
-                y: 40,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 75%",
-                },
-            });
+        const scroller = getScrollParent(wrapRef.current);
 
-            gsap.from(cardsRef.current, {
-                y: 80,
-                opacity: 0,
-                stagger: 0.08,
-                duration: 1.1,
-                ease: "power3.out",
+        const ctx = gsap.context(() => {
+            const track = trackRef.current;
+            if (!track) return;
+
+            const getScrollAmount = () => {
+                const parentWidth = track.parentElement?.clientWidth || window.innerWidth;
+                return -(track.scrollWidth - parentWidth + 40);
+            };
+
+            gsap.to(track, {
+                x: getScrollAmount,
+                ease: "none",
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: "top 70%",
+                    scroller,
+                    start: "top top",
+                    scrub: 1,
+                    markers:true,
+                    invalidateOnRefresh: true,
                 },
             });
         }, sectionRef);
 
-        return () => ctx.revert();
+        // Re-measure when layout above changes or fonts finish loading
+        let raf;
+        const refresh = () => {
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(() => ScrollTrigger.refresh());
+        };
+        const content = scroller === window ? document.body : scroller.firstElementChild;
+        const ro = new ResizeObserver(refresh);
+        if (content) ro.observe(content);
+        document.fonts?.ready.then(refresh);
+
+        return () => {
+            cancelAnimationFrame(raf);
+            ro.disconnect();
+            ctx.revert();
+        };
     }, []);
 
-    useLayoutEffect(() => {
-        if (!trackRef.current) return;
-
-        const card = cardsRef.current[active];
-
-        if (!card) return;
-
-        const sectionWidth = sectionRef.current.offsetWidth;
-        const cardLeft = card.offsetLeft;
-        const cardWidth = card.offsetWidth;
-
-        const targetX =
-            -(cardLeft - sectionWidth * 0.34 + cardWidth * 0.5);
-
-        gsap.to(trackRef.current, {
-            x: Math.min(0, targetX),
-            duration: 1.1,
-            ease: "power4.out",
-            overwrite: true,
-        });
-
-        cardsRef.current.forEach((item, index) => {
-            if (!item) return;
-
-            const isActive = index === active;
-
-            gsap.to(item, {
-                opacity: isActive ? 1 : 0.72,
-                duration: 0.7,
-                ease: "power2.out",
-            });
-
-            gsap.to(item.querySelector(".service-image"), {
-                opacity: isActive ? 1 : 0,
-                scale: isActive ? 1 : 1.08,
-                duration: 0.9,
-                ease: "power3.out",
-            });
-
-            gsap.to(item.querySelector(".service-overlay"), {
-                opacity: isActive ? 0.18 : 0,
-                duration: 0.7,
-            });
-
-            gsap.to(item.querySelector(".service-title"), {
-                y: isActive ? 0 : 4,
-                duration: 0.7,
-                ease: "power3.out",
-            });
-        });
-    }, [active]);
-
     return (
-        <section
-            ref={sectionRef}
-            className="relative h-screen overflow-hidden bg-[#292723] "
-        >
-            {/* Intro */}
-            <div className="what-intro absolute left-[90px] h-[90%] flex flex-col justify-between top-[8vh] z-20 max-w-[360px] text-[#f4f0e8] py-8">
-                <p className="mb-4 text-[10px] uppercase tracking-[0.15em] text-white/50">
-                    What I do
-                </p>
+        <div ref={wrapRef} className="relative w-screen" style={{ height: "300vh" }}>
+            <section
+                ref={sectionRef}
+                className="sticky top-0 h-screen w-full flex bg-[#292723] text-[#f4f0e8] overflow-hidden"
+            >
+                {/* Intro */}
+                <div className="what-intro h-[90%] ml-[10vw] flex flex-col justify-between w-[30vw] min-w-[260px] py-8 shrink-0 z-10">
+                    <p className="mb-4 text-[10px] uppercase tracking-[0.15em] text-white/50">
+                        What I do
+                    </p>
 
-                <p className="font-sans text-[clamp(1.2rem,2vw,2rem)] leading-[1.15] tracking-[-0.03em]">
-                    I build digital experiences with clarity,
-                    <br />
-                    motion, and intention.
-                </p>
-            </div>
+                    <p className="font-sans text-[clamp(1.2rem,2vw,2rem)] leading-[1.15] tracking-[-0.03em]">
+                        I build digital experiences with clarity,
+                        <br />
+                        motion, and intention.
+                    </p>
+                </div>
 
-            {/* Horizontal cards */}
-            
-        </section>
+                {/* Horizontal cards */}
+                <div className="h-full flex-1 overflow-hidden">
+                    <div
+                        ref={trackRef}
+                        className="flex h-full w-max will-change-transform items-center px-12 gap-6"
+                    >
+                        {services.map((service) => (
+                            <article
+                                key={service.number}
+                                className="group service-card relative h-[85vh] w-[32vw] min-w-[330px] max-w-[460px] shrink-0 overflow-hidden border-r border-white/15"
+                            >
+                                <div className="absolute inset-0 z-0 h-full w-full bg-cover bg-center overflow-hidden">
+                                    <img className="w-full h-full object-cover" src={service.image || "/mine.png"} alt={service.title} />
+                                    <div className="absolute inset-0 bg-[#292723] transition-transform duration-500 ease-in-out group-hover:-translate-y-full" />
+                                </div>
+                                <div className="absolute inset-0 z-10 h-full w-full bg-cover flex flex-col justify-between bg-center bg-transparent py-8 px-6">
+                                    {/* Number */}
+                                    <div>
+                                        <span className="font-editorial text-[clamp(3.5rem,6vw,6rem)] leading-none tracking-[-0.05em]">
+                                            {service.number}
+                                        </span>
+                                    </div>
+
+                                    {/* Main title & Description */}
+                                    <div>
+                                        <h3 className="service-title font-editorial text-[clamp(1.8rem,3vw,3.2rem)] uppercase leading-[0.9] tracking-[-0.045em]">
+                                            {service.title}
+                                        </h3>
+                                        <p className="max-w-[340px] mt-2 text-[0.78rem] leading-[1.4] text-white/85">
+                                            {service.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        </div>
     );
 };
 
