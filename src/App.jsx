@@ -6,6 +6,7 @@ import gsap from 'gsap'
 import SplitText from 'gsap/SplitText'
 import About from './components/sections/About'
 import Work from './components/sections/Work'
+import WhatIDo from "./pages/WhatIDo"
 
 gsap.registerPlugin(SplitText)
 
@@ -21,19 +22,19 @@ function App() {
   const containerRef = useRef(null)
 
   useEffect(() => {
-  if (loading) return
-  const scroller = revealRef.current
-  const hero = scroller.querySelector('.hero-section')
+    if (loading) return
+    const scroller = revealRef.current
+    const hero = scroller.querySelector('.hero-section')
 
-  const onScroll = () => {
-    // light nav once the Hero's bottom edge passes the middle of the screen
-    setNavLight(scroller.scrollTop >= hero.offsetHeight - scroller.clientHeight * 0.5)
-  }
+    const onScroll = () => {
+      // light nav once the Hero's bottom edge passes the middle of the screen
+      setNavLight(scroller.scrollTop >= hero.offsetHeight - scroller.clientHeight * 0.5)
+    }
 
-  scroller.addEventListener('scroll', onScroll, { passive: true })
-  onScroll() // set the correct color on load
-  return () => scroller.removeEventListener('scroll', onScroll)
-}, [loading])
+    scroller.addEventListener('scroll', onScroll, { passive: true })
+    onScroll() // set the correct color on load
+    return () => scroller.removeEventListener('scroll', onScroll)
+  }, [loading])
 
   useEffect(() => {
     if (loading) return
@@ -176,8 +177,8 @@ function App() {
               <About />
               {/* Work Section */}
               <Work />
-              {/* ScrollExpand Section */}
-
+              {/* what i do section */}
+              <WhatIDo />
             </div>
           </div>
         )}
