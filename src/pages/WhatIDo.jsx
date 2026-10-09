@@ -72,7 +72,6 @@ const WhatIDo = () => {
                     scroller,
                     start: "top top",
                     scrub: 1,
-                    markers:true,
                     invalidateOnRefresh: true,
                 },
             });

@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import Lenis from 'lenis'
+import 'lenis/dist/lenis.css'
 import { Loader } from './components/common/Loader'
 import { Nav } from './components/common/Nav'
 
@@ -20,6 +22,10 @@ function App() {
 
   const revealRef = useRef(null)
   const containerRef = useRef(null)
+
+  const lenis = new Lenis({
+    autoRaf: true,
+  });
 
   useEffect(() => {
     if (loading) return
