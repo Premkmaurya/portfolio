@@ -5,12 +5,13 @@ import { Loader } from './components/common/Loader'
 import { Nav } from './components/common/Nav'
 
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SplitText from 'gsap/SplitText'
 import About from './components/sections/About'
 import Work from './components/sections/Work'
 import WhatIDo from "./pages/WhatIDo"
 
-gsap.registerPlugin(SplitText)
+gsap.registerPlugin(SplitText, ScrollTrigger)
 
 
 
@@ -23,9 +24,6 @@ function App() {
   const revealRef = useRef(null)
   const containerRef = useRef(null)
 
-  const lenis = new Lenis({
-    autoRaf: true,
-  });
 
   useEffect(() => {
     if (loading) return
@@ -44,6 +42,22 @@ function App() {
 
   useEffect(() => {
     if (loading) return
+
+    const lenis = new Lenis({
+      wrapper: revealRef.current,    // the element that actually scrolls
+      content: containerRef.current, // its direct child
+      smoothWheel: true,                 // try to disable this if you have performance issues
+      smoothTouch: false,                // try to disable this if you have performance issues
+      direction: 'vertical',             // vertical, horizontal
+      gestureDirection: 'vertical',      // vertical, horizontal, both
+      infinite: false,                   // can scroll over the edges and give a feeling of infinite scrolling
+      lerp: 0.05,                     // lower = floatier (0.05–0.15 feels good)
+    })
+
+    lenis.on('scroll', ScrollTrigger.update)  // keeps your ScrollTriggers in sync
+    const tick = (time) => lenis.raf(time * 1000)
+    gsap.ticker.add(tick)
+    gsap.ticker.lagSmoothing(0)
 
     const ctx = gsap.context(() => {
 
@@ -100,7 +114,11 @@ function App() {
 
     }, revealRef)
 
-    return () => ctx.revert()
+    return () => {
+      gsap.ticker.remove(tick)
+      lenis.destroy()
+      ctx.revert()
+    }
   }, [loading])
 
 
