@@ -10,6 +10,7 @@ import SplitText from 'gsap/SplitText'
 import About from './components/sections/About'
 import Work from './components/sections/Work'
 import WhatIDo from "./pages/WhatIDo"
+import Footer from './components/sections/Footer'
 
 gsap.registerPlugin(SplitText, ScrollTrigger)
 
@@ -203,6 +204,8 @@ function App() {
               <Work />
               {/* what i do section */}
               <WhatIDo />
+              {/* Footer Section */}
+              <Footer />
             </div>
           </div>
         )}
