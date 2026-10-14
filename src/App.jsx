@@ -131,7 +131,7 @@ function App() {
         {!loading && (
           <div
             ref={revealRef}
-            className="absolute inset-0 z-30 min-h-screen min-w-screen overflow-x-hidden translate-y-full"
+            className="absolute inset-0 z-30 min-h-screen min-w-screen overflow-x-hidden overflow-y-auto translate-y-full"
           >
             <div
               ref={containerRef}

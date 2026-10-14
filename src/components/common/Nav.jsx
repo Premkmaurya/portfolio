@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
+import { FaInstagram, FaLinkedinIn, FaGithub, FaXTwitter, FaEnvelope } from 'react-icons/fa6'
 
 export const Nav = ({ reveal = false, isLight }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [hoveredIndex, setHoveredIndex] = useState(null)
   const [activeIndex, setActiveIndex] = useState(0)
-  const navigate = useNavigate();
 
   const isLightNav = isLight
   const navBackground = isOpen ? 'bg-[#262220]' : isLightNav ? 'bg-[#FAF9F6]' : reveal ? 'bg-[#3A3632]' : ''
@@ -21,9 +20,11 @@ export const Nav = ({ reveal = false, isLight }) => {
   ]
 
   const socialLinks = [
-    { name: 'Instagram', href: 'https://instagram.com' },
-    { name: 'Behance', href: 'https://behance.net' },
-    { name: 'Linkedin', href: 'https://linkedin.com' },
+    { name: 'GitHub', href: 'https://github.com/premkmaurya', icon: FaGithub },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/prem-maurya-8640b5319/', icon: FaLinkedinIn },
+    { name: 'X / Twitter', href: 'https://x.com/PremMaurya723', icon: FaXTwitter },
+    { name: 'Instagram', href: 'https://instagram.com', icon: FaInstagram },
+    { name: 'Email', href: 'mailto:premmaurya537@gmail.com', icon: FaEnvelope },
   ]
   // Close on Escape key press
   useEffect(() => {
@@ -184,18 +185,22 @@ export const Nav = ({ reveal = false, isLight }) => {
               transition={{ duration: 0.4, delay: 1.3, staggerChildren: 0.1 }}
               className="w-full flex items-center justify-end gap-6 sm:gap-8 md:gap-10 text-xs sm:text-sm tracking-wide text-[#A8A199]"
             >
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative tracking-tighter font-normal text-[#A8A199] hover:text-[#F3EEE8] transition-colors duration-300 inline-block"
-                >
-                  <span>{social.name}</span>
-                  <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#F3EEE8] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left pointer-events-none" />
-                </a>
-              ))}
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative tracking-tighter font-normal text-[#A8A199] hover:text-[#F3EEE8] transition-colors duration-300 inline-flex items-center gap-2"
+                  >
+                    {Icon && <Icon className="w-3.5 h-3.5 text-[#F3EEE8]/80 group-hover:text-white transition-transform duration-300 group-hover:scale-115" />}
+                    <span>{social.name}</span>
+                    <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#F3EEE8] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left pointer-events-none" />
+                  </a>
+                );
+              })}
             </motion.div>
           </motion.div>
         )}
