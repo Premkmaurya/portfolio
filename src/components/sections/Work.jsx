@@ -23,41 +23,41 @@ const getScrollParent = (el) => {
 const headings = [
   {
     title: "StudySync",
-    previewImage: "/images.jfif",
+    previewImage: "/studySync.png",
     description: "A comprehensive platform for collaborative learning and educational resources.",
     additionalInfo: {
       technologies: "React, Node.js, Express, MongoDB",
-      duration: "6 months",
+      duration: "3 weeks",
       link: "https://study-sync-ten-lake.vercel.app/"
     },
   },
   {
     title: "Spotify",
-    previewImage: "/images.jfif",
+    previewImage: "/spotify.png",
     description: "A music streaming platform for discovering and listening to songs.",
     additionalInfo: {
       technologies: "React, Node.js, Express, MongoDB",
-      duration: "6 months",
+      duration: "2 weeks",
       link: "https://spotify-ebon-one.vercel.app/"
     },
   },
   {
     title: "UltraPath",
-    previewImage: "/mine.png",
+    previewImage: "/ultrapath.png",
     description: "A navigation app for finding the best routes and getting real-time traffic updates.",
     additionalInfo: {
       technologies: "React, Node.js, Express, MongoDB",
-      duration: "6 months",
+      duration: "1 month",
       link: "https://lab-report-theta.vercel.app/"
     },
   },
   {
     title: "Timeflow",
-    previewImage: "/images.jfif",
+    previewImage: "/timeflow.png",
     description: "A time management tool for tracking overtime and improving productivity.",
     additionalInfo: {
       technologies: "React, Node.js, Express, MongoDB",
-      duration: "6 months",
+      duration: "1 week",
       link: "https://timeflow-frontend-rsb5.onrender.com/"
     },
   },
