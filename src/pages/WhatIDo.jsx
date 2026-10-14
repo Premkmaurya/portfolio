@@ -22,28 +22,28 @@ const services = [
         title: "WEB DEVELOPMENT",
         description:
             "Fast, responsive websites and web applications built with clean code, strong UX, and modern technologies.",
-        image: "/images.jfif",
+        image: "/web-development.webp",
     },
     {
         number: "02",
         title: "UI/UX DESIGN",
         description:
             "Interfaces designed around clarity, usability, visual hierarchy, and a smooth interaction experience.",
-        image: "/images.jfif",
+        image: "/product-design.webp",
     },
     {
         number: "03",
         title: "CREATIVE DEVELOPMENT",
         description:
             "Interactive digital experiences combining animation, motion, WebGL, and thoughtful frontend engineering.",
-        image: "/images.jfif",
+        image: "/design.webp",
     },
     {
         number: "04",
         title: "FULL-STACK DEVELOPMENT",
         description:
             "Complete products built from frontend to backend, APIs, databases, authentication, and deployment.",
-        image: "/images.jfif",
+        image: "/development.webp",
     },
 ];
 
@@ -126,23 +126,32 @@ const WhatIDo = () => {
                                 className="group service-card relative h-[85vh] w-[32vw] min-w-[330px] max-w-[460px] shrink-0 overflow-hidden border-r border-white/15"
                             >
                                 <div className="absolute inset-0 z-0 h-full w-full bg-cover bg-center overflow-hidden">
-                                    <img className="w-full h-full object-cover" src={service.image || "/mine.png"} alt={service.title} />
+                                    <img className="w-full h-full object-cover opacity-50" src={service.image || "/mine.png"} alt={service.title} />
                                     <div className="absolute inset-0 bg-[#3A3632] transition-transform duration-500 ease-in-out group-hover:-translate-y-full" />
                                 </div>
-                                <div className="absolute inset-0 z-10 h-full w-full bg-cover flex flex-col justify-between bg-center bg-transparent py-8 px-6 text-[#f4f0e8] transition-colors duration-500 ease-in-out group-hover:text-[#141518]">
+                                <div className="absolute inset-0 z-10 h-full w-full bg-cover flex flex-col justify-between bg-center bg-transparent py-8 px-6 text-[#f4f0e8] transition-colors duration-500 ease-in-out">
                                     {/* Number */}
                                     <div>
-                                        <span className="font-editorial text-[clamp(3.5rem,6vw,6rem)] leading-none tracking-[-0.05em] transition-colors duration-500 ease-in-out group-hover:text-[#141518]">
+                                        <span
+                                            style={{ fontWeight: 300 }}
+                                            className="font-editorial font-light text-[clamp(3.5rem,6vw,6rem)] leading-none tracking-[-0.05em] transition-colors duration-500 ease-in-out"
+                                        >
                                             {service.number}
                                         </span>
                                     </div>
 
                                     {/* Main title & Description */}
                                     <div>
-                                        <h3 className="service-title font-editorial text-[clamp(1.8rem,3vw,3.2rem)] uppercase leading-[0.9] tracking-[-0.045em] transition-colors duration-500 ease-in-out group-hover:text-[#141518]">
+                                        <h3
+                                            style={{ fontWeight: 300 }}
+                                            className="service-title font-editorial font-light text-[clamp(1.8rem,3vw,3.2rem)] uppercase leading-[0.9] tracking-[-0.045em] transition-colors duration-500 ease-in-out"
+                                        >
                                             {service.title}
                                         </h3>
-                                        <p className="max-w-[340px] mt-2 text-[0.78rem] leading-[1.4] text-white/85 transition-colors duration-500 ease-in-out group-hover:text-[#141518]/90">
+                                        <p
+                                            style={{ fontWeight: 300 }}
+                                            className="max-w-[340px] mt-2 text-[0.78rem] font-light leading-[1.4] text-white/80 transition-colors duration-500 ease-in-out"
+                                        >
                                             {service.description}
                                         </p>
                                     </div>
