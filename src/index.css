@@ -201,3 +201,35 @@ html {
 .project-btn:not(:hover) .project-btn-line {
   transform-origin: right;
 }
+
+/* Global / #FAF9F6 background: selected text background is #3A3632, text is #FAF9F6 */
+::selection {
+  background-color: #3A3632;
+  color: #FAF9F6;
+}
+
+.bg-\[\#faf9f6\] ::selection,
+.bg-\[\#faf9f6\]::selection,
+.bg-\[\#FAF9F6\] ::selection,
+.bg-\[\#FAF9F6\]::selection,
+.about-intro-section ::selection,
+.about-intro-section::selection,
+[class*="bg-[#faf9f6]"] ::selection,
+[class*="bg-[#faf9f6]"]::selection,
+[class*="bg-[#FAF9F6]"] ::selection,
+[class*="bg-[#FAF9F6]"]::selection {
+  background-color: #3A3632 !important;
+  color: #FAF9F6 !important;
+}
+
+/* When the background is #3A3632, selected text background is #FAF9F6 */
+.bg-\[\#3A3632\] ::selection,
+.bg-\[\#3A3632\]::selection,
+.hero-section ::selection,
+.hero-section::selection,
+[class*="bg-[#3A3632]"] ::selection,
+[class*="bg-[#3A3632]"]::selection {
+  background-color: #FAF9F6 !important;
+  color: #3A3632 !important;
+}
+

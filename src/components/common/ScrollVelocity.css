@@ -1,6 +1,24 @@
 .parallax {
   position: relative;
   overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.scroll-velocity-root,
+.scroll-velocity-root--layered,
+.scroll-velocity-scroller,
+.scroll-velocity-text,
+.scroll-velocity-parallax,
+.scroller,
+.scroll-velocity-overlay,
+.about-marquee {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .scroller {

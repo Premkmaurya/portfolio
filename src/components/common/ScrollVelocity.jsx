@@ -146,7 +146,7 @@ export const ScrollVelocity = ({
       }
 
       return (
-        <motion.div className={scrollerClassName} style={{ x, ...scrollerStyle }}>
+        <motion.div className={`${scrollerClassName} select-none`} style={{ x, ...scrollerStyle }}>
           {spans}
         </motion.div>
       );
@@ -168,7 +168,7 @@ export const ScrollVelocity = ({
   }
 
   return (
-    <section className={overlayRows.length ? 'scroll-velocity-root scroll-velocity-root--layered' : undefined}>
+    <section className={`${overlayRows.length ? 'scroll-velocity-root scroll-velocity-root--layered' : ''} select-none`}>
       {texts.map((text, index) => (
         <VelocityText
           key={index}

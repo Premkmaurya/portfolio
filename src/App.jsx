@@ -32,8 +32,14 @@ function App() {
     const hero = scroller.querySelector('.hero-section')
 
     const onScroll = () => {
-      // light nav once the Hero's bottom edge passes the middle of the screen
-      setNavLight(scroller.scrollTop >= hero.offsetHeight - scroller.clientHeight * 0.5)
+      // Light nav across light sections (About, Work); dark nav on Hero and WhatIDo / Footer
+      const whatIDo = scroller.querySelector('.what-i-do-section')
+      const darkThreshold = whatIDo ? whatIDo.offsetTop : (hero ? (hero.offsetHeight / 607) * 4900 : 4900)
+
+      const isPastHero = scroller.scrollTop >= hero.offsetHeight - scroller.clientHeight * 0.5
+      const isBeforeDark = scroller.scrollTop < darkThreshold
+
+      setNavLight(isPastHero && isBeforeDark)
     }
 
     scroller.addEventListener('scroll', onScroll, { passive: true })
@@ -139,7 +145,7 @@ function App() {
               style={{ width: 'fit-content' }}
             >
               {/* Hero Section */}
-              <div className="hero-section bg-[#3A3632] text-[#F3EEE8] w-screen shrink-0 min-h-screen h-full flex flex-col justify-between">
+              <div className="hero-section bg-[#3A3632] text-[#F3EEE8] selection:bg-[#FAF9F6] selection:text-[#3A3632] w-screen shrink-0 min-h-screen h-full flex flex-col justify-between">
                 <div className="mx-auto flex h-full max-w-[1700px] flex-col pl-20 sm:pl-24 md:pl-28 pr-6 sm:pr-10 md:pr-16 pb-5 pt-8">
                   <div className="flex flex-1 items-start justify-between gap-8 pt-2 md:pt-4">
                     <div className="flex-1">

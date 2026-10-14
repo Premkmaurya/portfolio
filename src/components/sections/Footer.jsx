@@ -188,7 +188,7 @@ const Footer = () => {
   return (
     <footer
       ref={footerRef}
-      className="relative w-screen bg-[#181615] text-[#F3EEE8] pt-20 pb-12 px-6 sm:px-12 md:px-16 lg:px-24 overflow-hidden selection:bg-[#FF4500] selection:text-white"
+      className="relative w-screen bg-[#3A3632] text-[#F3EEE8] pt-20 pb-12 px-6 sm:px-12 md:px-16 lg:px-24 overflow-hidden selection:bg-[#FF4500] selection:text-white"
     >
       <div className="mx-auto max-w-[1600px] flex flex-col justify-between min-h-[90vh]">
 

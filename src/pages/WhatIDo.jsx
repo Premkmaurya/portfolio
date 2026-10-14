@@ -96,10 +96,10 @@ const WhatIDo = () => {
     }, []);
 
     return (
-        <div ref={wrapRef} className="relative w-screen" style={{ height: "300vh" }}>
+        <div ref={wrapRef} className="what-i-do-section relative w-screen" style={{ height: "300vh" }}>
             <section
                 ref={sectionRef}
-                className="sticky top-0 h-screen w-full flex bg-[#292723] text-[#f4f0e8] overflow-hidden"
+                className="sticky top-0 h-screen w-full flex bg-[#3A3632] text-[#f4f0e8] selection:bg-[#FAF9F6] selection:text-[#3A3632] overflow-hidden"
             >
                 {/* Intro */}
                 <div className="what-intro h-[90%] ml-[10vw] flex flex-col justify-between w-[30vw] min-w-[260px] py-8 shrink-0 z-10">
@@ -127,22 +127,22 @@ const WhatIDo = () => {
                             >
                                 <div className="absolute inset-0 z-0 h-full w-full bg-cover bg-center overflow-hidden">
                                     <img className="w-full h-full object-cover" src={service.image || "/mine.png"} alt={service.title} />
-                                    <div className="absolute inset-0 bg-[#292723] transition-transform duration-500 ease-in-out group-hover:-translate-y-full" />
+                                    <div className="absolute inset-0 bg-[#3A3632] transition-transform duration-500 ease-in-out group-hover:-translate-y-full" />
                                 </div>
-                                <div className="absolute inset-0 z-10 h-full w-full bg-cover flex flex-col justify-between bg-center bg-transparent py-8 px-6">
+                                <div className="absolute inset-0 z-10 h-full w-full bg-cover flex flex-col justify-between bg-center bg-transparent py-8 px-6 text-[#f4f0e8] transition-colors duration-500 ease-in-out group-hover:text-[#141518]">
                                     {/* Number */}
                                     <div>
-                                        <span className="font-editorial text-[clamp(3.5rem,6vw,6rem)] leading-none tracking-[-0.05em]">
+                                        <span className="font-editorial text-[clamp(3.5rem,6vw,6rem)] leading-none tracking-[-0.05em] transition-colors duration-500 ease-in-out group-hover:text-[#141518]">
                                             {service.number}
                                         </span>
                                     </div>
 
                                     {/* Main title & Description */}
                                     <div>
-                                        <h3 className="service-title font-editorial text-[clamp(1.8rem,3vw,3.2rem)] uppercase leading-[0.9] tracking-[-0.045em]">
+                                        <h3 className="service-title font-editorial text-[clamp(1.8rem,3vw,3.2rem)] uppercase leading-[0.9] tracking-[-0.045em] transition-colors duration-500 ease-in-out group-hover:text-[#141518]">
                                             {service.title}
                                         </h3>
-                                        <p className="max-w-[340px] mt-2 text-[0.78rem] leading-[1.4] text-white/85">
+                                        <p className="max-w-[340px] mt-2 text-[0.78rem] leading-[1.4] text-white/85 transition-colors duration-500 ease-in-out group-hover:text-[#141518]/90">
                                             {service.description}
                                         </p>
                                     </div>

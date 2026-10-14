@@ -219,7 +219,7 @@ const Work = () => {
   return (
     // Tall wrapper = scroll length. The stage inside sticks to the top while you scroll through it.
     <div ref={wrapRef} className="relative w-screen" style={{ height: `${100 + SCROLL_VH}vh` }}>
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#faf9f6]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#faf9f6] selection:bg-[#3A3632] selection:text-[#FAF9F6]">
         {/* IMAGE: full-screen, shown through a clip-path that grows to the whole screen */}
         <div ref={frameRef} className="absolute inset-0" style={{ clipPath: insetFrom }}>
           <img
@@ -259,7 +259,7 @@ const Work = () => {
         {/* WORK SECTION: starts off-screen, slides in with the scroll once the image is full-screen */}
         <section
           ref={sectionRef}
-          className="absolute inset-0 z-10 flex flex-row bg-[#faf9f6] pl-6"
+          className="absolute inset-0 z-10 flex flex-row bg-[#faf9f6] selection:bg-[#3A3632] selection:text-[#FAF9F6] pl-6"
         >
           <div className="preview-box h-full w-[55%] flex py-10 items-end justify-center">
             <div className="flex h-full w-[65%] flex-col justify-end gap-6">
