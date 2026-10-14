@@ -96,7 +96,7 @@ const WhatIDo = () => {
     }, []);
 
     return (
-        <div ref={wrapRef} className="what-i-do-section relative w-screen" style={{ height: "300vh" }}>
+        <div id="what-i-do" ref={wrapRef} className="what-i-do-section relative w-screen" style={{ height: "300vh" }}>
             <section
                 ref={sectionRef}
                 className="sticky top-0 h-screen w-full flex bg-[#3A3632] text-[#f4f0e8] selection:bg-[#FAF9F6] selection:text-[#3A3632] overflow-hidden"

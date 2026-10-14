@@ -86,7 +86,7 @@ const stickers = [
   {
     name: "Instagram",
     label: "Instagram",
-    href: "https://instagram.com",
+    href: "https://instagram.com/premmaurya222",
     icon: FaInstagram,
     iconSize: "w-7 h-7 sm:w-9 sm:h-9",
     tilt: "-rotate-3 hover:rotate-0",
@@ -187,6 +187,7 @@ const Footer = () => {
 
   return (
     <footer
+      id="contact"
       ref={footerRef}
       className="relative w-screen bg-[#3A3632] text-[#F3EEE8] pt-20 pb-12 px-6 sm:px-12 md:px-16 lg:px-24 overflow-hidden selection:bg-[#FF4500] selection:text-white"
     >

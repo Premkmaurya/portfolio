@@ -14,9 +14,9 @@ export const Nav = ({ reveal = false, isLight }) => {
 
   const navItems = [
     { number: '01.', title: 'HOME', href: '/' },
-    { number: '02.', title: 'ABOUT', href: '/about' },
-    { number: '03.', title: 'WORKS', href: '/works' },
-    { number: '04.', title: 'CONTACT', href: '/contact' },
+    { number: '02.', title: 'ABOUT', href: '#about' },
+    { number: '03.', title: 'WORKS', href: '#works' },
+    { number: '04.', title: 'CONTACT', href: '#contact' },
   ]
 
   const socialLinks = [
