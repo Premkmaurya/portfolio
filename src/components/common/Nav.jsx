@@ -206,14 +206,6 @@ export const Nav = ({ reveal = false, isLight, progress: explicitProgress }) => 
               </span>
             </div>
           </div>
-
-          {/* Vertical progress bar track on desktop sidebar border */}
-          <div className="absolute right-0 top-0 bottom-0 w-[2px] bg-transparent pointer-events-none">
-            <div
-              className="w-full bg-[#FF4500] transition-all duration-150 ease-out"
-              style={{ height: `${Math.min(100, Math.max(0, activeProgress))}%` }}
-            />
-          </div>
         </div>
       </nav>
 
@@ -255,8 +247,8 @@ export const Nav = ({ reveal = false, isLight, progress: explicitProgress }) => 
             </div>
 
             {/* Menu Items */}
-            <div className="flex-1 flex flex-col justify-center w-full max-w-6xl pl-0 sm:pl-4 md:pl-16 lg:pl-20 py-6 sm:py-8">
-              <div className="flex flex-col gap-5 sm:gap-7 md:gap-8 lg:gap-10">
+            <div className="flex-1 flex flex-col justify-center w-full max-w-6xl pl-0 sm:pl-4 md:pl-16 lg:pl-20 py-6">
+              <div className="flex flex-col gap-3 md:gap-2">
                 {navItems.map((item, index) => {
                   const isHovered = hoveredIndex === index
                   const isCurrentActive = activeIndex === index
@@ -289,7 +281,7 @@ export const Nav = ({ reveal = false, isLight, progress: explicitProgress }) => 
                         >
                           {/* Number Prefix */}
                           <span
-                            className={`font-editorial text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight transition-colors duration-300 ${isHighlighted ? 'text-[#F3EEE8]' : 'text-[#645e58]'
+                            className={`font-editorial text-2xl sm:text-3xl md:text-4xl tracking-tight transition-colors duration-300 ${isHighlighted ? 'text-[#F3EEE8]' : 'text-[#645e58]'
                               }`}
                           >
                             {item.number}
@@ -297,7 +289,7 @@ export const Nav = ({ reveal = false, isLight, progress: explicitProgress }) => 
 
                           {/* Large Title */}
                           <span
-                            className={`font-editorial text-[clamp(3.6rem,14.5vw,8.5rem)] tracking-[-0.04em] leading-[0.88] transition-all duration-300 group-hover:translate-x-2 ${isHighlighted
+                            className={`font-editorial text-[clamp(2.8rem,10vw,6rem)] tracking-[-0.04em] leading-[0.88] transition-all duration-300 group-hover:translate-x-2 ${isHighlighted
                               ? 'text-[#F3EEE8] drop-shadow-[0_2px_15px_rgba(255,255,255,0.08)]'
                               : 'text-[#645e58]'
                               }`}

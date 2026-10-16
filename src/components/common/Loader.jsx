@@ -8,65 +8,65 @@ export const Loader = ({ reveal, setLoading }) => {
   const loaderRef = useRef(null);
   const barRef = useRef(null);
 
-  // useEffect(() => {
-  //   const ctx = gsap.context(() => {
-  //     gsap.set(barRef.current, { scaleX: 0, transformOrigin: 'left center' })
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.set(barRef.current, { scaleX: 0, transformOrigin: 'left center' })
 
-  //     const split = new SplitText('.quote', {
-  //       type: 'words,lines',
-  //       linesClass: 'line',
-  //       autoSplit: true,
-  //       mask: 'lines',
-  //     })
+      const split = new SplitText('.quote', {
+        type: 'words,lines',
+        linesClass: 'line',
+        autoSplit: true,
+        mask: 'lines',
+      })
 
-  //     const splitYear = new SplitText('.year', {
-  //       type: 'words,lines',
-  //       linesClass: 'line',
-  //       autoSplit: true,
-  //       mask: 'lines',
-  //     })
-  //     const tl = gsap.timeline({
-  //       defaults: { ease: 'power3.out' }
-  //     })
+      const splitYear = new SplitText('.year', {
+        type: 'words,lines',
+        linesClass: 'line',
+        autoSplit: true,
+        mask: 'lines',
+      })
+      const tl = gsap.timeline({
+        defaults: { ease: 'power3.out' }
+      })
 
-  //     tl.from(splitYear.lines, {
-  //       duration: 1.2,
-  //       yPercent: 100,
-  //       opacity: 0,
-  //       stagger: 0.08,
-  //     })
-  //       .from(
-  //         split.lines,
-  //         {
-  //           yPercent: 100,
-  //           opacity: 0,
-  //           duration: 1,
-  //           stagger: 0.08,
-  //         },
-  //         '-=0.6',
-  //       )
-  //       .to(
-  //         barRef.current,
-  //         {
-  //           duration: 3,
-  //           scaleX: 1,
-  //           ease: 'power2.inOut',
-  //           transformOrigin: 'left center',
-  //           onComplete:()=>{
-  //             setLoading(false)
-  //           }
-  //         },
-  //         '-=0.4',
-  //       )
+      tl.from(splitYear.lines, {
+        duration: 1.2,
+        yPercent: 100,
+        opacity: 0,
+        stagger: 0.08,
+      })
+        .from(
+          split.lines,
+          {
+            yPercent: 100,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.08,
+          },
+          '-=0.6',
+        )
+        .to(
+          barRef.current,
+          {
+            duration: 3,
+            scaleX: 1,
+            ease: 'power2.inOut',
+            transformOrigin: 'left center',
+            onComplete:()=>{
+              setLoading(false)
+            }
+          },
+          '-=0.4',
+        )
 
-  //     return () => {
-  //       split.revert()
-  //       splitYear.revert()
-  //     }
-  //   }, loaderRef)
+      return () => {
+        split.revert()
+        splitYear.revert()
+      }
+    }, loaderRef)
 
-  //   return () => ctx.revert()
-  // }, [])
+    return () => ctx.revert()
+  }, [])
 
   return (
     <div

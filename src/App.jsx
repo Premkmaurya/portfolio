@@ -146,9 +146,9 @@ function App() {
             >
               {/* Hero Section */}
               <div className="hero-section bg-[#3A3632] text-[#F3EEE8] selection:bg-[#FAF9F6] selection:text-[#3A3632] w-screen shrink-0 min-h-screen h-full flex flex-col justify-between">
-                <div className="mx-auto flex h-full max-w-[1700px] flex-col pl-20 sm:pl-24 md:pl-28 pr-6 sm:pr-10 md:pr-16 pb-5 pt-8">
-                  <div className="flex flex-1 items-start justify-between gap-8 pt-2 md:pt-4">
-                    <div className="flex-1">
+                <div className="mx-auto flex h-full max-w-[1700px] flex-col pl-4 sm:pl-24 md:pl-28 pr-6 sm:pr-10 md:pr-16 pb-5 pt-8">
+                  <div className="flex flex-1 flex-col-reverse sm:flex-row items-start justify-between gap-8 pt-2 md:pt-4">
+                    <div className="flex flex-1 justify-end items-end w-full mb-4 sm:mb-0">
                       <h1 className="font-[--pp-editorial-old-ultrabold] leading-[0.72] tracking-[-0.08em] text-[clamp(6rem,13vw,20rem)]">
                         <div className="overflow-hidden">
                           <span className="reveal-title block">
@@ -163,7 +163,7 @@ function App() {
                       </h1>
                     </div>
 
-                    <div className="mt-6 flex max-w-[32rem] items-start justify-end pt-2 md:mt-8 lg:mt-10">
+                    <div className="mt-6 flex max-w-[32rem] items-start justify-start sm:justify-end pt-2 md:mt-8 lg:mt-10">
                       <div className="text-[clamp(1.4rem,1.85vw,2.8rem)] leading-[1.1] tracking-[-0.04em] text-[#F3EEE8]">
                         <div className="overflow-hidden">
                           <span className="reveal-copy block">Independent designer based in India —</span>
@@ -178,7 +178,7 @@ function App() {
                     </div>
                   </div>
 
-                  <div className="flex items-end justify-between gap-4 pb-3 pt-5 text-[#F3EEE8]">
+                  <div className="hidden sm:flex items-end justify-between gap-4 pb-3 pt-5 text-[#F3EEE8]">
                     <div className="text-[1.05rem] leading-tight tracking-[-0.03em] text-[#F3EEE8]/90">
                       <div className="mb-1 overflow-hidden">
                         <span className='reveal-meta block'>Lucknow, India</span>
