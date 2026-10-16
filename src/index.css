@@ -204,8 +204,8 @@ html {
 
 /* Global / #FAF9F6 background: selected text background is #3A3632, text is #FAF9F6 */
 ::selection {
-  background-color: #3A3632;
-  color: #FAF9F6;
+  background-color: #3a3632;
+  color: #faf9f6;
 }
 
 .bg-\[\#faf9f6\] ::selection,
@@ -218,8 +218,8 @@ html {
 [class*="bg-[#faf9f6]"]::selection,
 [class*="bg-[#FAF9F6]"] ::selection,
 [class*="bg-[#FAF9F6]"]::selection {
-  background-color: #3A3632 !important;
-  color: #FAF9F6 !important;
+  background-color: #3a3632 !important;
+  color: #faf9f6 !important;
 }
 
 /* When the background is #3A3632, selected text background is #FAF9F6 */
@@ -229,7 +229,14 @@ html {
 .hero-section::selection,
 [class*="bg-[#3A3632]"] ::selection,
 [class*="bg-[#3A3632]"]::selection {
-  background-color: #FAF9F6 !important;
-  color: #3A3632 !important;
+  background-color: #faf9f6 !important;
+  color: #3a3632 !important;
 }
 
+@media (max-width: 640px) {
+  .about-image {
+    width: 100vw;
+    height: 70vh;
+    top: 0;
+  }
+}

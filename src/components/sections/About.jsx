@@ -24,7 +24,7 @@ const About = () => {
           overlayRows={[0, 2]}
         />
         <div>
-          <div className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2">
+          <div className="about-image absolute sm:bottom-0 left-1/2 z-10 -translate-x-1/2">
             <img
               src="/mine.png"
               alt=""

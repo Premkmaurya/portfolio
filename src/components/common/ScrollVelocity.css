@@ -70,6 +70,7 @@
   justify-content: center;
 }
 
+
 .scroll-velocity-root--layered > .scroll-velocity-parallax {
   z-index: 0;
 }
@@ -92,8 +93,10 @@
   width: 100%;
 }
 
-.scroll-velocity-overlay .scroll-velocity-parallax .scroll-velocity-overlay-text {
-  color: #FAF9F6;
+.scroll-velocity-overlay
+  .scroll-velocity-parallax
+  .scroll-velocity-overlay-text {
+  color: #faf9f6;
 }
 
 .scroll-velocity-overlay-text--hidden {
@@ -153,4 +156,3 @@
     --img-h: calc(var(--img-w) * 4 / 3);
   }
 }
-
