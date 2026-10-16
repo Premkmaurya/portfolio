@@ -236,7 +236,7 @@ html {
 @media (max-width: 640px) {
   .about-image {
     width: 100vw;
-    height: 70vh;
+    height: 100vh;
     top: 0;
   }
 }
