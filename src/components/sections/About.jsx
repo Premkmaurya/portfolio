@@ -36,7 +36,7 @@ const About = () => {
         </div>
       </section>
 
-      <section ref={aboutIntroRef} className="about-intro-section ml-6">
+      <section ref={aboutIntroRef} className="about-intro-section ml-0 sm:ml-6">
         <TechText
           text="ABOUT"
           fontWeight={800}

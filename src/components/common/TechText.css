@@ -6,6 +6,12 @@
   user-select: none;
 }
 
+@media screen and (max-width:768px) {
+  .tech-text {
+    width: 60%;
+  }
+}
+
 .tech-text-canvas {
   display: block;
   width: 100%;
