@@ -233,6 +233,14 @@ html {
   color: #3a3632 !important;
 }
 
+@media screen and (max-width: 360px) {
+  .about-image {
+    top:0;
+    width: 90vw;
+    height: 95vh;
+  }
+}
+
 @media (max-width: 640px) {
   .about-image {
     width: 100vw;

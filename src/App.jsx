@@ -149,7 +149,7 @@ function App() {
                 <div className="mx-auto flex h-full max-w-[1700px] flex-col pl-4 sm:pl-24 md:pl-28 pr-6 sm:pr-10 md:pr-16 pb-5 pt-8">
                   <div className="flex flex-1 flex-col-reverse sm:flex-row items-start justify-between gap-8 pt-2 md:pt-4">
                     <div className="flex flex-1 justify-end items-end w-full mb-4 sm:mb-0">
-                      <h1 className="font-[--pp-editorial-old-ultrabold] leading-[0.72] tracking-[-0.08em] text-[clamp(6rem,13vw,20rem)]">
+                      <h1 className="font-[--pp-editorial-old-ultrabold] leading-[0.72] tracking-[-0.08em] max-[361px]:text-[clamp(5rem,13vw,18rem)] text-[clamp(6rem,13vw,20rem)]">
                         <div className="overflow-hidden">
                           <span className="reveal-title block">
                             PREM

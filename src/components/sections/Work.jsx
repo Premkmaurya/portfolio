@@ -473,7 +473,7 @@ const Work = () => {
                   rel="noopener noreferrer"
                   onMouseEnter={() => setActive(index)}
                   onFocus={() => setActive(index)}
-                  className={`group relative block h-1/5 sm:h-1/4 w-full overflow-hidden cursor-pointer ${
+                  className={`group relative block h-[18%] sm:h-1/4 w-full overflow-hidden cursor-pointer ${
                     index !== headings.length - 1
                       ? "border-b border-[#1111114b]"
                       : ""
