@@ -363,25 +363,16 @@ const Work = () => {
             style={{ transform: `scale(${ZOOM})` }}
           />
         </div>
-
-        {/*
-          THE WORK heading:
-          - Mobile (< 768px): flex-col, "THE" centered directly above "WORK"
-          - Desktop (≥ 768px): md:flex-row, "THE" and "WORK" in a single horizontal row with balanced gap
-          - GSAP scroll-driven motion:
-            * Mobile: "THE" moves upward (negative y), "WORK" moves downward (positive y)
-            * Desktop: "THE" moves left (negative x), "WORK" moves right (positive x)
-        */}
         <div className="pointer-events-none absolute inset-0 z-[5] flex flex-col md:flex-row items-center justify-center gap-1 sm:gap-2 md:gap-[2vw]">
           <span
             ref={theRef}
-            className="block select-none whitespace-nowrap font-[--pp-editorial-old-ultrabold] text-[18vw] md:text-[5.5vw] font-bold leading-none text-[#111] will-change-transform"
+            className="block select-none whitespace-nowrap font-[--pp-editorial-old-ultrabold] text-[18vw] md:text-[10vw] lg:text-[5.5vw] font-bold leading-none text-[#111] will-change-transform"
           >
             THE
           </span>
           <span
             ref={wordRef}
-            className="block select-none whitespace-nowrap font-[--pp-editorial-old-ultrabold] text-[18vw] md:text-[5.5vw] font-bold leading-none text-[#111] will-change-transform"
+            className="block select-none whitespace-nowrap font-[--pp-editorial-old-ultrabold] text-[18vw] md:text-[10vw] lg:text-[5.5vw] font-bold leading-none text-[#111] will-change-transform"
           >
             WORK
           </span>
@@ -392,7 +383,7 @@ const Work = () => {
           ref={sectionRef}
           className="absolute inset-0 z-10 flex flex-col min-h-screen sm:flex-row bg-[#faf9f6] selection:bg-[#3A3632] selection:text-[#FAF9F6] pl-6"
         >
-          <div className="preview-box h-0 sm:h-full w-0 sm:w-[55%] flex py-10 items-end justify-center">
+          <div className="preview-box h-0 lg:h-full w-0 lg:w-[55%] flex py-10 items-end justify-center">
             <div className="flex h-full w-[65%] flex-col justify-end gap-6">
               {/* Details of the active project (all stacked, the active one fades in) */}
               <div className="hidden sm:grid font-['Segoe UI'] text-[#111]">
@@ -456,7 +447,7 @@ const Work = () => {
             </div>
           </div>
 
-          <div className="h-full w-full sm:w-[45%] px-5 py-2 sm:py-14">
+          <div className="h-full w-full lg:w-[45%] px-5 py-2 sm:py-14">
             <p
               ref={featuredRef}
               className="font-['Segoe UI'] font-normal text-[0.775rem]"
@@ -464,7 +455,7 @@ const Work = () => {
               FEATURED WORK
             </p>
 
-            <div className="h-[75%] sm:h-[80%] mt-4 w-full font-[--pp-editorial-old-ultrabold]">
+            <div className="h-[75%] lg:h-[80%] mt-4 md:mt-[8vw] lg:mt-4 w-full font-[--pp-editorial-old-ultrabold]">
               {headings.map((project, index) => (
                 <a
                   key={project.title}
@@ -473,11 +464,11 @@ const Work = () => {
                   rel="noopener noreferrer"
                   onMouseEnter={() => setActive(index)}
                   onFocus={() => setActive(index)}
-                  className={`group relative block h-[18%] sm:h-1/4 w-full overflow-hidden cursor-pointer ${
+                  className={`group relative block h-[18%] md:h-[25%] lg:h-1/4 w-full overflow-hidden cursor-pointer ${
                     index !== headings.length - 1
                       ? "border-b border-[#1111114b]"
                       : ""
-                  } text-[3.4rem] sm:text-[4rem]`}
+                  } text-[3.4rem] md:text-[6.4rem] lg:text-[4rem]`}
                 >
                   {/* Original text */}
                   <div className="relative">
