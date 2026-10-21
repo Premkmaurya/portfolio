@@ -344,7 +344,7 @@ const Work = () => {
     // Tall wrapper = scroll length. The stage inside sticks to the top while you scroll through it.
     <div
       ref={wrapRef}
-      className="relative w-screen"
+      className="relative w-full"
       style={{ height: `${100 + SCROLL_VH}vh` }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#faf9f6] selection:bg-[#3A3632] selection:text-[#FAF9F6]">

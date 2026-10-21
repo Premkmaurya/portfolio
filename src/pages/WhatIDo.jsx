@@ -88,7 +88,7 @@ const WhatIDo = () => {
     <div
       id="what-i-do"
       ref={wrapRef}
-      className="what-i-do-section relative w-screen h-auto sm:h-[300vh]"
+      className="what-i-do-section relative w-full h-auto sm:h-[300vh]"
     >
       <section
         ref={sectionRef}
