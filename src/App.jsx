@@ -141,13 +141,12 @@ function App() {
           >
             <div
               ref={containerRef}
-              className="h-full min-h-screen"
-              style={{ width: 'fit-content' }}
+              className="h-full min-h-screen min-w-screen"
             >
               {/* Hero Section */}
-              <div className="hero-section bg-[#3A3632] text-[#F3EEE8] selection:bg-[#FAF9F6] selection:text-[#3A3632] w-screen shrink-0 min-h-screen h-full flex flex-col justify-between">
+              <div className="hero-section bg-[#3A3632] text-[#F3EEE8] selection:bg-[#FAF9F6] selection:text-[#3A3632] w-full shrink-0 min-h-screen h-full flex flex-col justify-between">
                 <div className="mx-auto flex h-full max-w-[1700px] flex-col pl-4 sm:pl-24 md:pl-28 pr-6 sm:pr-10 md:pr-16 pb-5 pt-8">
-                  <div className="flex flex-1 flex-col-reverse sm:flex-row items-start justify-between gap-8 pt-2 md:pt-4">
+                  <div className="flex flex-1 flex-col-reverse sm:flex-row items-start justify-between gap-8 pt-2 md:pt-[12vw] lg:pt-4">
                     <div className="flex flex-1 justify-end items-end w-full mb-4 sm:mb-0">
                       <h1 className="font-[--pp-editorial-old-ultrabold] leading-[0.72] tracking-[-0.08em] max-[361px]:text-[clamp(5rem,13vw,18rem)] text-[clamp(6rem,13vw,20rem)]">
                         <div className="overflow-hidden">

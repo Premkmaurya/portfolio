@@ -12,7 +12,7 @@ const About = () => {
 
   return (
     <section id="about">
-      <section className="about-marquee relative h-screen w-screen mt-10 overflow-hidden select-none">
+      <section className="about-marquee relative h-screen w-full mt-10 overflow-hidden select-none">
         <ScrollVelocity
           texts={['FULL STACK DEVELOPER', 'UI/UX DEVELOPER', 'MERN STACK DEVELOPER']}
           velocity={136}

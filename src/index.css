@@ -78,12 +78,13 @@
 }
 
 .about-intro-copy {
+  --about-intro-copy-font-size: clamp(1.8rem, 3.05vw, 3.2rem);
   display: grid;
   gap: clamp(4rem, 10vh, 7rem);
   margin-top: clamp(1.5rem, 3vh, 2.5rem);
   max-width: 78rem;
   font-family: "Segoe UI", sans-serif;
-  font-size: clamp(1.8rem, 3.05vw, 3.2rem);
+  font-size: var(--about-intro-copy-font-size);
   font-weight: 350;
   letter-spacing: -0.045em;
   line-height: 1.25;
@@ -138,6 +139,13 @@
   .about-intro-honors {
     width: 2.8rem;
     height: 9rem;
+  }
+}
+@media (max-width: 1024px) {
+  .about-intro-copy {
+    --about-intro-copy-font-size: clamp(2rem, 6vw, 3rem);
+    gap: 3rem;
+    margin-top: 2.5rem;
   }
 }
 
@@ -233,15 +241,22 @@ html {
   color: #3a3632 !important;
 }
 
-@media screen and (max-width: 360px) {
+@media (max-width: 365px) {
   .about-image {
-    top:0;
+    top: 0;
     width: 90vw;
     height: 95vh;
   }
 }
 
 @media (max-width: 640px) {
+  .about-image {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+  }
+}
+@media (max-width: 1024px) {
   .about-image {
     width: 100vw;
     height: 100vh;

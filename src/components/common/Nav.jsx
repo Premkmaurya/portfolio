@@ -108,7 +108,7 @@ export const Nav = ({ reveal = false, isLight, progress: explicitProgress }) => 
       {/* Mobile Top Navigation Bar (< md) */}
       <header
         aria-label="Mobile Navigation"
-        className={`md:hidden fixed top-0 left-0 right-0 z-[100] pointer-events-auto transition-colors duration-500 ${navBackgroundMobile} ${navTextColor}`}
+        className={`lg:hidden fixed top-0 left-0 right-0 z-[100] pointer-events-auto transition-colors duration-500 ${navBackgroundMobile} ${navTextColor}`}
       >
         <div className="flex items-center justify-between px-5 h-14 sm:h-16">
           {/* Monogram Brand Logo */}
@@ -161,7 +161,7 @@ export const Nav = ({ reveal = false, isLight, progress: explicitProgress }) => 
       </header>
 
       {/* Left Persistent Sidebar (Desktop >= md) */}
-      <nav aria-label="Main Sidebar" className="hidden md:block h-screen w-16 sm:w-18 shrink-0 fixed top-0 left-0 z-[100] pointer-events-auto">
+      <nav aria-label="Main Sidebar" className="hidden lg:block h-screen w-16 sm:w-18 shrink-0 fixed top-0 left-0 z-[100] pointer-events-auto">
         <div className={`flex h-full w-full flex-col border-r border-[#58534f]/50 relative ${navBackground} ${navTextColor} transition-colors duration-500`}>
           {/* Three horizontal lines button div */}
           <button
