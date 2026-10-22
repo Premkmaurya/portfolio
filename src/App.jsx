@@ -165,13 +165,13 @@ function App() {
                     <div className="mt-6 flex max-w-[32rem] items-start justify-start sm:justify-end pt-2 md:mt-8 lg:mt-10">
                       <div className="text-[clamp(1.4rem,1.85vw,2.8rem)] leading-[1.1] tracking-[-0.04em] text-[#F3EEE8]">
                         <div className="overflow-hidden">
-                          <span className="reveal-copy block">Independent designer based in India —</span>
+                          <span className="reveal-copy block">I develop modern web applications using React, Next.js,</span>
                         </div>
                         <div className="overflow-hidden">
-                          <span className="reveal-copy block">focused on thoughtful, considered</span>
+                          <span className="reveal-copy block">Node.js, and MongoDB, with a focus on responsive</span>
                         </div>
                         <div className="overflow-hidden">
-                          <span className="reveal-copy block">digital work.</span>
+                          <span className="reveal-copy block">interfaces, smooth animations, and AI integrations.</span>
                         </div>
                       </div>
                     </div>
