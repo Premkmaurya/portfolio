@@ -132,7 +132,7 @@ function App() {
   return (
     <>
       <Nav reveal={reveal} isLight={navLight} />
-      <div className="h-screen">
+      <div className="h-full">
         <Loader setLoading={setLoading} reveal={reveal} />
         {!loading && (
           <div

@@ -241,25 +241,9 @@ html {
   color: #3a3632 !important;
 }
 
-@media (max-width: 365px) {
-  .about-image {
-    top: 0;
-    width: 90vw;
-    height: 95vh;
-  }
-}
-
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   .about-image {
     width: 100vw;
-    height: 100vh;
-    top: 0;
-  }
-}
-@media (max-width: 1024px) {
-  .about-image {
-    width: 100vw;
-    height: 100vh;
-    top: 0;
+    height: 85vh;
   }
 }

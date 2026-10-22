@@ -71,7 +71,7 @@ export const Loader = ({ reveal, setLoading }) => {
   return (
     <div
       ref={loaderRef}
-      className={`relative h-screen w-full bg-[#262220] text-[#F3EEE8] font-[--pp-editorial-old-ultrabold] ${reveal && "hidden"}`}
+      className={`relative h-full w-full bg-[#262220] text-[#F3EEE8] font-[--pp-editorial-old-ultrabold] ${reveal && "hidden"}`}
     >
       <div className="relative z-10 h-full w-full flex flex-col-reverse sm:flex-row">
         <div className="relative h-1/2 w-full">
