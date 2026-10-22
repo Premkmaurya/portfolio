@@ -216,11 +216,11 @@ const Works = () => {
 
   return (
     <>
-      <Nav reveal isLight progress={1} />
+      <Nav reveal isLight progress={0} />
 
       <div
         ref={pageRef}
-        className="flex min-h-screen flex-col select-none overflow-x-hidden bg-[#ece8e1] text-[#2a2622] min-[1025px]:h-screen min-[1025px]:min-h-0 min-[1025px]:overflow-hidden min-[1025px]:pl-18"
+        className="flex min-h-screen flex-col select-none overflow-x-hidden bg-[#FAF9F6] text-[#2a2622] min-[1025px]:h-screen min-[1025px]:min-h-0 min-[1025px]:overflow-hidden min-[1025px]:pl-18"
       >
         <header className="flex items-start justify-between px-5 pt-[12vh] sm:px-[4.5vw] md:pt-[10vh] min-[1025px]:pt-[4vh]">
           <h1 className="works-heading pb-2 font-editorial text-[clamp(2.2rem,9vw,5rem)] uppercase leading-none tracking-[-0.03em] min-[1025px]:text-[clamp(3.5rem,9vw,9rem)]">
@@ -261,14 +261,14 @@ const Works = () => {
                 </div>
 
                 <div className="mt-[1.2vh] flex items-start gap-3">
-                  <span className="font-editorial text-[clamp(1.8rem,3.4vw,3.4rem)] leading-none">
+                  <span className="font-editorial text-[clamp(1.5rem,3.4vw,2.4rem)] md:text-[clamp(2.2rem,4vw,3rem)] lg:text-[clamp(1.8rem,3.4vw,3.4rem)] leading-none">
                     {String(index + 1).padStart(2, "0")}.
                   </span>
-                  <div className="pt-[0.35em]">
-                    <div className="text-[0.68rem] uppercase tracking-[0.04em] opacity-70">
+                  <div className="pt-[0.35em] text-[clamp(1rem,3.4vw,2.4rem)] md:text-[clamp(1rem,4vw,3rem)] lg:text-[0.7rem]">
+                    <div className="uppercase tracking-[0.04em] opacity-70">
                       {work.category} — {work.year}
                     </div>
-                    <div className="mt-1 text-[0.95rem] font-medium">
+                    <div className="mt-1 font-medium">
                       {work.title}
                     </div>
                   </div>

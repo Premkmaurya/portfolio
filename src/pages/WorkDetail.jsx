@@ -76,7 +76,7 @@ const Detail = ({ work, next }) => {
 
             <div
                 ref={pageRef}
-                className="grid h-dvh grid-rows-[40dvh_minmax(0,1fr)] overflow-hidden bg-[#f9f8f4] text-[#2a2622] min-[1025px]:h-screen min-[1025px]:grid-rows-1 min-[1025px]:grid-cols-2 min-[1025px]:pl-16 min-[1025px]:sm:pl-18"
+                className="grid h-dvh grid-rows-[40dvh_minmax(0,1fr)] overflow-hidden bg-[#FAF9F6] text-[#2a2622] min-[1025px]:h-screen min-[1025px]:grid-rows-1 min-[1025px]:grid-cols-2 min-[1025px]:pl-16 min-[1025px]:sm:pl-18"
             >
                 {/* LEFT: fixed information column */}
                 <div className="row-start-2 flex min-h-0 min-w-0 flex-col overflow-y-auto overscroll-contain px-5 pb-8 pt-5 sm:px-7 min-[1025px]:row-start-auto min-[1025px]:px-[4.5vw] min-[1025px]:pb-[5vh] min-[1025px]:pt-[8vh]">
@@ -150,7 +150,7 @@ const Detail = ({ work, next }) => {
                 </div>
 
                 {/* RIGHT: images scroll on their own */}
-                <div className="detail-image-panel row-start-1 h-[40dvh] min-h-0 overflow-hidden bg-[#ece8e1] min-[1025px]:row-start-auto min-[1025px]:h-screen min-[1025px]:overflow-y-auto">
+                <div className="detail-image-panel row-start-1 h-[40dvh] min-h-0 overflow-hidden bg-[#FAF9F6] min-[1025px]:row-start-auto min-[1025px]:h-screen min-[1025px]:overflow-y-auto">
                     {images.map((src, i) =>
                         i === 0 ? (
                             <div
