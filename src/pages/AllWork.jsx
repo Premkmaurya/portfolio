@@ -8,13 +8,13 @@ import { slugify } from "../utils/slug";
 
 gsap.registerPlugin(SplitText);
 
-// --- motion tuning -------------------------------------------------------
-const SMOOTH = 0.085; // 0-1, lower = floatier gallery
-const WHEEL = 1.2; // wheel / trackpad speed multiplier
-const DRAG = 1.4; // drag speed multiplier
-const MAX_TILT = 9; // deg of 3D tilt at full speed
-const PERSPECTIVE = 900; // px, per-card perspective
-const INTRO = 0.55; // gallery sweeps in from this fraction of the screen width
+// --- Desktop gallery motion tuning --------------------------------------
+const SMOOTH = 0.085;
+const WHEEL = 1.2;
+const DRAG = 1.4;
+const MAX_TILT = 9;
+const PERSPECTIVE = 900;
+const INTRO = 0.55;
 
 const clamp = gsap.utils.clamp;
 
@@ -34,157 +34,223 @@ const Works = () => {
     const page = pageRef.current;
     const viewport = viewportRef.current;
     const track = trackRef.current;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const s = { target: 0, current: 0, max: 0, dragging: false, lastX: 0, moved: 0 };
-    let lastTilt = 0;
+    if (!page || !viewport || !track) return undefined;
 
-    const ctx = gsap.context(() => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    // Keep the heading/card intro on every screen size.
+    let splitHeading;
+    const introContext = gsap.context(() => {
       const q = gsap.utils.selector(page);
       const cards = q(".works-card");
 
-      // ---- intro: same masked-line reveal as the Loader, then the cards fade in ----
-      const splitHeading = new SplitText(q(".works-heading"), {
+      splitHeading = new SplitText(q(".works-heading"), {
         type: "words,lines",
         linesClass: "line",
         mask: "lines",
       });
+
       gsap
         .timeline({ defaults: { ease: "power3.out" } })
-        .from(splitHeading.lines, { yPercent: 100, opacity: 0, duration: 1.2, stagger: 0.08 })
+        .from(splitHeading.lines, {
+          yPercent: 100,
+          opacity: 0,
+          duration: 1.2,
+          stagger: 0.08,
+        })
         .from(q(".works-count"), { y: 30, opacity: 0, duration: 1 }, "-=0.9")
         .from(cards, { opacity: 0, duration: 1, stagger: 0.08 }, "-=1");
+    }, pageRef);
 
-      // ---- gallery: wheel / drag drives `target`, the ticker eases `current` toward it ----
+    // The custom horizontal gallery exists only above 1024px.
+    // On mobile/tablet, the cards remain in normal document flow and use native vertical scrolling.
+    const media = gsap.matchMedia();
+
+    media.add("(min-width: 1025px)", () => {
+      const cards = gsap.utils.toArray(page.querySelectorAll(".works-card"));
+      const state = {
+        target: 0,
+        current: 0,
+        max: 0,
+        dragging: false,
+        lastX: 0,
+        moved: 0,
+      };
+      let lastTilt = 0;
+
       gsap.set(cards, { transformPerspective: PERSPECTIVE });
       const setX = gsap.quickSetter(track, "x", "px");
 
       const measure = () => {
-        s.max = Math.max(0, track.offsetWidth - viewport.clientWidth);
-        s.target = clamp(0, s.max, s.target);
+        state.max = Math.max(0, track.scrollWidth - viewport.clientWidth);
+        state.target = clamp(0, state.max, state.target);
       };
+
       measure();
 
-      // start pushed to the right so the cards sweep in (the tilt below comes for free)
-      s.current = reduce ? 0 : -viewport.clientWidth * INTRO;
-      setX(-s.current);
+      // Preserve the original desktop gallery entrance.
+      state.current = reduceMotion ? 0 : -viewport.clientWidth * INTRO;
+      setX(-state.current);
 
       const tick = () => {
-        const diff = s.target - s.current;
-        s.current += Math.abs(diff) < 0.05 ? diff : diff * SMOOTH;
-        setX(-s.current);
+        const diff = state.target - state.current;
+        state.current += Math.abs(diff) < 0.05 ? diff : diff * SMOOTH;
+        setX(-state.current);
 
-        // lag behind the target = speed. Tilt the cards in the direction of travel.
-        const tilt = reduce ? 0 : clamp(-MAX_TILT, MAX_TILT, diff * 0.03);
+        const tilt = reduceMotion
+          ? 0
+          : clamp(-MAX_TILT, MAX_TILT, diff * 0.03);
+
         if (tilt !== lastTilt) {
-          gsap.set(cards, { rotateY: tilt, scale: 1 + Math.abs(tilt) / 180 });
+          gsap.set(cards, {
+            rotateY: tilt,
+            scale: 1 + Math.abs(tilt) / 180,
+          });
           lastTilt = tilt;
         }
       };
+
       gsap.ticker.add(tick);
 
-      const onWheel = (e) => {
-        e.preventDefault();
-        const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-        s.target = clamp(0, s.max, s.target + d * (e.deltaMode === 1 ? 32 : 1) * WHEEL);
+      const onWheel = (event) => {
+        event.preventDefault();
+        const delta =
+          Math.abs(event.deltaX) > Math.abs(event.deltaY)
+            ? event.deltaX
+            : event.deltaY;
+        state.target = clamp(
+          0,
+          state.max,
+          state.target + delta * (event.deltaMode === 1 ? 32 : 1) * WHEEL
+        );
       };
-      const onDown = (e) => {
-        if (e.pointerType === "mouse" && e.button !== 0) return;
-        s.dragging = true;
-        s.lastX = e.clientX;
-        s.moved = 0;
+
+      const onPointerDown = (event) => {
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+        state.dragging = true;
+        state.lastX = event.clientX;
+        state.moved = 0;
       };
-      const onMove = (e) => {
-        if (!s.dragging) return;
-        const dx = e.clientX - s.lastX;
-        s.lastX = e.clientX;
-        s.moved += Math.abs(dx);
-        s.target = clamp(0, s.max, s.target - dx * DRAG);
+
+      const onPointerMove = (event) => {
+        if (!state.dragging) return;
+        const deltaX = event.clientX - state.lastX;
+        state.lastX = event.clientX;
+        state.moved += Math.abs(deltaX);
+        state.target = clamp(
+          0,
+          state.max,
+          state.target - deltaX * DRAG
+        );
       };
-      const onUp = () => {
-        s.dragging = false;
+
+      const onPointerUp = () => {
+        state.dragging = false;
       };
-      // a drag must not count as a click on a card
-      const onClickCapture = (e) => {
-        if (s.moved > 6) {
-          e.preventDefault();
-          e.stopPropagation();
+
+      // Prevent a drag gesture from accidentally opening a project.
+      const onClickCapture = (event) => {
+        if (state.moved > 6) {
+          event.preventDefault();
+          event.stopPropagation();
         }
-        s.moved = 0;
+        state.moved = 0;
       };
-      const onKey = (e) => {
-        if (e.key === "ArrowRight") s.target = clamp(0, s.max, s.target + viewport.clientWidth * 0.3);
-        if (e.key === "ArrowLeft") s.target = clamp(0, s.max, s.target - viewport.clientWidth * 0.3);
+
+      const onKeyDown = (event) => {
+        if (event.key === "ArrowRight") {
+          state.target = clamp(
+            0,
+            state.max,
+            state.target + viewport.clientWidth * 0.3
+          );
+        }
+        if (event.key === "ArrowLeft") {
+          state.target = clamp(
+            0,
+            state.max,
+            state.target - viewport.clientWidth * 0.3
+          );
+        }
       };
 
       page.addEventListener("wheel", onWheel, { passive: false });
-      viewport.addEventListener("pointerdown", onDown);
+      viewport.addEventListener("pointerdown", onPointerDown);
       viewport.addEventListener("click", onClickCapture, true);
-      window.addEventListener("pointermove", onMove);
-      window.addEventListener("pointerup", onUp);
-      window.addEventListener("pointercancel", onUp);
-      window.addEventListener("keydown", onKey);
+      window.addEventListener("pointermove", onPointerMove);
+      window.addEventListener("pointerup", onPointerUp);
+      window.addEventListener("pointercancel", onPointerUp);
+      window.addEventListener("keydown", onKeyDown);
 
-      const ro = new ResizeObserver(measure);
-      ro.observe(track);
-      ro.observe(viewport);
+      const resizeObserver = new ResizeObserver(measure);
+      resizeObserver.observe(track);
+      resizeObserver.observe(viewport);
 
+      // This cleanup also runs when resizing across the 1024px breakpoint.
       return () => {
         gsap.ticker.remove(tick);
         page.removeEventListener("wheel", onWheel);
-        viewport.removeEventListener("pointerdown", onDown);
+        viewport.removeEventListener("pointerdown", onPointerDown);
         viewport.removeEventListener("click", onClickCapture, true);
-        window.removeEventListener("pointermove", onMove);
-        window.removeEventListener("pointerup", onUp);
-        window.removeEventListener("pointercancel", onUp);
-        window.removeEventListener("keydown", onKey);
-        ro.disconnect();
-        splitHeading.revert();
-      };
-    }, pageRef);
+        window.removeEventListener("pointermove", onPointerMove);
+        window.removeEventListener("pointerup", onPointerUp);
+        window.removeEventListener("pointercancel", onPointerUp);
+        window.removeEventListener("keydown", onKeyDown);
+        resizeObserver.disconnect();
 
-    return () => ctx.revert();
+        // Remove desktop-only transforms before switching to the vertical layout.
+        gsap.set(track, { clearProps: "transform" });
+        gsap.set(cards, { clearProps: "transform,transformPerspective" });
+      };
+    });
+
+    return () => {
+      media.revert();
+      splitHeading?.revert();
+      introContext.revert();
+    };
   }, []);
 
   return (
     <>
-      {/* light rail on this page */}
       <Nav reveal isLight progress={1} />
 
       <div
         ref={pageRef}
-        className="flex h-screen select-none flex-col overflow-hidden bg-[#ece8e1] pl-16 text-[#2a2622] sm:pl-18"
+        className="flex min-h-screen flex-col select-none overflow-x-hidden bg-[#ece8e1] text-[#2a2622] min-[1025px]:h-screen min-[1025px]:min-h-0 min-[1025px]:overflow-hidden min-[1025px]:pl-18"
       >
-        {/* Heading + count */}
-        <header className="flex items-start justify-between px-[4.5vw] pt-[3vh]">
-          <h1 className="works-heading pb-2 font-editorial text-[clamp(3.5rem,9vw,9rem)] uppercase leading-none tracking-[-0.03em]">
+        <header className="flex items-start justify-between px-5 pt-[12vh] sm:px-[4.5vw] md:pt-[10vh] min-[1025px]:pt-[4vh]">
+          <h1 className="works-heading pb-2 font-editorial text-[clamp(2.2rem,9vw,5rem)] uppercase leading-none tracking-[-0.03em] min-[1025px]:text-[clamp(3.5rem,9vw,9rem)]">
             All Work
           </h1>
-          <span className="works-count font-editorial text-[clamp(3.5rem,9vw,9rem)] leading-none tracking-[-0.03em]">
+          <span className="works-count font-editorial text-[clamp(2.2rem,9vw,5rem)] leading-none tracking-[-0.03em] min-[1025px]:text-[clamp(3.5rem,9vw,9rem)]">
             ({works.length})
           </span>
         </header>
 
-        {/* Gallery: moves with wheel / trackpad / drag / arrow keys */}
+        {/* Mobile: normal vertical page flow. Desktop: animated horizontal gallery. */}
         <div
           ref={viewportRef}
-          className="relative mt-[3vh] min-h-0 flex-1 cursor-grab touch-none overflow-hidden active:cursor-grabbing"
+          className="relative mt-[3vh] w-full flex-none overflow-visible px-5 pb-10 sm:px-[4.5vw] min-[1025px]:min-h-0 min-[1025px]:flex-1 min-[1025px]:cursor-grab min-[1025px]:overflow-hidden min-[1025px]:px-0 min-[1025px]:pb-0 min-[1025px]:touch-none min-[1025px]:active:cursor-grabbing"
         >
           <div
             ref={trackRef}
-            className="flex w-max items-start gap-[2.2vw] px-[4.5vw] will-change-transform"
+            className="flex w-full flex-col items-start gap-9 min-[1025px]:w-max min-[1025px]:flex-row min-[1025px]:gap-[2.2vw] min-[1025px]:px-[4.5vw] min-[1025px]:will-change-transform"
           >
             {works.map((work, index) => (
               <Link
                 key={work.title}
                 to={`/works/${slugify(work.title)}`}
                 draggable={false}
-                className="works-card group block w-[20.3vw] min-w-[170px] max-w-[380px] shrink-0"
+                className="works-card group block w-full shrink-0 min-[1025px]:w-[20.3vw] min-[1025px]:min-w-[170px] min-[1025px]:max-w-[380px]"
               >
-                {/* alternating short / tall images, tops aligned like the reference */}
                 <div
-                  className={`overflow-hidden ${index % 2 === 0 ? "aspect-[278/220]" : "aspect-[278/320]"
-                    }`}
+                  className={`overflow-hidden ${
+                    index % 2 === 0 ? "aspect-[278/220]" : "aspect-[278/320]"
+                  }`}
                 >
                   <img
                     src={work.previewImage}
@@ -194,7 +260,6 @@ const Works = () => {
                   />
                 </div>
 
-                {/* caption: big numeral, small category — year, project name */}
                 <div className="mt-[1.2vh] flex items-start gap-3">
                   <span className="font-editorial text-[clamp(1.8rem,3.4vw,3.4rem)] leading-none">
                     {String(index + 1).padStart(2, "0")}.
@@ -203,7 +268,9 @@ const Works = () => {
                     <div className="text-[0.68rem] uppercase tracking-[0.04em] opacity-70">
                       {work.category} — {work.year}
                     </div>
-                    <div className="mt-1 text-[0.95rem] font-medium">{work.title}</div>
+                    <div className="mt-1 text-[0.95rem] font-medium">
+                      {work.title}
+                    </div>
                   </div>
                 </div>
               </Link>

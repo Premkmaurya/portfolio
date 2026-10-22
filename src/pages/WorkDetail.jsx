@@ -12,7 +12,7 @@ gsap.registerPlugin(SplitText);
 const HERO_FROM = "inset(39% 51% 61% 49%)"; // hero image starts as a smaller box, then fills the panel
 const HERO_TO = "inset(0% 0% 0% 0%)";
 const LABEL = "text-[0.7rem] uppercase tracking-[0.04em]";
-const COLS = "grid grid-cols-[38%_1fr]";
+const COLS = "grid grid-cols-1 gap-2 min-[1025px]:grid-cols-[38%_1fr] min-[1025px]:gap-0";
 
 const Detail = ({ work, next }) => {
     const pageRef = useRef(null);
@@ -76,27 +76,27 @@ const Detail = ({ work, next }) => {
 
             <div
                 ref={pageRef}
-                className="grid h-screen grid-cols-2 overflow-hidden bg-[#f9f8f4] pl-16 text-[#2a2622] sm:pl-18"
+                className="grid h-dvh grid-rows-[40dvh_minmax(0,1fr)] overflow-hidden bg-[#f9f8f4] text-[#2a2622] min-[1025px]:h-screen min-[1025px]:grid-rows-1 min-[1025px]:grid-cols-2 min-[1025px]:pl-16 min-[1025px]:sm:pl-18"
             >
                 {/* LEFT: fixed information column */}
-                <div className="flex min-h-0 flex-col overflow-y-auto px-[4.5vw] pb-[5vh] pt-[8vh]">
+                <div className="row-start-2 flex min-h-0 min-w-0 flex-col overflow-y-auto overscroll-contain px-5 pb-8 pt-5 sm:px-7 min-[1025px]:row-start-auto min-[1025px]:px-[4.5vw] min-[1025px]:pb-[5vh] min-[1025px]:pt-[8vh]">
                     <Link to="/works" className="detail-back w-fit items-center gap-2 text-[0.95rem] inline-flex">
                         <FiArrowLeft className="h-4 w-4" />
                         Back
                     </Link>
 
-                    <h1 className="detail-title mt-[1.5vh] font-editorial text-[clamp(2rem,5.6vw,6rem)] uppercase leading-[1.02] tracking-[-0.02em]">
+                    <h1 className="detail-title mt-4 font-editorial text-[clamp(2rem,8vw,3.5rem)] uppercase leading-[1.02] tracking-[-0.02em] min-[1025px]:mt-[1.5vh] min-[1025px]:text-[clamp(2rem,5.6vw,6rem)]">
                         {work.title}
                     </h1>
 
-                    <div className={`mt-[7vh] ${COLS}`}>
+                    <div className={`mt-7 min-[1025px]:mt-[7vh] ${COLS}`}>
                         <span className={`detail-label ${LABEL}`}>Overview</span>
                         <p className="detail-overview max-w-[26rem] text-[0.95rem] leading-[1.5]">
                             {work.description}
                         </p>
                     </div>
 
-                    <div className={`mt-[4vh] ${COLS}`}>
+                    <div className={`mt-6 min-[1025px]:mt-[4vh] ${COLS}`}>
                         <span className={`detail-label ${LABEL}`}>Details</span>
                         <ul>
                             {rows.map(([label, value]) => (
@@ -136,7 +136,7 @@ const Detail = ({ work, next }) => {
                     </div>
 
                     {next && (
-                        <div className={`detail-next mt-auto pt-[5vh] ${COLS}`}>
+                        <div className={`detail-next mt-8 pt-4 min-[1025px]:mt-auto min-[1025px]:pt-[5vh] ${COLS}`}>
                             <span className={`detail-label ${LABEL} pt-[1.1em]`}>Next Projects</span>
                             <Link
                                 to={`/works/${slugify(next.title)}`}
@@ -150,18 +150,18 @@ const Detail = ({ work, next }) => {
                 </div>
 
                 {/* RIGHT: images scroll on their own */}
-                <div className="h-screen min-h-0 overflow-y-auto bg-[#ece8e1]">
+                <div className="detail-image-panel row-start-1 h-[40dvh] min-h-0 overflow-hidden bg-[#ece8e1] min-[1025px]:row-start-auto min-[1025px]:h-screen min-[1025px]:overflow-y-auto">
                     {images.map((src, i) =>
                         i === 0 ? (
                             <div
                                 key={src + i}
-                                className="detail-hero h-screen w-full overflow-hidden"
+                                className="detail-hero h-[40dvh] w-full overflow-hidden min-[1025px]:h-screen"
                                 style={{ clipPath: HERO_FROM }}
                             >
                                 <img src={src} alt={work.title} draggable={false} className="h-full w-full object-cover" />
                             </div>
                         ) : (
-                            <img key={src + i} src={src} alt={`${work.title} ${i + 1}`} draggable={false} className="block h-auto w-full" />
+                            <img key={src + i} src={src} alt={`${work.title} ${i + 1}`} draggable={false} className="hidden h-auto w-full min-[1025px]:block" />
                         )
                     )}
                 </div>
@@ -178,7 +178,7 @@ const WorkDetail = () => {
         return (
             <>
                 <Nav reveal isLight progress={1} />
-                <div className="flex h-screen flex-col items-start justify-center gap-4 bg-[#f9f8f4] pl-24 text-[#2a2622]">
+                <div className="flex h-screen flex-col items-start justify-center gap-4 bg-[#f9f8f4] px-6 text-[#2a2622] min-[1025px]:pl-24">
                     <p className="font-editorial text-5xl">Project not found</p>
                     <Link to="/works" className="inline-flex items-center gap-2 text-[0.95rem]">
                         <FiArrowLeft className="h-4 w-4" /> Back to all work
